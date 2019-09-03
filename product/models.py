@@ -16,7 +16,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ManyToManyField(Category, related_name='categories_products')
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     store = models.ForeignKey(Store, related_name='stores', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
     image = models.ImageField(upload_to='product/%Y/%m/%d', blank=True)
@@ -25,6 +25,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    onstock = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ('name', )
