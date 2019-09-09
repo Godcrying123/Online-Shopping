@@ -5,6 +5,9 @@ from shop.models import Store
 
 class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    numofprods = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ('name',)
@@ -16,8 +19,8 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-    store = models.ForeignKey(Store, related_name='stores', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.DO_NOTHING)
+    # store = models.ForeignKey(Store, related_name='stores', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
     image = models.ImageField(upload_to='product/%Y/%m/%d', blank=True)
     description = models.TextField(blank=True)
