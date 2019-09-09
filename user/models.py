@@ -8,8 +8,8 @@ class User(models.Model):
     name = models.CharField(max_length=200, verbose_name='name')
     owner = models.ForeignKey('auth.User', related_name='person_entity', on_delete=models.CASCADE)
     username = models.CharField(max_length=200, db_index=True, unique=True, verbose_name='username')
-    mail = models.EmailField(max_length=200, db_index=True, unique=True, verbose_name='E-mail')
-    telephone = models.CharField(max_length=100, unique=True, verbose_name='Telephone')
+    mail = models.EmailField(max_length=200, db_index=True, unique=True, verbose_name='E-mail', blank=True)
+    telephone = models.CharField(max_length=100, unique=True, verbose_name='Telephone', blank=True)
     password = models.CharField(max_length=200, verbose_name='Password')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='created_time')
     updated_time = models.DateTimeField(auto_now=True, verbose_name='updated_time')
@@ -49,10 +49,10 @@ class Buyer(User):
         ('banned', 'Banned'),
     )
     status_vip = models.CharField(default='not-vip', max_length=10,
-                                  choices=STATUS_VIP, verbose_name='status_vip', db_index=True)
+                                  choices=STATUS_VIP, verbose_name='status_vip', db_index=True, blank=True)
     status_user = models.CharField(default='normal', max_length=10,
-                                   choices=STATUS_USER, verbose_name='status_user', db_index=True)
-    recaddress = models.CharField(max_length=100, blank=False)
+                                   choices=STATUS_USER, verbose_name='status_user', db_index=True, blank=True)
+    recaddress = models.CharField(max_length=100, blank=True)
     # orders = models.ForeignKey(Order, related_name='buyer_order', on_delete=models.CASCADE)
 
     class Meta:

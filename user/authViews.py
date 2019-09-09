@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .models import Buyer, userToken
-from .serializers import BuyerSerializer
+from .serializers import BuyerSerializer, BuyerDetailSerializer
 # Create your views here
 
 
@@ -17,21 +17,40 @@ class AuthView(APIView):
     """
     Login Method by username and password
     """
-    def get_object(self, username, password):
+    def user_auth(self, username, password, retresult):
         try:
-            return Buyer.objects.filter(username=username, password=password).first()
+            instance = Buyer.objects.get(username=username, password=password)
+            retresult['Status Code'] = status.HTTP_200_OK
+            retresult['Found User'] = True
+            retresult['Password Correct'] = True
+            serializer = BuyerDetailSerializer(instance)
+            retresult['User Data'] = serializer.data
+            return retresult
         except Buyer.DoesNotExist:
-            raise Http404
+            try:
+                instance = Buyer.objects.get(username=username)
+                if instance is not None:
+                    retresult['Status Code'] = status.HTTP_404_NOT_FOUND
+                    retresult['Found User'] = True
+                    retresult['Password Correct'] = False
+                    return retresult
+            except Buyer.DoesNotExist:
+                retresult['Status Code'] = status.HTTP_404_NOT_FOUND
+                retresult['Found User'] = False
+                retresult['Password Correct'] = False
+                return retresult
 
     def post(self, request, *args, **kwargs):
+        retresult = {
+            'Status Code': None,
+            'Found User': None,
+            'Password Correct': None,
+            'User Data': None
+        }
         usr = request.data.get('username')
         pas = request.data.get('password')
-        buyer = self.get_object(usr, pas)
-        serializer = BuyerSerializer(buyer)
-        if buyer != None:
-            return Response(serializer.data)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+        authResult = self.user_auth(usr, pas, retresult)
+        return Response(authResult)
         # token = str(time.time()) + usr
         # print (token)
         # userToken.objects.update_or_create(username=usr, defaults={'token':token})
