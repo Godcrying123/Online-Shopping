@@ -2,7 +2,7 @@ from django.db import models
 # Create your models here.
 
 
-class User(models.Model):
+class Users(models.Model):
     name = models.CharField(max_length=200, verbose_name='name')
     owner = models.ForeignKey('auth.User', related_name='person_entity', on_delete=models.CASCADE)
     username = models.CharField(max_length=200, db_index=True, unique=True, verbose_name='username')
@@ -28,7 +28,7 @@ class User(models.Model):
 
 
 class userToken(models.Model):
-    username = models.OneToOneField(to='User', on_delete=models.DO_NOTHING)
+    username = models.OneToOneField(to='Users', on_delete=models.DO_NOTHING)
     token = models.CharField(max_length=100)
 
     class Meta:
@@ -36,7 +36,7 @@ class userToken(models.Model):
         verbose_name = verbose_name_plural = 'user token table'
 
 
-class Buyer(User):
+class Buyer(Users):
     STATUS_VIP = (
         ('vip', 'VIP'),
         ('not-vip', 'Not VIP'),

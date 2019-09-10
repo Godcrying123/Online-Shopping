@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/person_entity/', include('user.urls')),
     path('api/item_entity/', include('product.urls')),
+    path('api/order_entity/', include('orders.urls')),
     path('api/docs/', include_docs_urls(title='ShopSite Apis')),
     # path('', include(router.urls)),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework'))

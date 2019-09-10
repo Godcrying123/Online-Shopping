@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
-from .models import User, Buyer
+from .models import Users, Buyer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,12 +13,19 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'buyer']
 
 
+class UsersSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Users
+        fields = ['id', 'name', 'username', 'mail', 'telephone']
+
+
 class BuyerSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Buyer
-        fields = ['id', 'owner', 'name', 'username', 'password']
+        fields = ['id', 'owner', 'name', 'username', 'password', 'mail', 'telephone']
 
 
 class BuyerDetailSerializer(serializers.ModelSerializer):

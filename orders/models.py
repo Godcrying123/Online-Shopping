@@ -1,6 +1,6 @@
 from django.db import models
 from product.models import Product
-from user.models import User
+from user.models import Users
 # Create your models here.
 
 
@@ -17,7 +17,7 @@ class Order(models.Model):
     )
     status_order = models.CharField(default='unpaid', max_length=10,
                                     choices=STATUS_ORDER, verbose_name='status_order', db_index=True)
-    status_delivery = models.CharField(default='un-delivery', max_length=10,
+    status_delivery = models.CharField(default='un-delivery', max_length=50,
                                        choices=STATUS_DELIVERY, verbose_name='status_delivery', db_index=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -34,9 +34,9 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    owner = models.ForeignKey(User, related_name='owners', on_delete=models.CASCADE, blank=False)
-    order = models.ForeignKey(Order, related_name='Items', on_delete=models.CASCADE, blank=False)
-    product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE, blank=False)
+    owner = models.ForeignKey(Users, related_name='owners', on_delete=models.CASCADE, blank=False)
+    order = models.ForeignKey(Order, related_name='orderitems', on_delete=models.CASCADE, blank=False)
+    product = models.ForeignKey(Product, related_name='products', on_delete=models.CASCADE, blank=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 

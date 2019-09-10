@@ -1,11 +1,11 @@
 from django.db import models
-from user.models import User
+from user.models import Users
 from shop.models import Store
 
 # Create your models here.
 
 
-class Seller(User):
+class Seller(Users):
     STATUS_NORMAL = 1
     STATUS_DELETE = 0
     STATUS_BANNED = 2
