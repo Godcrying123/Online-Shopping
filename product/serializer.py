@@ -14,7 +14,7 @@ class AdminCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ['id', 'name', 'created', 'created', 'numofprods']
+        fields = ['id', 'name', 'created', 'updated', 'numofprods']
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -23,3 +23,11 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['id', 'category', 'name', 'image', 'description', 'price', 'available', 'created', 'updated',
                   'onstock']
+
+
+class ProductByCategorySerializer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'numofprods', 'products']

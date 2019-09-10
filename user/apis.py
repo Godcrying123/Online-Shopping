@@ -30,10 +30,10 @@ class BuyerList(generics.ListCreateAPIView):
     """
     queryset = Buyer.objects.all()
     serializer_class = BuyerSerializer
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    #
-    # def perform_create(self, serializer):
-    #     serializer.save(owner=self.request.user)
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class AdminBuyerList(generics.ListCreateAPIView):
@@ -74,7 +74,6 @@ class BuyerDetailByName(mixins.RetrieveModelMixin,
 
     def get_object(self, username):
         try:
-            print(Buyer.objects.get(username=username))
             return Buyer.objects.get(username=username)
         except Buyer.DoesNotExist:
             raise Http404

@@ -14,11 +14,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class BuyerSerializer(serializers.ModelSerializer):
-    # owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Buyer
-        fields = ['id', 'name', 'username', 'password']
+        fields = ['id', 'owner', 'name', 'username', 'password']
 
 
 class BuyerDetailSerializer(serializers.ModelSerializer):

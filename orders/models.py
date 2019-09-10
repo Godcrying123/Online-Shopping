@@ -34,9 +34,9 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    owner = models.ForeignKey(User, related_name='owners', on_delete=models.DO_NOTHING)
-    order = models.ForeignKey(Order, related_name='Items', on_delete=models.DO_NOTHING)
-    product = models.ForeignKey(Product, related_name='order_items', on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(User, related_name='owners', on_delete=models.CASCADE, blank=False)
+    order = models.ForeignKey(Order, related_name='Items', on_delete=models.CASCADE, blank=False)
+    product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE, blank=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 
