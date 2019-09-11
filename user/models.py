@@ -26,6 +26,8 @@ class Users(models.Model):
         self.password = password
         self.created_time = created_time
 
+    def __str__(self):
+        return self.username
 
 class userToken(models.Model):
     username = models.OneToOneField(to='Users', on_delete=models.DO_NOTHING)

@@ -49,9 +49,6 @@ class ProductListByCategory(generics.ListAPIView):
     def get(self, request, category, *args, **kwargs):
         return self.retrieve(request, category, *args, **kwargs)
 
-    def put(self, request, category, *args, **kwargs):
-        return self.update(request, category, *args, **kwargs)
-
     def get_object(self, category):
         try:
             return Category.objects.get(name=category)
@@ -62,4 +59,3 @@ class ProductListByCategory(generics.ListAPIView):
         instance = self.get_object(category)
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
-

@@ -1,7 +1,9 @@
+from django.http import Http404
+
 from rest_framework import serializers
 
 from .models import Order, OrderItem
-from user.serializers import UsersSerializer
+from user.models import Users
 from product.serializer import ProductSerializer
 
 
@@ -9,15 +11,19 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'status_order', 'status_delivery', 'created', 'updated']
+        fields = ['id', 'owner', 'status_order', 'status_delivery', 'created', 'updated']
+
+
+class OrderByUserNameSerializer(serializers.ModelSerializer):
+    orderowner = OrderSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Users
+        fields = ['id', 'username', 'orderowner']
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    owner = UsersSerializer()
-    orderitems = OrderSerializer()
-    # products = ProductSerializer(many=True)
 
     class Meta:
         model = OrderItem
-        fields = ['id', 'owner', 'orderitems']
-
+        fields = ['id', 'order', 'product', 'price', 'quantity']

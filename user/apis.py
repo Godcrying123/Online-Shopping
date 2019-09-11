@@ -2,12 +2,9 @@ from django.http import Http404
 from django.contrib.auth.models import User
 
 from rest_framework import generics
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework import permissions
 from rest_framework import mixins
-from rest_framework.request import Request
 
 from .serializers import BuyerSerializer, AdminBuyerSerializer, BuyerDetailSerializer, UserSerializer
 from .models import Buyer
@@ -59,8 +56,8 @@ class AdminBuyerDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class BuyerDetailByName(mixins.RetrieveModelMixin,
-                         mixins.UpdateModelMixin,
-                         generics.GenericAPIView):
+                        mixins.UpdateModelMixin,
+                        generics.GenericAPIView):
     """
     Retrieve, or delete an buyer instance
     """
@@ -94,4 +91,7 @@ class BuyerDetailByName(mixins.RetrieveModelMixin,
             instance._prefetched_objects_cache = {}
 
         return Response(serializer.data)
+
+    def perform_update(self, serializer):
+        serializer.save()
 

@@ -5,10 +5,12 @@ from user.models import Users
 
 
 class Order(models.Model):
+    owner = models.ForeignKey(Users, related_name='orderowner', on_delete=models.CASCADE, blank=False)
     STATUS_ORDER = (
         ('unpaid', 'Unpaid'),
         ('paid', 'Paid'),
         ('cancel', 'Cancel'),
+        ('delete', 'Delete'),
     )
     STATUS_DELIVERY = (
         ('un-delivery', 'Un-Delivery'),
@@ -34,7 +36,6 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    owner = models.ForeignKey(Users, related_name='owners', on_delete=models.CASCADE, blank=False)
     order = models.ForeignKey(Order, related_name='orderitems', on_delete=models.CASCADE, blank=False)
     product = models.ForeignKey(Product, related_name='products', on_delete=models.CASCADE, blank=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
