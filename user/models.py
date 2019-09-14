@@ -3,11 +3,12 @@ from django.db import models
 
 
 class Users(models.Model):
-    name = models.CharField(max_length=200, verbose_name='name')
-    owner = models.ForeignKey('auth.User', related_name='person_entity', on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, verbose_name='name', blank=True)
+    # owner = models.ForeignKey('auth.User', related_name='person_entity', on_delete=models.CASCADE, blank=True)
+    isAdmin = models.BooleanField(default=False, verbose_name='IsAdmin')
     username = models.CharField(max_length=200, db_index=True, unique=True, verbose_name='username')
-    mail = models.EmailField(max_length=200, db_index=True, unique=True, verbose_name='E-mail', blank=True)
-    telephone = models.CharField(max_length=100, unique=True, verbose_name='Telephone', blank=True)
+    mail = models.EmailField(max_length=200, db_index=True, verbose_name='E-mail', blank=True)
+    telephone = models.CharField(max_length=100, verbose_name='Telephone', blank=True)
     password = models.CharField(max_length=200, verbose_name='Password')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='created_time')
     updated_time = models.DateTimeField(auto_now=True, verbose_name='updated_time')
@@ -28,6 +29,7 @@ class Users(models.Model):
 
     def __str__(self):
         return self.username
+
 
 class userToken(models.Model):
     username = models.OneToOneField(to='Users', on_delete=models.DO_NOTHING)

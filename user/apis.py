@@ -27,22 +27,18 @@ class BuyerList(generics.ListCreateAPIView):
     """
     queryset = Buyer.objects.all()
     serializer_class = BuyerSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)
 
 
-class AdminBuyerList(generics.ListCreateAPIView):
+class AdminBuyerList(generics.ListAPIView):
     """
     General Method for Listing user instances including all detailed user information
     """
     queryset = Buyer.objects.all()
     serializer_class = AdminBuyerSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
 
 
 class AdminBuyerDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -51,8 +47,6 @@ class AdminBuyerDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Buyer.objects.all()
     serializer_class = AdminBuyerSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerReadOnly]
 
 
 class BuyerDetailByName(mixins.RetrieveModelMixin,
@@ -94,4 +88,5 @@ class BuyerDetailByName(mixins.RetrieveModelMixin,
 
     def perform_update(self, serializer):
         serializer.save()
+
 

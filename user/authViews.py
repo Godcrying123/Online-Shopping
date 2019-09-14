@@ -20,8 +20,8 @@ class AuthView(APIView):
     def user_auth(self, username, password, retresult):
         try:
             instance = Buyer.objects.get(username=username, password=password)
-            retresult['Status Code'] = status.HTTP_200_OK
-            retresult['Found User'] = True
+            retresult['Status_Code'] = status.HTTP_200_OK
+            retresult['Found_User'] = True
             retresult['Password Correct'] = True
             serializer = BuyerDetailSerializer(instance)
             retresult['User Data'] = serializer.data
@@ -30,22 +30,22 @@ class AuthView(APIView):
             try:
                 instance = Buyer.objects.get(username=username)
                 if instance is not None:
-                    retresult['Status Code'] = status.HTTP_404_NOT_FOUND
-                    retresult['Found User'] = True
-                    retresult['Password Correct'] = False
+                    retresult['Status_Code'] = status.HTTP_404_NOT_FOUND
+                    retresult['Found_User'] = True
+                    retresult['Password_Correct'] = False
                     return retresult
             except Buyer.DoesNotExist:
-                retresult['Status Code'] = status.HTTP_404_NOT_FOUND
-                retresult['Found User'] = False
-                retresult['Password Correct'] = False
+                retresult['Status_Code'] = status.HTTP_404_NOT_FOUND
+                retresult['Found_User'] = False
+                retresult['Password_Correct'] = False
                 return retresult
 
     def post(self, request, *args, **kwargs):
         retresult = {
-            'Status Code': None,
-            'Found User': None,
-            'Password Correct': None,
-            'User Data': None
+            'Status_Code': None,
+            'Found_User': None,
+            'Password_Correct': None,
+            'User_Data': None
         }
         usr = request.data.get('username')
         pas = request.data.get('password')

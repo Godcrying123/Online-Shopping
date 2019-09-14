@@ -15,11 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class BuyerSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    # owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Buyer
-        fields = ['id', 'owner', 'name', 'username', 'password', 'mail', 'telephone']
+        fields = ['id', 'name', 'username', 'password', 'mail', 'telephone']
 
 
 class BuyerDetailSerializer(serializers.ModelSerializer):
@@ -30,9 +30,8 @@ class BuyerDetailSerializer(serializers.ModelSerializer):
 
 
 class AdminBuyerSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Buyer
-        fields = ['id', 'owner', 'name', 'username', 'mail', 'telephone', 'password', 'status_vip', 'status_user',
+        fields = ['id', 'name', 'username', 'mail', 'telephone', 'isAdmin', 'password', 'status_vip', 'status_user',
                   'recaddress', 'created_time', 'updated_time']

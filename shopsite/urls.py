@@ -26,9 +26,9 @@ from rest_framework.documentation import include_docs_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('snippets.urls')),
-    path('api/person_entity/', include('user.urls')),
-    path('api/item_entity/', include('product.urls')),
-    path('api/order_entity/', include('orders.urls')),
+    path('api/person_entity/v1/', include('user.urls')),
+    path('api/item_entity/v1/', include('product.urls')),
+    path('api/order_entity/v1/', include('orders.urls')),
     path('api/docs/', include_docs_urls(title='ShopSite Apis')),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
 ]
