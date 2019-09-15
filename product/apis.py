@@ -5,7 +5,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import mixins
 
-from .serializer import ProductSerializer, CategorySerializer, CategoryProductSerialzer
+from .serializer import ProductSerializer, CategorySerializer, CategoryProductSerialzer, ProductDetailSerializer
 from .models import Category, Product
 
 
@@ -17,20 +17,20 @@ class AllCategoryAllProductList(generics.ListAPIView):
     serializer_class = CategorySerializer
 
 
-class ProductList(generics.ListCreateAPIView):
-    """
-    General Method for listing and creating product instance
-    """
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+# class ProductList(generics.ListCreateAPIView):
+#     """
+#     General Method for listing and creating product instance
+#     """
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
 
 
-class AdminProductDetail(generics.ListAPIView):
+class ProductDetail(generics.RetrieveAPIView):
     """
     the product details
     """
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductDetailSerializer
 
 
 class ProductListByCategory(generics.RetrieveAPIView):

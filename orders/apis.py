@@ -10,11 +10,11 @@ from .models import Order, OrderItem
 from user.models import Users
 
 
-class OrderList(generics.CreateAPIView):
+class OrderCreate(generics.CreateAPIView):
     """
     create a order
     """
-    queryset = Order.objects.filter()
+    queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
 
@@ -30,21 +30,22 @@ class OrderListByUser(generics.ListAPIView):
     """
     General Method for listing and creating category instance by user
     """
+    queryset = Users.objects.all()
     serializer_class = OrderByUserNameSerializer
 
-    def get(self, request, username, *args, **kwargs):
-        return self.retrieve(request, username, *args, **kwargs)
-
-    def get_object(self, username):
-        try:
-            return Users.objects.get(username=username)
-        except Users.DoesNotExist:
-            raise Http404
-
-    def retrieve(self, request, username, *args, **kwargs):
-        instance = self.get_object(username)
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+    # def get(self, request, username, *args, **kwargs):
+    #     return self.retrieve(request, username, *args, **kwargs)
+    #
+    # def get_object(self, username):
+    #     try:
+    #         return Users.objects.get(username=username)
+    #     except Users.DoesNotExist:
+    #         raise Http404
+    #
+    # def retrieve(self, request, username, *args, **kwargs):
+    #     instance = self.get_object(username)
+    #     serializer = self.get_serializer(instance)
+    #     return Response(serializer.data)
 
 
 class OrderItemDetail(generics.ListAPIView):

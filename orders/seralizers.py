@@ -1,29 +1,37 @@
-from django.http import Http404
-
 from rest_framework import serializers
 
 from .models import Order, OrderItem
+from product.models import Product
+
 from user.models import Users
-from product.serializer import ProductSerializer
 
 
-class OrderSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Order
-        fields = ['id', 'owner', 'status_order', 'status_delivery', 'created', 'updated']
-
-
-class OrderByUserNameSerializer(serializers.ModelSerializer):
-    orderowner = OrderSerializer(many=True, read_only=True)
+class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Users
-        fields = ['id', 'username', 'orderowner']
+        model = Product
+        fields = ['id', 'name', 'image', 'price']
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
+    boughtproducts = ProductSerializer()
 
     class Meta:
         model = OrderItem
-        fields = ['id', 'order', 'product', 'price', 'quantity']
+        fields = ['id', 'order', 'boughtproducts', 'price', 'quantity']
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    orderitems = OrderItemSerializer()
+
+    class Meta:
+        model = Order
+        fields = ['id', 'owner', 'status_order', 'status_delivery', 'created', 'orderitems']
+
+
+class OrderByUserNameSerializer(serializers.ModelSerializer):
+    ownorders = OrderSerializer(read_only=True)
+
+    class Meta:
+        model = Users
+        fields = ['id', 'username', 'ownorders']

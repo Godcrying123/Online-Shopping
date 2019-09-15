@@ -5,7 +5,7 @@ from user.models import Users
 
 
 class Order(models.Model):
-    owner = models.ForeignKey(Users, related_name='orderowner', on_delete=models.CASCADE, blank=False)
+    owner = models.OneToOneField(Users, related_name='ownorders',verbose_name='order_owner',on_delete=models.CASCADE, blank=False)
     STATUS_ORDER = (
         ('unpaid', 'Unpaid'),
         ('paid', 'Paid'),
@@ -37,7 +37,7 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='orderitems', on_delete=models.CASCADE, blank=False)
-    product = models.ForeignKey(Product, related_name='products', on_delete=models.CASCADE, blank=False)
+    product = models.ForeignKey(Product,verbose_name='bought_products',related_name='boughtproducts', on_delete=models.CASCADE, blank=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 
