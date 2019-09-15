@@ -5,10 +5,10 @@ from . import apis, authViews
 
 urlpatterns = [
     # buyer views
-    path('register', apis.BuyerList.as_view()),
+    path('register/', apis.BuyerList.as_view()),
     # path('admin/buyers/', apis.AdminBuyerList.as_view()),
     # path('admin/buyers/<int:pk>/', apis.AdminBuyerDetail.as_view()),
-    path('updateprofile/<str:username>/', apis.BuyerDetailByName.as_view()),
+    path('profile/detail/<int:pk>/', apis.BuyerDetailByName.as_view()),
     path('login/', authViews.AuthView.as_view()),
 ]
 

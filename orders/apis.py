@@ -10,11 +10,11 @@ from .models import Order, OrderItem
 from user.models import Users
 
 
-class OrderList(generics.ListCreateAPIView):
+class OrderList(generics.CreateAPIView):
     """
-    General Method for listing and creating category instance
+    create a order
     """
-    queryset = Order.objects.all()
+    queryset = Order.objects.filter()
     serializer_class = OrderSerializer
 
 
@@ -47,9 +47,9 @@ class OrderListByUser(generics.ListAPIView):
         return Response(serializer.data)
 
 
-class OrderItemDetail(generics.ListCreateAPIView):
+class OrderItemDetail(generics.ListAPIView):
     """
-    General Method for listing and creating category instance
+    order detail list
     """
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer

@@ -21,30 +21,19 @@ class AuthView(APIView):
         try:
             instance = Buyer.objects.get(username=username, password=password)
             retresult['Status_Code'] = status.HTTP_200_OK
-            retresult['Found_User'] = True
-            retresult['Password Correct'] = True
-            serializer = BuyerDetailSerializer(instance)
+            retresult['User_Verified'] = True
+            serializer = BuyerSerializer(instance)
             retresult['User Data'] = serializer.data
             return retresult
         except Buyer.DoesNotExist:
-            try:
-                instance = Buyer.objects.get(username=username)
-                if instance is not None:
-                    retresult['Status_Code'] = status.HTTP_404_NOT_FOUND
-                    retresult['Found_User'] = True
-                    retresult['Password_Correct'] = False
-                    return retresult
-            except Buyer.DoesNotExist:
-                retresult['Status_Code'] = status.HTTP_404_NOT_FOUND
-                retresult['Found_User'] = False
-                retresult['Password_Correct'] = False
-                return retresult
+            retresult['Status_Code'] = status.HTTP_404_NOT_FOUND
+            retresult['User_Verified'] = False
+            return retresult
 
     def post(self, request, *args, **kwargs):
         retresult = {
             'Status_Code': None,
-            'Found_User': None,
-            'Password_Correct': None,
+            'User_Verified': None,
             'User_Data': None
         }
         usr = request.data.get('username')

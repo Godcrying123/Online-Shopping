@@ -6,24 +6,23 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework import mixins
 
-from .serializers import BuyerSerializer, AdminBuyerSerializer, BuyerDetailSerializer, UserSerializer
+from .serializers import BuyerSerializer, AdminBuyerSerializer, BuyerDetailSerializer
 from .models import Buyer
 from .permissions import IsOwnerReadOnly
 
+# class UserList(generics.ListAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#
+#
+# class UserDetail(generics.RetrieveAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
 
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class BuyerList(generics.ListCreateAPIView):
+class BuyerList(generics.CreateAPIView):
     """
-    General Method for Listing user instances
+    the api for user registrations
     """
     queryset = Buyer.objects.all()
     serializer_class = BuyerSerializer
@@ -53,7 +52,7 @@ class BuyerDetailByName(mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
                         generics.GenericAPIView):
     """
-    Retrieve, or delete an buyer instance
+    user profile details and update
     """
     serializer_class = BuyerDetailSerializer
 

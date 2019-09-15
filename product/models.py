@@ -4,22 +4,23 @@ from shop.models import Store
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=200, db_index=True)
+    name = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField('slug', max_length=40)
+    parent_category = models.ForeignKey('self', verbose_name='parent_category',related_name='children_categories', blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    numofprods = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ('name',)
         verbose_name = 'category'
-        verbose_name_plural = 'categories'
 
     def __str__(self):
         return self.name
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    # category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    category = models.ManyToManyField(Category, related_name='products', verbose_name='category_product')
     # store = models.ForeignKey(Store, related_name='stores', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
     image = models.ImageField(upload_to='product/%Y/%m/%d', blank=True)
@@ -29,6 +30,7 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     onstock = models.PositiveIntegerField(default=0)
+    salesamount = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ('name', )
@@ -39,3 +41,7 @@ class Product(models.Model):
     # def product_available(self):
     #     if Product.objects.
 
+
+# class CateProd(models.Model):
+    # category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    # product = models.ForeignKey(Product, on_delete=models.CASCADE)

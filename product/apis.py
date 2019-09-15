@@ -1,27 +1,20 @@
 from django.http import Http404
+from django.db.models import Q
 
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import mixins
 
-from .serializer import ProductSerializer, CategorySerializer, AdminCategorySerializer, ProductByCategorySerializer
+from .serializer import ProductSerializer, CategorySerializer
 from .models import Category, Product
 
 
-class CategoryList(generics.ListCreateAPIView):
+class AllCategoryAllProductList(generics.ListAPIView):
     """
-    General Method for listing and creating category instances
+    All categories details
     """
-    queryset = Category.objects.all()
+    queryset = Category.objects.filter(Q(parent_category=None))
     serializer_class = CategorySerializer
-
-    
-class AdminCategoryList(generics.ListCreateAPIView):
-    """
-    General Method for listing and creating an admin category instance
-    """
-    queryset = Category.objects.all()
-    serializer_class = AdminCategorySerializer
 
 
 class ProductList(generics.ListCreateAPIView):
@@ -32,9 +25,9 @@ class ProductList(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
 
 
-class AdminProductDetail(generics.RetrieveUpdateDestroyAPIView):
+class AdminProductDetail(generics.ListAPIView):
     """
-    Retrieve, update or delete a product instance for admin user
+    the product details
     """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -42,20 +35,24 @@ class AdminProductDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class ProductListByCategory(generics.ListAPIView):
     """
-    General Method for listing and creating product instance with different category
+    all product list in the sub categories
     """
-    serializer_class = ProductByCategorySerializer
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
-    def get(self, request, category, *args, **kwargs):
-        return self.retrieve(request, category, *args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        print(self.request.META)
+        return self.retrieve(request, *args, **kwargs)
 
-    def get_object(self, category):
-        try:
-            return Category.objects.get(name=category)
-        except Category.DoesNotExist:
-            raise Http404
+    def get_object(self, cate1ID, cate2ID):
+        return None
+        # try:
+        #     return Category.objects.get(name=category)
+        # except Category.DoesNotExist:
+        #     raise Http404
 
-    def retrieve(self, request, category, *args, **kwargs):
-        instance = self.get_object(category)
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+    def retrieve(self, request, *args, **kwargs):
+        return None
+        # instance = self.get_object(category)
+        # serializer = self.get_serializer(instance)
+        # return Response(serializer.data)

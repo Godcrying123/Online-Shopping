@@ -6,26 +6,22 @@ from .models import Users, Buyer
 from orders.models import OrderItem
 
 
-class UserSerializer(serializers.ModelSerializer):
-    buyer = serializers.PrimaryKeyRelatedField(many=True, queryset=Buyer.objects.all())
-
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'buyer']
-
-
 class BuyerSerializer(serializers.ModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
-        model = Buyer
+        model = Users
         fields = ['id', 'name', 'username', 'password', 'mail', 'telephone']
 
 
 class BuyerDetailSerializer(serializers.ModelSerializer):
+    RECEIVE_ADDRESS = (
+        ('Primary Receive Address', None),
+    )
+    recaddress = serializers.MultipleChoiceField(choices=RECEIVE_ADDRESS, allow_blank=True)
 
     class Meta:
-        model = Buyer
+        model = Users
         fields = ['id', 'name', 'username', 'mail', 'telephone', 'password', 'recaddress']
 
 
