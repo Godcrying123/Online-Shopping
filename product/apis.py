@@ -5,7 +5,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import mixins
 
-from .serializer import ProductSerializer, CategorySerializer
+from .serializer import ProductSerializer, CategorySerializer, CategoryProductSerialzer
 from .models import Category, Product
 
 
@@ -33,26 +33,26 @@ class AdminProductDetail(generics.ListAPIView):
     serializer_class = ProductSerializer
 
 
-class ProductListByCategory(generics.ListAPIView):
+class ProductListByCategory(generics.RetrieveAPIView):
     """
-    all product list in the sub categories
+    all product list with a specific category id
     """
     queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+    serializer_class = CategoryProductSerialzer
 
-    def get(self, request, *args, **kwargs):
-        print(self.request.META)
-        return self.retrieve(request, *args, **kwargs)
-
-    def get_object(self, cate1ID, cate2ID):
-        return None
-        # try:
-        #     return Category.objects.get(name=category)
-        # except Category.DoesNotExist:
-        #     raise Http404
-
-    def retrieve(self, request, *args, **kwargs):
-        return None
-        # instance = self.get_object(category)
-        # serializer = self.get_serializer(instance)
-        # return Response(serializer.data)
+    # def get(self, request, *args, **kwargs):
+    #     return self.retrieve(request, *args, **kwargs)
+    #
+    # def get_object(self, cate1ID, cate2ID):
+    #     if cate2ID is None:
+    #         try:
+    #             return Category.objects.get(pk=cate1ID)
+    #         except Category.DoesNotExist:
+    #             raise Http404
+    #
+    # def retrieve(self, request, *args, **kwargs):
+    #     cate1ID = kwargs.get('cate1ID')
+    #     cate2ID = kwargs.get('cate2ID', None)
+    #     instance = self.get_object(cate1ID,cate2ID)
+    #     serializer = self.get_serializer(instance)
+    #     return Response(serializer.data)

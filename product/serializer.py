@@ -35,13 +35,14 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'children_categories', 'products']
 
 
+class CategoryProductSerialzer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'products']
 
 
 
-# class CategoryProductSerializer(serializers.ModelSerializer):
-#     category = CategorySerializer2(read_only=True)
-#     product = ProductSerializer(read_only=True)
-#
-#     class Meta:
-#         model = CateProd
-#         fields = ['category', 'product']
+
+
