@@ -5,6 +5,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework import mixins
+from rest_framework import status
 
 from .serializers import BuyerSerializer, AdminBuyerSerializer, BuyerDetailSerializer
 from .models import Buyer
@@ -48,6 +49,48 @@ class AdminBuyerDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AdminBuyerSerializer
 
 
+class UserRegisterCheck(mixins.RetrieveModelMixin,
+                        generics.GenericAPIView):
+    """
+    The Api for checking the username/email/telephone uniqueness.\n
+    example call: /username/value/ to check the value has been registered or not
+    """
+    serializer_class = BuyerSerializer
+
+    def get(self, request, *args, **kwargs):
+
+        return self.retrieve(request, *args, **kwargs)
+
+    def get_object(self, fieldname, fieldvalue):
+        retresult = {
+            'Status_Code': None,
+            'Verified_Field': fieldname,
+            'Verified_Value': fieldvalue,
+            'HaveOrNotHave': None
+        }
+        try:
+            if fieldname == 'username':
+                buyerinstance = Buyer.objects.get(username=fieldvalue)
+            elif fieldname == 'mail':
+                buyerinstance = Buyer.objects.get(mail=fieldvalue)
+            elif fieldname == 'telephone':
+                buyerinstance = Buyer.objects.get(telephone=fieldvalue)
+            retresult['Status_Code'] = status.HTTP_200_OK
+            retresult['HaveOrNotHave'] = True
+            return retresult
+        except Buyer.DoesNotExist:
+            retresult['Status_Code'] = status.HTTP_204_NO_CONTENT
+            retresult['HaveOrNotHave'] = None
+            return retresult
+
+    def retrieve(self, request, *args, **kwargs):
+        fieldname = kwargs.get('fieldname')
+        fieldvalue = kwargs.get('fieldvalue')
+        retresult = self.get_object(fieldname, fieldvalue)
+        # serializer = self.get_serializer(instance)
+        return Response(retresult)
+
+
 class BuyerDetailByName(mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
                         generics.GenericAPIView):
@@ -87,5 +130,6 @@ class BuyerDetailByName(mixins.RetrieveModelMixin,
 
     def perform_update(self, serializer):
         serializer.save()
+
 
 
