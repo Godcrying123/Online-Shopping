@@ -6,7 +6,7 @@ from shop.models import Store
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField('slug', max_length=40)
-    parent_category = models.ForeignKey('self', verbose_name='parent_category',related_name='children_categories', blank=True, null=True, on_delete=models.CASCADE)
+    parent_category = models.ForeignKey('self', verbose_name='parent_category', related_name='children_categories', blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

@@ -4,16 +4,44 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework import mixins
 
 from .seralizers import OrderSerializer, OrderItemSerializer, OrderByUserNameSerializer
 from .models import Order, OrderItem
+from product.models import Product
 from user.models import Users
 
 
-class OrderCreate(generics.CreateAPIView):
+class OrderCreate(mixins.CreateModelMixin,
+                  generics.GenericAPIView):
     """
     create a order
     """
+    # queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        owner_id = self.request.data.get('owner')
+        products = self.request.data.get('products')
+        user = Users.objects.get(pk=owner_id)
+        ordercreated = Order.objects.create(owner=user)
+        for orderproduct in products:
+            product_id = orderproduct.get('id')
+            quantity = orderproduct.get('quantity')
+            price = orderproduct.get('price')
+            product = Product.objects.get(pk=product_id)
+            orderitem = OrderItem.objects.create(order=ordercreated, product=product, quantity=quantity, price=price)
+            print(orderitem)
+            serializer = self.get_serializer(orderitem)
+        return Response(serializer.data)
+
+
+class OrederList(generics.ListAPIView,
+                 generics.DestroyAPIView):
+
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 

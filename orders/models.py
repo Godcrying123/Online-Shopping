@@ -5,28 +5,29 @@ from user.models import Users
 
 
 class Order(models.Model):
-    owner = models.OneToOneField(Users, related_name='ownorders',verbose_name='order_owner',on_delete=models.CASCADE, blank=False)
+    owner = models.ForeignKey(Users, related_name='ownorders', verbose_name='order_owner',
+                              on_delete=models.CASCADE, blank=False)
     STATUS_ORDER = (
         ('unpaid', 'Unpaid'),
         ('paid', 'Paid'),
         ('cancel', 'Cancel'),
         ('delete', 'Delete'),
     )
-    STATUS_DELIVERY = (
-        ('un-delivery', 'Un-Delivery'),
-        ('in delivery', 'In-Delivery'),
-        ('delivered', 'Delivered'),
-    )
+
     status_order = models.CharField(default='unpaid', max_length=10,
                                     choices=STATUS_ORDER, verbose_name='status_order', db_index=True)
-    status_delivery = models.CharField(default='un-delivery', max_length=50,
-                                       choices=STATUS_DELIVERY, verbose_name='status_delivery', db_index=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     braintree_id = models.CharField(max_length=150, blank=True)
 
     class Meta:
         ordering = ('-created',)
+
+    # @classmethod
+    # def create(cls, user):
+    #     print(user)
+    #     order = cls(owner=user)
+    #     return order
 
     def __str__(self):
         return "Order {}".format(self.id)
@@ -36,8 +37,16 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name='orderitems', on_delete=models.CASCADE, blank=False)
-    product = models.ForeignKey(Product,verbose_name='bought_products',related_name='boughtproducts', on_delete=models.CASCADE, blank=False)
+    STATUS_DELIVERY = (
+        ('un-delivery', 'Un-Delivery'),
+        ('in delivery', 'In-Delivery'),
+        ('delivered', 'Delivered'),
+    )
+    order = models.ForeignKey(Order, verbose_name='belongsorder', related_name='orderitems', on_delete=models.CASCADE, blank=False)
+    status_delivery = models.CharField(default='un-delivery', max_length=50, choices=STATUS_DELIVERY,
+                                       verbose_name='status_delivery', db_index=True, blank=True)
+    product = models.ForeignKey(Product, verbose_name='bought_products', related_name='boughtproducts',
+                                on_delete=models.CASCADE, blank=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 

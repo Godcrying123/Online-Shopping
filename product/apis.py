@@ -17,12 +17,12 @@ class AllCategoryAllProductList(generics.ListAPIView):
     serializer_class = CategorySerializer
 
 
-# class ProductList(generics.ListCreateAPIView):
-#     """
-#     General Method for listing and creating product instance
-#     """
-#     queryset = Product.objects.all()
-#     serializer_class = ProductSerializer
+class ProductList(generics.ListCreateAPIView):
+    """
+    General Method for listing and creating product instance
+    """
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
 class ProductDetail(generics.RetrieveAPIView):

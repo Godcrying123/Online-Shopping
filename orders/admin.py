@@ -5,11 +5,12 @@ from .models import Order, OrderItem
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['owner', 'status_order', 'status_delivery', 'created', 'updated']
-    list_filter = ['owner', 'status_order', 'status_delivery', 'created', 'updated']
-    list_editable = ['status_order', 'status_delivery']
+    list_display = ['owner', 'status_order',  'created', 'updated']
+    list_filter = ['owner', 'status_order', 'created', 'updated']
+    list_editable = ['status_order']
 
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ['order', 'product', 'price', 'quantity']
+    list_display = ['order', 'product', 'status_delivery', 'price', 'quantity']
+    list_editable = ['status_delivery']

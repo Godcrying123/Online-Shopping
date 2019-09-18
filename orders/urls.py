@@ -6,5 +6,6 @@ urlpatterns = [
     path('order/createorder/', apis.OrderCreate.as_view()),
     # path('order/createorupdate/<int:pk>/', apis.OrderDetail.as_view()),
     path('order/detail/', apis.OrderItemDetail.as_view()),
-    path('order/list/', apis.OrderListByUser.as_view()),
+    path('order/list/<int:userID>', apis.OrderListByUser.as_view()),
+    path('order/list/', apis.OrederList.as_view()),
 ]
