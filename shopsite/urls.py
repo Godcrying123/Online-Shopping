@@ -28,7 +28,7 @@ urlpatterns = [
     # path('', include('snippets.urls')),
     path('api/person_entity/v1/', include('user.urls')),
     path('api/item_entity/v1/', include('product.urls')),
-    path('api/order_entity/v1/', include('orders.urls')),
+    path('api/order_entity/v1/', include('order.urls')),
     path('api/docs/', include_docs_urls(title='ShopSite Apis')),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
 ]

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from .models import Users, Buyer
-from orders.models import OrderItem
+from order.models import OrderItem
 
 
 class BuyerSerializer(serializers.ModelSerializer):

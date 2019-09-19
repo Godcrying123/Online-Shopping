@@ -5,7 +5,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import mixins
 
-from .serializer import ProductSerializer, CategorySerializer, CategoryProductSerialzer, ProductDetailSerializer
+from .serializers import ProductSerializer, CategorySerializer, CategoryProductSerialzer, ProductDetailSerializer
 from .models import Category, Product
 
 

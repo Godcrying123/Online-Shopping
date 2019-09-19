@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework import mixins
 
-from .seralizers import OrderSerializer, OrderItemSerializer, OrderByUserNameSerializer
+from .serializers import OrderSerializer, OrderItemSerializer, OrderByUserNameSerializer
 from .models import Order, OrderItem
 from product.models import Product
 from user.models import Users
