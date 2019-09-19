@@ -1,4 +1,6 @@
 from django.db import models
+
+# from order.models import Order
 # Create your models here.
 
 
@@ -55,6 +57,8 @@ class Buyer(Users):
                                   choices=STATUS_VIP, verbose_name='status_vip', db_index=True, blank=True)
     status_user = models.CharField(default='normal', max_length=10,
                                    choices=STATUS_USER, verbose_name='status_user', db_index=True, blank=True)
+    # order = models.ForeignKey(Order, verbose_name='own_order', related_name='boughtorders',
+    #                           on_delete=models.CASCADE, blank=True, default=None)
 
     class Meta:
         ordering = ('username',)

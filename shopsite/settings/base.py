@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'post.apps.PostConfig',
     'product.apps.ProductConfig',
-    'orders.apps.OrdersConfig',
+    'order.apps.OrderConfig',
     'rest_framework',
     'snippets.apps.SnippetsConfig',
 ]

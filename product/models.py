@@ -1,4 +1,5 @@
 from django.db import models
+from django.http import Http404
 from shop.models import Store
 # Create your models here.
 
@@ -37,6 +38,14 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    @classmethod
+    def get_img_path(cls, pk):
+        try:
+            product = cls.objects.get(pk=pk)
+            return product.image
+        except Product.DoesNotExisted:
+            raise Http404
 
     # def product_available(self):
     #     if Product.objects.

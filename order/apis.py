@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework import mixins
 
-from .serializers import OrderSerializer, OrderItemSerializer, OrderByUserNameSerializer
+from .serializers import OrderSerializer, OrderItemSerializer, OrderByUserNameSerializer, ProductSerializer
 from .models import Order, OrderItem
 from product.models import Product
 from user.models import Users
@@ -39,24 +39,9 @@ class OrderCreate(mixins.CreateModelMixin,
         return Response(serializer.data)
 
 
-class OrederList(generics.ListAPIView,
-                 generics.DestroyAPIView):
-
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-
-
-class OrderDetail(generics.RetrieveUpdateAPIView):
+class OrderListByUser(generics.RetrieveAPIView):
     """
-    General Method for listing and creating category instance
-    """
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-
-
-class OrderListByUser(generics.ListAPIView):
-    """
-    General Method for listing and creating category instance by user
+    Listing all order details for specific user
     """
     queryset = Users.objects.all()
     serializer_class = OrderByUserNameSerializer
@@ -76,7 +61,7 @@ class OrderListByUser(generics.ListAPIView):
     #     return Response(serializer.data)
 
 
-class OrderItemDetail(generics.ListAPIView):
+class OrderItemDetail(generics.RetrieveUpdateAPIView):
     """
     order detail list
     """

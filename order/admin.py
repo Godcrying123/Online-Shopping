@@ -5,6 +5,7 @@ from .models import Order, OrderItem
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    # list_display_links = ['status_order']
     list_display = ['owner', 'status_order',  'created', 'updated']
     list_filter = ['owner', 'status_order', 'created', 'updated']
     list_editable = ['status_order']
