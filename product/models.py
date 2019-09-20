@@ -50,7 +50,3 @@ class Product(models.Model):
     # def product_available(self):
     #     if Product.objects.
 
-
-# class CateProd(models.Model):
-    # category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    # product = models.ForeignKey(Product, on_delete=models.CASCADE)
