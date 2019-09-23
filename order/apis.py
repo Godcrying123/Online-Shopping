@@ -17,6 +17,7 @@ class OrderCreate(mixins.CreateModelMixin,
     """
     create a order
     """
+    serializer_class = OrderSerializer
 
     def get_instance_by_model(self, Object, pk):
         try:
@@ -109,12 +110,3 @@ class OrderItemDetail(generics.RetrieveUpdateAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
 
-    # def create(self, request, *args, **kwargs):
-    #     user_username_for_order = self.request.data.get('owner.username')
-    #     user_instance = Users.objects.get(username=user_username_for_order)
-    #     serializer = OrderItemSerializer(user_instance, data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         headers = self.get_success_headers(serializer.data)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

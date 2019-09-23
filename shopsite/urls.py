@@ -18,17 +18,27 @@ from django.contrib import admin
 from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
 
+from product.views import IndexView
+
 
 # router = routers.DefaultRouter()
 # router.register(r'users', views.UserViewSet)
 # router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    # path('', include('snippets.urls')),
+    # API URL List
     path('api/person_entity/v1/', include('user.urls')),
     path('api/item_entity/v1/', include('product.urls')),
     path('api/order_entity/v1/', include('order.urls')),
     path('api/docs/', include_docs_urls(title='ShopSite Apis')),
-    path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
+    # path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
+]
+
+urlpatterns = urlpatterns + [
+    # View URL List
+    # path('', include('snippets.urls')),
+    path('admin/', admin.site.urls),
+    path('view/',IndexView.as_view()),
+    path('view/user/',include('user.urls')),
+    path('view/item/',include('product.urls')),
 ]

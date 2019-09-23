@@ -9,7 +9,7 @@ class Users(models.Model):
     # owner = models.ForeignKey('auth.User', related_name='person_entity', on_delete=models.CASCADE, blank=True)
     # isAdmin = models.BooleanField(default=False, verbose_name='IsAdmin')
     username = models.CharField(max_length=200, db_index=True, unique=True, verbose_name='username')
-    mail = models.EmailField(max_length=200, db_index=True, verbose_name='E-mail', blank=True)
+    mail = models.EmailField(max_length=200, db_index=True, verbose_name='E-mail')
     telephone = models.CharField(max_length=100, verbose_name='Telephone', blank=True)
     password = models.CharField(max_length=200, verbose_name='Password')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='created_time')

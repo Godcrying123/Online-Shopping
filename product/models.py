@@ -1,6 +1,9 @@
 from django.db import models
 from django.http import Http404
+from django.db.models import Q
+
 from shop.models import Store
+
 # Create your models here.
 
 
@@ -17,6 +20,15 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def firstlevelcategory(self):
+        return Category.objects.filter(Q(parent_category=None))
+
+    def secondlevelcategory(self):
+        return Category.objects.filter(Q(parent_category=self))
+
+    def categoryproductlist(self):
+        return Product.objects.filter(Q(category=self))
 
 
 class Product(models.Model):

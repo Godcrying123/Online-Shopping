@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet" >
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" >
+    <script type='text/javascript' src='{% static "js/jquery-3.4.1.min.js" %}'></script>
+    <script type='text/javascript' src='{% static "js/bootstrap.bundle.js" %}'></script>
+    <script type='text/javascript' src='{% static "js/bootstrap.min.js" %}'></script>
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+         <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="/view/">HomePage</a>
+            </li>
+             <li class="nav-item dropdown">
+                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Languages
+                 </a>
+                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                     <a class="dropdown-item" href="#">Chinese</a>
+                     <a class="dropdown-item" href="#">English</a>
+                     <a class="dropdown-item" href="#">Japanese</a>
+                 </div>
+             </li>
+         </ul>
+        <li class="nav-item dropdown form-inline my-2 my-lg-0">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                User Operations
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                <a class="dropdown-item" href="/view/user/login/">Login</a>
+                <a class="dropdown-item" href="/view/user/register/">New User?</a>
+                <a class="dropdown-item" href="/view/user/profile/">Profile</a>
+                <a class="dropdown-item" href="/view/user/logout">Log Out</a>
+            </div>
+        </li>
+    </nav>
+</header>

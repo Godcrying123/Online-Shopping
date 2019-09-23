@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<hr>
+<div class="container" style="margin:auto auto;">
+    <h3>Profile</h3>
+    <form action="/view/user/profile/" method="post">
+    {{ profile_form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Save Profile"></p>
+</form>
+    <p>{{ loginresult }}</p>
+</div>
+{% endblock %}

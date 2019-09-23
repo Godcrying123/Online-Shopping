@@ -2,7 +2,7 @@ from django.urls import path, re_path
 
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from . import apis
+from . import apis, views
 
 urlpatterns = [
     #category views
@@ -15,3 +15,7 @@ urlpatterns = [
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)
+
+urlpatterns = urlpatterns + [
+    path('', views.IndexView.as_view()),
+]

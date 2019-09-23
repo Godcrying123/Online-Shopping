@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Online Shopping{% endblock %}
+
+{% block content %}
+<div>
+    <div style="text-align:center;">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+    <div style="width:30%;">
+        {% for category in firstcategorylist %}
+        <div class="list-group dropright">
+            <a href="#" class="list-group-item list-group-item-action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ category }}</a>
+            <div id="{{ category }}" class="dropdown-menu">
+                <table class="table table-borderless">
+                    {% for cate in category.secondlevelcategory %}
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ cate }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        {% for product in cate.categoryproductlist %}
+                        <td><img src="{{ product.image }}"></td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for product in cate.categoryproductlist %}
+                        <td>{{ product }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for product in cate.categoryproductlist %}
+                        <td>{{ product.price }}</td>
+                        {% endfor %}
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div>
+        <script>
+           $(".firstlevelcate").hover(function(){
+               var catename = $(this).text();
+               console.log(catename);
+               });
+        </script>
+    </div>
+</div>
+{% endblock %}

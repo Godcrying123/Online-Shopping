@@ -13,7 +13,7 @@ class AllCategoryAllProductList(generics.ListAPIView):
     """
     All categories details
     """
-    queryset = Category.objects.filter(Q(parent_category=None))
+    queryset = Category.firstlevelcategory(Category)
     serializer_class = CategorySerializer
 
 
