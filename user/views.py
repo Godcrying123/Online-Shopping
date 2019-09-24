@@ -83,6 +83,7 @@ class ProfileView(View):
         if len(self.useridlist) != 0:
             self.useridlist.clear()
         self.useridlist.append(userid)
+        print(self.useridlist)
 
     def get(self, request, *args, **kwargs):
         userid = kwargs.get('pk')

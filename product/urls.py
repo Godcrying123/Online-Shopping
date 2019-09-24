@@ -18,4 +18,5 @@ urlpatterns = [
 
 urlpatterns = urlpatterns + [
     path('', views.IndexView.as_view()),
+    path('category/products/', views.CategoryProductList.as_view())
 ]
