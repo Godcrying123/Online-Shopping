@@ -1,10 +1,10 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 # from django.contrib.auth import authenticate, login
 
 from .models import Users
-from .forms import LoginForm, UserRegistrationForm, UserProfileForm
+from .forms import LoginForm, UserRegistrationForm, UserProfileGetForm, UserProfileChangeForm
 
 
 class LoginView(View):
@@ -76,12 +76,41 @@ class RegistrationView(View):
 
 
 class ProfileView(View):
-    template_name='user/profile.html'
+    template_name = 'user/profile.html'
+    useridlist = []
 
-    def get(self, request):
-        profile_form = UserProfileForm()
-        return render(request, self.template_name,{'profile_form': profile_form})
+    def userlistchange(self, userid):
+        if len(self.useridlist) != 0:
+            self.useridlist.clear()
+        self.useridlist.append(userid)
 
-    def put(self, request):
-        profile_form = UserProfileForm(request.POST)
-        return render(request, self.template_name,{'profile_form':profile_form})
+    def get(self, request, *args, **kwargs):
+        userid = kwargs.get('pk')
+        userinstance = get_object_or_404(Users, pk=userid)
+        profile_form = UserProfileGetForm(instance=userinstance)
+        self.userlistchange(userid)
+        return render(request, self.template_name, {'profile_form': profile_form})
+
+    def post(self, request, *args, **kwargs):
+        context = {
+            'profile_form': None,
+            'profilesaveresult': None
+        }
+        profile_form = UserProfileChangeForm(request.POST)
+        context['profile_form'] = profile_form
+        userid = self.useridlist[0]
+        if profile_form.is_valid():
+            cd = profile_form.cleaned_data
+            name = cd['name']
+            username = cd['username']
+            telephone = cd['telephone']
+            email = cd['mail']
+            userinstance = get_object_or_404(Users, pk=userid)
+            recaddress = cd['recaddress']
+            userinstance.name = name
+            userinstance.username = username
+            userinstance.mail = email
+            userinstance.telephone = telephone
+            userinstance.recaddress = recaddress
+            userinstance.save()
+        return HttpResponseRedirect('/view/user/profile/'+str(userid)+'/')

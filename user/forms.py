@@ -25,8 +25,21 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password2']
 
 
-class UserProfileForm(forms.ModelForm):
+class UserProfileGetForm(forms.ModelForm):
 
     class Meta:
         model = Users
-        fields = '__all__'
+        fields = ('name', 'username', 'mail', 'telephone', 'recaddress')
+
+
+class UserProfileChangeForm(forms.Form):
+    name = forms.CharField(label='Name', max_length=100,
+                           required=True)
+    username = forms.CharField(label='UserName', max_length=100,
+                               required=True)
+    mail = forms.EmailField(label='E-mail', required=True,
+                            max_length=100)
+    telephone = forms.CharField(label='Telephone', max_length=100,
+                                required=True)
+    recaddress = forms.CharField(label='Recaddress', max_length=100,
+                                 required=True)
