@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.views import View
-from .models import Category
+from django.shortcuts import render, get_object_or_404
+from django.views import View, generic
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .models import Category, Product
 
 # Create your views here.
 
@@ -10,13 +11,8 @@ class IndexView(View):
 
     def get_context(self):
         firstCategories = Category.firstlevelcategory(Category)
-        for x in firstCategories:
-            for y in x.secondlevelcategory():
-                print(y)
-        # secondCategories = Category.secondlevelcategory(firstCategories)
         context = {
             'firstcategorylist': firstCategories,
-            # 'secondcategorylist': secondCategories,
         }
         return context
 
@@ -25,22 +21,39 @@ class IndexView(View):
         return render(request, self.template_name, context)
 
 
-class CategoryProductList(View):
+class CategoryProductList(generic.ListView):
+    model = Product
     template_namme = 'product/categorylist.html'
+    paginate_by = 10
 
 
-    def get_context(self):
+
+    def get_context(self, categoryslug):
         firstCategories = Category.firstlevelcategory(Category)
-        for x in firstCategories:
-            for y in x.secondlevelcategory():
-                print(y)
-        # secondCategories = Category.secondlevelcategory(firstCategories)
+        if categoryslug == 'all':
+            productlist = Product.objects.all()
+        else:
+            category = get_object_or_404(Category, slug=categoryslug)
+            productlist = category.categoryproductlist()
         context = {
             'firstcategorylist': firstCategories,
-            # 'secondcategorylist': secondCategories,
+            'productlist': productlist,
         }
         return context
 
-    def get(self, request):
-        context = self.get_context()
-        return render(request, self.template_namme, context)
+    def get(self, request, *args, **kwargs):
+        categoryslug = kwargs.get('categoryslug', 'all')
+        context = self.get_context(categoryslug)
+        productlist = context['productlist']
+        paginator = Paginator(productlist, 2)
+        page = self.request.GET.get('page', 1)
+        try:
+            currentPage = int(page)
+            productpage = paginator.page(currentPage)
+        except PageNotAnInteger:
+            productpage = paginator.page(1)
+        except EmptyPage:
+            productpage = paginator.page(paginator.num_pages)
+        context['productlist'] = productpage.object_list
+        print(locals())
+        return render(request, self.template_namme, locals())
