@@ -17,28 +17,31 @@
             <div id="{{ category }}" class="dropdown-menu">
                 <table class="table table-borderless">
                     {% for cate in category.secondlevelcategory %}
-                    <thead>
-                    <tr>
-                        <th scope="col">{{ cate }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        {% for product in cate.categoryproductlist %}
-                        <td><img src="{{ product.image }}"></td>
-                        {% endfor %}
-                    </tr>
-                    <tr>
-                        {% for product in cate.categoryproductlist %}
-                        <td>{{ product }}</td>
-                        {% endfor %}
-                    </tr>
-                    <tr>
-                        {% for product in cate.categoryproductlist %}
-                        <td>{{ product.price }}</td>
-                        {% endfor %}
-                    </tr>
-                    </tbody>
+                        {% if cate.numofproductincategory == 0 %}
+                        {% else %}
+                        <thead>
+                        <tr>
+                            <th scope="col">{{ cate }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {% for product in cate.categoryproductlist %}
+                            <td><img src="{{ product.image.url }}" height="200" width="200"></td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {% for product in cate.categoryproductlist %}
+                            <td>{{ product }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {% for product in cate.categoryproductlist %}
+                            <td>{{ product.price }}</td>
+                            {% endfor %}
+                        </tr>
+                        </tbody>
+                        {% endif %}
                     {% endfor %}
                 </table>
             </div>

@@ -2,6 +2,7 @@ from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from . import apis, authViews, views
 
+app_name = 'user'
 
 urlpatterns = [
     # User API URL

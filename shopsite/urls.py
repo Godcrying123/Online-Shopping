@@ -17,6 +17,8 @@ from django.urls import path, include
 from django.contrib import admin
 from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
+from django.conf.urls.static import static
+from django.conf import settings
 
 from product.views import IndexView
 
@@ -39,6 +41,9 @@ urlpatterns = urlpatterns + [
     # path('', include('snippets.urls')),
     path('admin/', admin.site.urls),
     path('view/',IndexView.as_view()),
-    path('view/user/',include('user.urls')),
-    path('view/item/',include('product.urls')),
+    path('view/user/',include('user.urls', namespace='user')),
+    path('view/item/',include('product.urls', namespace='product')),
 ]
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

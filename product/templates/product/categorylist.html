@@ -11,11 +11,18 @@
     <div class="row">
         <div class="col-3">
             <div class="accordion" id="accordionExample">
-                {% for category in context.firstcategorylist %}
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" onclick="location.href='/view/item/category/products/?page=1';">All</button>
+                        </h2>
+                    </div>
+                </div>
+                {% for category in firstcategorylist %}
                 <div class="card">
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne{{ category.slug }}" aria-expanded="true" aria-controls="collapseOne">{{ category }}</button>
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne{{ category.slug }}" aria-expanded="false" aria-controls="collapseOne">{{ category }}</button>
                         </h2>
                     </div>
 
@@ -23,7 +30,10 @@
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 {% for cate in category.secondlevelcategory %}
-                                    <li href="/view/" class="list-group-item list-group-item-action">{{ cate }}</li>
+                                {% if cate.numofproductincategory == 0 %}
+                                {% else %}
+                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="/view/item/category/products/{{ cate.slug }}/?page=1">{{ cate }}</a><span class="badge badge-primary badge-pill">{{ cate.numofproductincategory }}</span></li>
+                                {% endif %}
                                 {% endfor %}
                             </ul>
                         </div>
@@ -33,29 +43,65 @@
             </div>
         </div>
         <div class="col-9">
-            <table class="table table-borderless">
-                <tbody>
-                {% for product in productlist %}
-                    <td>
-                        <div class="card" style="width: 18rem;">
-                            <img src="{{ product.image }}" class="card-img-top" alt="...">
+            <div class="container">
+                <form class="form-inline my-2 my-lg-0" method="post" action="">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">2</button>
+                        <button type="button" class="btn btn-secondary">3</button>
+                        <button type="button" class="btn btn-secondary">4</button>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <div class="row">
+                    {% for product in productlist %}
+                    <div class="col-{{ eachby }}">
+                        <div class="card" style="width: 18rem;margin:auto auto;">
+                            <img src="{{ product.image.url }}" class="card-img-top" alt="..." height="200" width="200">
                             <div class="card-body">
                                 <p class="card-text">{{ product }}</p>
                                 <p class="card-text">{{ product.price }} &ensp; {{ product.salesamount }}</p>
                             </div>
                         </div>
-                    </td>
-                {% endfor %}
-                </tbody>
-            </table>
-            <div>
-                <ul>
-<!--                    {% if paginator.has_previous %}-->
-<!--                        <li><a href="view/item/category/products/?page={{ paginator.previous_page_number }}"></a></li>-->
-<!--                    {% else %}-->
-<!--                        <li><a href="#">Last</a></li>-->
-<!--                    {% endif %}-->
-                </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="container" >
+                <nav aria-label="Page navigation example" >
+                    <ul class="pagination">
+                        {% if has_previous_page %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="?page={{ previous_page_number }}">{{ previous_page_number }}</a></li>
+                        {% else %}
+<!--                        <p>This is a test</p>-->
+                        <li class="disabled page-item">
+                            <a class="page-link" href="" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="page-item"><a class="page-link" href="?page={{ current_page_num }}">{{ current_page_num }}</a></li>
+                        {% if has_next_page %}
+                        <li class="page-item"><a class="page-link" href="?page={{ next_page_number }}">{{ next_page_number }}</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ next_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="disabled page-item">
+                            <a class="page-link" href="" aria-label="Previous">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

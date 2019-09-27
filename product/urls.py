@@ -4,6 +4,9 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from . import apis, views
 
+app_name = 'product'
+
+
 urlpatterns = [
     #category views
     path('categories/products/', apis.AllCategoryAllProductList.as_view()),
@@ -19,5 +22,6 @@ urlpatterns = [
 urlpatterns = urlpatterns + [
     path('', views.IndexView.as_view()),
     path('category/products/<slug:categoryslug>/', views.CategoryProductList.as_view()),
-    path('category/products/', views.CategoryProductList.as_view())
+    path('category/products/', views.CategoryProductList.as_view()),
+    path('category/products/detail/<int:pk>/', views.ProductListDetail.as_view())
 ]

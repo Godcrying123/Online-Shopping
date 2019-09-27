@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'post.apps.PostConfig',
     'product.apps.ProductConfig',
     'order.apps.OrderConfig',
+    'image.apps.ImageConfig',
+    'comment.apps.CommentConfig',
     'rest_framework',
     'snippets.apps.SnippetsConfig',
 ]
@@ -64,6 +66,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',

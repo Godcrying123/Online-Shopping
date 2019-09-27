@@ -5,8 +5,8 @@ from .models import Category,Product
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name','slug', 'parent_category', 'created', 'updated']
-    prepopulated_fields = {'slug':('name',)}
+    list_display = ['name', 'slug', 'parent_category', 'created', 'updated']
+    prepopulated_fields = {'slug': ('name',)}
     list_filter = ['parent_category']
     list_editable = ['parent_category']
 

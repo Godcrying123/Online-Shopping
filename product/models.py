@@ -30,6 +30,9 @@ class Category(models.Model):
     def categoryproductlist(self):
         return Product.objects.filter(Q(category=self))
 
+    def numofproductincategory(self):
+        return len(Product.objects.filter(Q(category=self)))
+
 
 class Product(models.Model):
     # category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
