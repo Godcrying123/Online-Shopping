@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View, generic
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Category, Product
-from .forms import ProductDetailForm
+from .forms import ProductDetailForm, CartAddProductForm
 
+from image.models import Images
 # Create your views here.
 
 
@@ -99,9 +100,14 @@ class CategoryProductList(generic.ListView):
 
 class ProductListDetail(generic.DetailView):
     template_name = 'product/productdetail.html'
+    imagesets = {}
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk', None)
         productinstance = get_object_or_404(Product, pk=pk)
-        productdetail_form = ProductDetailForm(instance=productinstance)
-        return render(request, self.template_name,{'productdetail_form': productdetail_form})
+        images = Images.getallimagesforproduct(Images, productinstance)
+        self.imagesets.clear()
+        self.imagesets['product'] = productinstance
+        self.imagesets['otherimages'] = images
+        productdetail_form = CartAddProductForm()
+        return render(request, self.template_name, {**{'productdetail_form': productdetail_form}, **self.imagesets})

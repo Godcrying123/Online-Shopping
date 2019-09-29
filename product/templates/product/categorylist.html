@@ -1,13 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Category-Product List{% endblock %}
 {% block content %}
-<div>
-    <div style="text-align:center;">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
+<div class="container-fluid">
+    {% include "searchbar.html" %}
     <div class="row">
         <div class="col-3">
             <div class="accordion" id="accordionExample">
@@ -43,21 +38,27 @@
             </div>
         </div>
         <div class="col-9">
-            <div class="container">
-                <form class="form-inline my-2 my-lg-0" method="post" action="">
+            <div class="container-fluid">
+                <br>
+                <div class="row justify-content-end">
+                    <div class="col-3">
+                        <form class="form-inline my-2 my-lg-0" method="post" action="">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-secondary">2</button>
                         <button type="button" class="btn btn-secondary">3</button>
                         <button type="button" class="btn btn-secondary">4</button>
                     </div>
                 </form>
-            </div>
-            <div class="container">
+                    </div>
+                </div>
+                <br>
                 <div class="row">
-                    {% for product in productlist %}
+                {% for product in productlist %}
                     <div class="col-{{ eachby }}">
                         <div class="card" style="width: 18rem;margin:auto auto;">
-                            <img src="{{ product.image.url }}" class="card-img-top" alt="..." height="200" width="200">
+                            <a href="/view/item/category/products/detail/{{ product.id }}/">
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="..." height="200" width="200" />
+                            </a>
                             <div class="card-body">
                                 <p class="card-text">{{ product }}</p>
                                 <p class="card-text">{{ product.price }} &ensp; {{ product.salesamount }}</p>
@@ -66,9 +67,10 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-            <div class="container" >
-                <nav aria-label="Page navigation example" >
+                <br>
+                <div class="row justify-content-center">
+                    <div class="col-3">
+                    <nav aria-label="Page navigation example" >
                     <ul class="pagination">
                         {% if has_previous_page %}
                         <li class="page-item">
@@ -101,7 +103,9 @@
                         </li>
                         {% endif %}
                     </ul>
-                </nav>
+                    </nav>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

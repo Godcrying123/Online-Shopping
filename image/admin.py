@@ -7,3 +7,4 @@ from .models import Images
 class ImageAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'product_img', 'comment_img', 'user_img', 'created', 'updated']
     list_filter = ['created', 'updated']
+    prepopulated_fields = {'slug': ('name',)}

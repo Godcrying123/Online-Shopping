@@ -1,15 +1,11 @@
-{% extends "base.html" %}
-
-{% block title %}Create an account{% endblock %}
-
-{% block content %}
-<hr>
-<div class="container">
-    <h3>Create an account</h3>
+{% extends "user/user_base.html" %}
+{% block title %}Registraion{% endblock %}
+{% block h3 %}Create an account{% endblock%}
+{% block user_form %}
     <form action="/view/user/rr/" method="post">
     {{ user_form.as_p }}
     {% csrf_token %}
     <p><input type="submit" value="Create my account"></p>
-</form>
-</div>
+    </form>
 {% endblock %}
+
