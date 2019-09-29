@@ -1,15 +1,11 @@
-import time
-
-from django.shortcuts import render
-from django.http import JsonResponse
-from django.http import Http404
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import Buyer, userToken
-from .serializers import BuyerSerializer, BuyerDetailSerializer
+from user.models import Buyer
+from user.api.serializers import BuyerSerializer
+
+
 # Create your views here
 
 

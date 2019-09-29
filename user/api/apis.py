@@ -1,15 +1,13 @@
 from django.http import Http404
-from django.contrib.auth.models import User
 
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework import permissions
 from rest_framework import mixins
 from rest_framework import status
 
-from .serializers import BuyerSerializer, AdminBuyerSerializer, BuyerDetailSerializer
-from .models import Buyer
-from .permissions import IsOwnerReadOnly
+from user.api.serializers import BuyerSerializer, AdminBuyerSerializer, BuyerDetailSerializer
+from user.models import Buyer
+
 
 # class UserList(generics.ListAPIView):
 #     queryset = User.objects.all()

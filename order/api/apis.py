@@ -1,13 +1,9 @@
-from django.http import Http404
-
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
 from rest_framework import mixins
 
-from .serializers import OrderSerializer, OrderItemSerializer, OrderByUserNameSerializer, ProductSerializer
-from .models import Order, OrderItem
+from order.api.serializers import OrderSerializer, OrderItemSerializer, OrderByUserNameSerializer
+from order.models import Order, OrderItem
 from product.models import Product
 from user.models import Users
 
@@ -68,7 +64,7 @@ class OrderCreate(mixins.CreateModelMixin,
             orderitem = OrderItem.objects.create(order=ordercreated, product=product, quantity=quantity, price=price)
             orderdetail['OrderItemID'] = orderitem.id
             orderdetail['OrderProductName'] = product.name
-            # orderdetail['OrderImg'] = product.image
+            orderdetail['OrderImg'] = product.image.url
             orderdetail['OrderResult'] = True
             retresult['Order_Item_Results'].append(orderdetail)
         return Response(retresult)

@@ -27,22 +27,28 @@ from product.views import IndexView
 # router.register(r'users', views.UserViewSet)
 # router.register(r'groups', views.GroupViewSet)
 
-urlpatterns = [
+extra_patterns = [
     # API URL List
-    path('api/person_entity/v1/', include('user.urls')),
-    path('api/item_entity/v1/', include('product.urls')),
-    path('api/order_entity/v1/', include('order.urls')),
-    path('api/docs/', include_docs_urls(title='ShopSite Apis')),
+    path('api/', include([
+        path('person_entity/v1/', include('user.api.urls', namespace='persona_api')),
+        path('item_entity/v1/', include('product.api.urls', namespace='item_api')),
+        path('order_entity/v1/', include('order.api.urls', namespace='order_api')),
+        path('docs/', include_docs_urls(title='ShopSite Apis')),
+    ])),
     # path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
-urlpatterns = urlpatterns + [
+urlpatterns = [
     # View URL List
-    # path('', include('snippets.urls')),
+    # Admin page url
     path('admin/', admin.site.urls),
-    path('view/',IndexView.as_view()),
-    path('view/user/',include('user.urls', namespace='user')),
-    path('view/item/',include('product.urls', namespace='product')),
+    path('view/', include([
+        path('', IndexView.as_view()),
+        path('user/', include('user.urls', namespace='user_view')),
+        path('item/', include('product.urls', namespace='product_view')),
+    ])),
+    path('', include(extra_patterns)),
+    # path('', include('snippets.urls')),
 ]
 
 if settings.DEBUG:

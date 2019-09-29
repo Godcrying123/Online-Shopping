@@ -1,12 +1,7 @@
-from django.http import Http404
-from django.db.models import Q
-
 from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework import mixins
 
-from .serializers import ProductSerializer, CategorySerializer, CategoryProductSerialzer, ProductDetailSerializer
-from .models import Category, Product
+from product.api.serializers import ProductSerializer, CategorySerializer, CategoryProductSerialzer, ProductDetailSerializer
+from product.models import Category, Product
 
 
 class AllCategoryAllProductList(generics.ListAPIView):

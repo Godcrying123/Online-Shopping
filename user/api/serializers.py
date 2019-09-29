@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
-from .models import Users, Buyer
+from user.models import Users, Buyer
 
 
 class BuyerSerializer(serializers.ModelSerializer):
