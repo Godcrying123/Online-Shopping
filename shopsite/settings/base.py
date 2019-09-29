@@ -25,6 +25,8 @@ SECRET_KEY = 's1mivna_#&l99j$t#6s#$6a$66#w#7t)0+_avey%nvfrbml0x3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# SET THE CART ID
+CART_SESSION_ID = 'cart'
 
 # Application definition
 
@@ -108,6 +110,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Redis Configurations
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

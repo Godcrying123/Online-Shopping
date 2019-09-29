@@ -46,6 +46,7 @@ urlpatterns = [
         path('', IndexView.as_view()),
         path('user/', include('user.urls', namespace='user_view')),
         path('item/', include('product.urls', namespace='product_view')),
+        path('cart/', include('cart.urls', namespace='cart_view')),
     ])),
     path('', include(extra_patterns)),
     # path('', include('snippets.urls')),

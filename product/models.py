@@ -54,7 +54,11 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def categorynameforproduct(self):
+        return self.category.all()
+
     # def product_available(self):
     #     if Product.objects.
+
 
 

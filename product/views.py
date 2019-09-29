@@ -110,4 +110,5 @@ class ProductListDetail(generic.DetailView):
         self.imagesets['product'] = productinstance
         self.imagesets['otherimages'] = images
         productdetail_form = CartAddProductForm()
+        print(productinstance.categorynameforproduct())
         return render(request, self.template_name, {**{'productdetail_form': productdetail_form}, **self.imagesets})

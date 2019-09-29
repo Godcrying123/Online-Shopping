@@ -28,13 +28,16 @@
         </div>
         <div class="col-6">
             <h1>{{ product.name }}</h1>
-            <h2>{{ product.category.name }}</h2>
+            {% for cate in product.categorynameforproduct %}
+            <h3>{{ cate }}</h3>
+            {% endfor %}
             <p>{{ product.price }}</p>
-            <form>
-                {{ productdetail_form.as_form }}
+            <form action="" method="post">
+                {{ productdetail_form.as_p }}
                 {% csrf_token %}
                 <input type="submit" value="Add to cart">
             </form>
+            <hr>
             {{ product.description | linebreaks }}
         </div>
     </div>
