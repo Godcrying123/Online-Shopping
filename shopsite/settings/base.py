@@ -32,7 +32,6 @@ CART_SESSION_ID = 'cart'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -45,8 +44,10 @@ INSTALLED_APPS = [
     'order.apps.OrderConfig',
     'image.apps.ImageConfig',
     'comment.apps.CommentConfig',
+    'cart.apps.CartConfig',
     'rest_framework',
     'snippets.apps.SnippetsConfig',
+    'django.contrib.auth',
 ]
 
 MIDDLEWARE = [
