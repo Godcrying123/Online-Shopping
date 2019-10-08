@@ -1,24 +1,131 @@
 {% extends "base.html" %}
+
 {% block title %}Cart Detail Page{% endblock %}
 {% block content %}
 <hr>
 <div class="container">
-    <h1>Your Shopping Cart</h1>
+    <h2>Your Shopping Cart</h2>
     <div class="row">
-        <div class="col-9">
+        <div class="col-12">
             <table class="table table-striped">
-                <thead>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Operations</th>
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="6">Kai's Store</th>
+                    </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <tr style="text-align:center;">
+                        <td><a href="#"><img src="/media/product/2019/09/26/844948ee1b8c0e560246b5908a1be949.jpg" height="80" width="80"></a></td>
+                        <td><a>Apple</a></td>
+                        <td>
+                            <span>
+                                <select name="quantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </span>
+                            <span><button>update</button></span></td>
+                        <td>19.99</td>
+                        <td>40</td>
+                        <td align="center" style="text-align:center;">
+                            <input type="button" value="delete">
+                        </td>
+                    </tr>
+                    <tr style="text-align:center;">
+                        <td><a href="#"><img src="/media/product/2019/09/26/844948ee1b8c0e560246b5908a1be949.jpg" height="80" width="80"></a></td>
+                        <td><a>Apple</a></td>
+                        <td>
+                            <span>
+                                <select name="quantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </span>
+                            <span><button>update</button></span></td>
+                        <td>19.99</td>
+                        <td>40</td>
+                        <td align="center" style="text-align:center;">
+                            <input type="button" value="delete">
+                        </td>
+                    </tr>
+                    <tr class="total" style="text-align:center;">
+                        <td>Total</td>
+                        <td colspan="4"></td>
+                        <td class="num">29.99</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
-        <div class="col-3"></div>
     </div>
-    <div class="row"></div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="6">Kai's Store</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align:center;">
+                        <td><a href="#"><img src="/media/product/2019/09/26/844948ee1b8c0e560246b5908a1be949.jpg" height="80" width="80"></a></td>
+                        <td><a>Apple</a></td>
+                        <td>
+                            <span>
+                                <select name="quantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </span>
+                            <span><button>update</button></span></td>
+                        <td>19.99</td>
+                        <td>40</td>
+                        <td align="center" style="text-align:center;">
+                            <input type="button" value="delete">
+                        </td>
+                    </tr>
+                    <tr style="text-align:center;">
+                        <td><a href="#"><img src="/media/product/2019/09/26/844948ee1b8c0e560246b5908a1be949.jpg" height="80" width="80"></a></td>
+                        <td><a>Apple</a></td>
+                        <td>
+                            <span>
+                                <select name="quantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </span>
+                            <span><button>update</button></span></td>
+                        <td>19.99</td>
+                        <td>40</td>
+                        <td align="center" style="text-align:center;">
+                            <input type="button" value="delete">
+                        </td>
+                    </tr>
+                    <tr class="total" style="text-align:center;">
+                        <td>Total</td>
+                        <td colspan="4"></td>
+                        <td class="num">29.99</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--<div class="row"></div>-->
 </div>
 {% endblock %}

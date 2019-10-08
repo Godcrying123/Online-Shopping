@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'image.apps.ImageConfig',
     'comment.apps.CommentConfig',
     'cart.apps.CartConfig',
+    'activity.apps.ActivityConfig',
     'rest_framework',
     'snippets.apps.SnippetsConfig',
     'django.contrib.auth',
