@@ -25,6 +25,7 @@ class Cart(object):
         """
         product_id = str(product.id)
         if product_id not in self.cart:
+            print("this product is not in cart")
             self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
 
         if update_quantity:
