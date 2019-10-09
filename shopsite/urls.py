@@ -47,6 +47,7 @@ urlpatterns = [
         path('user/', include('user.urls', namespace='user_view')),
         path('item/', include('product.urls', namespace='product_view')),
         path('cart/', include('cart.urls', namespace='cart_view')),
+        path('order/', include('order.urls', namespace='order_view')),
     ])),
     path('', include(extra_patterns)),
     # path('', include('snippets.urls')),

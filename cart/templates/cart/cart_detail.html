@@ -10,56 +10,35 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
+                        <th align="center"><input type="checkbox" aria-label="Checkbox for following text input"></th>
                         <th colspan="6">Kai's Store</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="text-align:center;">
-                        <td><a href="#"><img src="/media/product/2019/09/26/844948ee1b8c0e560246b5908a1be949.jpg" height="80" width="80"></a></td>
-                        <td><a>Apple</a></td>
-                        <td>
-                            <span>
-                                <select name="quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </span>
-                            <span><button>update</button></span></td>
-                        <td>19.99</td>
-                        <td>40</td>
-                        <td align="center" style="text-align:center;">
-                            <input type="button" value="delete">
-                        </td>
-                    </tr>
-                    <tr style="text-align:center;">
-                        <td><a href="#"><img src="/media/product/2019/09/26/844948ee1b8c0e560246b5908a1be949.jpg" height="80" width="80"></a></td>
-                        <td><a>Apple</a></td>
-                        <td>
-                            <span>
-                                <select name="quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </span>
-                            <span><button>update</button></span></td>
-                        <td>19.99</td>
-                        <td>40</td>
-                        <td align="center" style="text-align:center;">
-                            <input type="button" value="delete">
-                        </td>
-                    </tr>
+                    {% for item in cart %}
+                        {%  with product=item.product%}
+                            <tr align="center">
+                                <td><input type="checkbox" aria-label="Checkbox for following text input"></td>
+                                <td><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" height="80" width="80"></a></td>
+                                <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                                <td>
+                                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                    {{ item.update_quantity_form.quantity }}
+                                    {{ item.update_quantity_form.update }}
+                                    <input type="submit" value="Update">
+                                    {% csrf_token %}
+                                    </form>
+                                </td>
+                                <td>{{ product.price }}</td>
+                                <td><a href="{% url "cart:cart_remove" product.id %}">Remove</a></td>
+                                <td>${{ item.total_price }}</td>
+                            </tr>
+                        {% endwith %}
+                    {% endfor %}
                     <tr class="total" style="text-align:center;">
+                        <td colspan="5"></td>
                         <td>Total</td>
-                        <td colspan="4"></td>
-                        <td class="num">29.99</td>
+                        <td class="num">${{ cart.get_total_price }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -68,64 +47,32 @@
     <br>
     <div class="row">
         <div class="col-12">
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th colspan="6">Kai's Store</th>
+            <table class="table table-info">
+                <thead>
+                    <tr class="total">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Total</th>
+                        <th class="num">29.99</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr style="text-align:center;">
-                        <td><a href="#"><img src="/media/product/2019/09/26/844948ee1b8c0e560246b5908a1be949.jpg" height="80" width="80"></a></td>
-                        <td><a>Apple</a></td>
-                        <td>
-                            <span>
-                                <select name="quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </span>
-                            <span><button>update</button></span></td>
-                        <td>19.99</td>
-                        <td>40</td>
-                        <td align="center" style="text-align:center;">
-                            <input type="button" value="delete">
-                        </td>
-                    </tr>
-                    <tr style="text-align:center;">
-                        <td><a href="#"><img src="/media/product/2019/09/26/844948ee1b8c0e560246b5908a1be949.jpg" height="80" width="80"></a></td>
-                        <td><a>Apple</a></td>
-                        <td>
-                            <span>
-                                <select name="quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </span>
-                            <span><button>update</button></span></td>
-                        <td>19.99</td>
-                        <td>40</td>
-                        <td align="center" style="text-align:center;">
-                            <input type="button" value="delete">
-                        </td>
-                    </tr>
-                    <tr class="total" style="text-align:center;">
-                        <td>Total</td>
-                        <td colspan="4"></td>
-                        <td class="num">29.99</td>
-                    </tr>
-                </tbody>
             </table>
         </div>
     </div>
-    <!--<div class="row"></div>-->
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <p class="text-right">
+                <a href="{% url "product:all_category_product_list" %}" class="button">Continue Shopping</a>
+                <a href="#" class="button">Checkout</a>
+            </p>
+        </div>
+    </div>
 </div>
 {% endblock %}

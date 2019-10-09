@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Check Out{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>CheckOut</h1>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-7" style="background:orange;">
+        </div>
+        <div class="col-5">
+            <form>
+               {{ ordercreateform.as_p }}
+                <p><input type="submit" value="Place a Order"></p>
+                {% csrf_token %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

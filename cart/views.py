@@ -13,7 +13,8 @@ class CartDetail(generic.ListView):
 
     def get(self, request):
         cart = Cart(request)
-        print(cart.cart)
+        for item in cart:
+            item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'], 'update': True})
         return render(request, self.template_name, {'cart': cart})
 
 
@@ -21,7 +22,7 @@ class CartDetail(generic.ListView):
 def cart_add(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
-    print(product)
+    # print(product)
     form = CartAddProductForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
@@ -33,7 +34,7 @@ def cart_add(request, product_id):
 
 def cart_remove(request, product_id):
     cart = Cart(request)
-    product = get_object_or_404(Product, product_id=product_id)
+    product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
     return redirect('cart:cart_detail')
 

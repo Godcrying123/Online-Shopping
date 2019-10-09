@@ -1,6 +1,8 @@
 from django.db import models
 from django.http import Http404
 from django.db.models import Q
+from django.urls import reverse
+
 
 from shop.models import Store
 
@@ -56,6 +58,9 @@ class Product(models.Model):
 
     def categorynameforproduct(self):
         return self.category.all()
+
+    def get_absolute_url(self):
+        return reverse('product:product_detail',  args=[self.id])
 
     # def product_available(self):
     #     if Product.objects.

@@ -5,7 +5,14 @@ from user.models import Users
 
 
 class Order(models.Model):
-    owner = models.ForeignKey(Users, related_name='own_orders', verbose_name='order_owner',
+    receiver = models.CharField(max_length=100, blank=True, verbose_name='Order Receiver')
+    # sender = models.CharField(max_length=100, blank=True, verbose_name='order_sender')
+    order_email = models.EmailField(max_length=100, blank=True, verbose_name='Order Email')
+    order_telephone = models.CharField(max_length=100, blank=True, verbose_name='Order Telephone')
+    order_receiver_address = models.CharField(max_length=100, blank=True, verbose_name='Order Address')
+    order_receiver_address_postal = models.CharField(max_length=100, blank=True,
+                                                     verbose_name='Order Receiver Address Postal')
+    owner = models.ForeignKey(Users, related_name='own_orders', verbose_name='Order Owner',
                               on_delete=models.CASCADE, blank=False)
     STATUS_ORDER = (
         ('unpaid', 'Unpaid'),

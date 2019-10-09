@@ -11,13 +11,14 @@ class Cart(object):
         """
         Initialize the cart
         """
-        self.sesstion = request.session
-        cart = self.sesstion.get(settings.CART_SESSION_ID)
+        self.session = request.session
+        cart = self.session.get(settings.CART_SESSION_ID)
+        # print(cart)
         if not cart:
             # save an empty cart in the session
-            cart = self.sesstion[settings.CART_SESSION_ID] = {}
+            cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
-        self.coupon_id = self.sesstion.get('coupon_id')
+        self.coupon_id = self.session.get('coupon_id')
 
     def add(self, product, quantity=1, update_quantity=False):
         """
@@ -25,17 +26,18 @@ class Cart(object):
         """
         product_id = str(product.id)
         if product_id not in self.cart:
-            print("this product is not in cart")
+            # print("this product is not in cart")
             self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
 
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
             self.cart[product_id]['quantity'] += quantity
+        self.save()
 
     def save(self):
         # mark the session as "modified" to make sure it get saved
-        self.sesstion.modified = True
+        self.session.modified = True
 
     def remove(self, product):
         """
