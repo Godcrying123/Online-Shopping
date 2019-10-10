@@ -2,7 +2,7 @@
 {% block title %}Registraion{% endblock %}
 {% block h3 %}Create an account{% endblock%}
 {% block user_form %}
-    <form action="/view/user/rr/" method="post">
+    <form action="/view/user/register/" method="post">
     {{ user_form.as_p }}
     {% csrf_token %}
     <p><input type="submit" value="Create my account"></p>

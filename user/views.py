@@ -1,9 +1,9 @@
 from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
 # from django.contrib.auth import authenticate, login
 
-from .models import Users
+from .models import User
 from .forms import LoginForm, UserRegistrationForm, UserProfileGetForm, UserProfileChangeForm
 
 
@@ -27,14 +27,14 @@ class LoginView(View):
             password = cd['password']
             context['form'] = form
             try:
-                instance = Users.objects.get(username=username, mail=email, password=password)
+                instance = User.objects.get(username=username, mail=email, password=password)
                 context['loginresult'] = 'Login Success!'
-            except Users.DoesNotExist:
+            except User.DoesNotExist:
                 try:
-                    instance = Users.objects.get(username=username, mail=email)
+                    instance = User.objects.get(username=username, mail=email)
                     context['loginresult'] = 'Wrong Password!'
                     return render(request, self.template_name, context)
-                except Users.DoesNotExist:
+                except User.DoesNotExist:
                     # print(self.context['loginresult'])
                     context['loginresult'] = 'Wrong Username, Email or Password!'
                     return render(request, self.template_name, context)
@@ -61,57 +61,52 @@ class RegistrationView(View):
             email = cd['mail']
             password = user_form.clean_password2()
             try:
-                userinstance = Users.objects.get(username=username)
+                userinstance = User.objects.get(username=username)
                 context['registrationresult'] = 'the UserName has been used'
                 return render(request, self.template_name, context)
-            except Users.DoesNotExist:
+            except User.DoesNotExist:
                 try:
-                    userinstance = Users.objects.get(mail=email)
+                    userinstance = User.objects.get(mail=email)
                     context['registrationresult'] = 'the E-Mail has been used'
                     return render(request, self.template_name, context)
-                except Users.DoesNotExist:
-                    new_user = Users(username=username, mail=email, password=password)
+                except User.DoesNotExist:
+                    new_user = User(username=username, mail=email, password=password)
                     new_user.save()
                     return HttpResponseRedirect('/view/')
 
 
 class ProfileView(View):
     template_name = 'user/profile.html'
-    useridlist = []
-
-    def userlistchange(self, userid):
-        if len(self.useridlist) != 0:
-            self.useridlist.clear()
-        self.useridlist.append(userid)
-        print(self.useridlist)
 
     def get(self, request, *args, **kwargs):
         userid = kwargs.get('pk')
-        userinstance = get_object_or_404(Users, pk=userid)
+        userinstance = get_object_or_404(User, pk=userid)
         profile_form = UserProfileGetForm(instance=userinstance)
-        self.userlistchange(userid)
-        return render(request, self.template_name, {'profile_form': profile_form})
+        return render(request, self.template_name, {'profile_form': profile_form, 'user': userinstance})
 
     def post(self, request, *args, **kwargs):
-        context = {
-            'profile_form': None,
-            'profilesaveresult': None
-        }
+        # context = {
+        #     'profile_form': None,
+        #     'profilesaveresult': None
+        # }
+        # context['profile_form'] = profile_form
         profile_form = UserProfileChangeForm(request.POST)
-        context['profile_form'] = profile_form
-        userid = self.useridlist[0]
+        print(profile_form)
+        userid = kwargs.get('pk')
         if profile_form.is_valid():
+            print("the form is validated")
             cd = profile_form.cleaned_data
             name = cd['name']
             username = cd['username']
             telephone = cd['telephone']
             email = cd['mail']
-            userinstance = get_object_or_404(Users, pk=userid)
-            recaddress = cd['recaddress']
+            userinstance = get_object_or_404(User, pk=userid)
+            print(userinstance)
+            print(name)
             userinstance.name = name
             userinstance.username = username
             userinstance.mail = email
             userinstance.telephone = telephone
-            userinstance.recaddress = recaddress
             userinstance.save()
-        return HttpResponseRedirect('/view/user/profile/'+str(userid)+'/')
+        return redirect('user:profile_view', userid)
+

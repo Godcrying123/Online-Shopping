@@ -2,8 +2,8 @@ from django.db import models
 from django.db.models import Q
 
 from product.models import Product
-from comment.models import Comments
-from user.models import Users
+from comment.models import Comment
+from user.models import User
 # Create your models here.
 
 
@@ -12,9 +12,9 @@ class Images(models.Model):
     slug = models.SlugField('slug', max_length=40)
     product_img = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='belongstoProduct',
                                     related_name='product_images', null=True, blank=True)
-    comment_img = models.ForeignKey(Comments, on_delete=models.CASCADE, verbose_name='belongstoComment',
+    comment_img = models.ForeignKey(Comment, on_delete=models.CASCADE, verbose_name='belongstoComment',
                                     related_name='comment_images', null=True, blank=True)
-    user_img = models.ForeignKey(Users, on_delete=models.CASCADE, verbose_name='belongstoUser',
+    user_img = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='belongstoUser',
                                  related_name='user_images', null=True, blank=True)
     image = models.ImageField(upload_to='image/', blank=False)
     created = models.DateTimeField(auto_now_add=True)

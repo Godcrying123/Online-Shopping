@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from user.models import Buyer
+from user.models import Buyer, User
 from user.api.serializers import BuyerSerializer
 
 
@@ -15,13 +15,13 @@ class AuthView(APIView):
     """
     def user_auth(self, username, password, retresult):
         try:
-            instance = Buyer.objects.get(username=username, password=password)
+            instance = User.objects.get(username=username, password=password)
             retresult['Status_Code'] = status.HTTP_200_OK
             retresult['User_Verified'] = True
             serializer = BuyerSerializer(instance)
             retresult['User Data'] = serializer.data
             return retresult
-        except Buyer.DoesNotExist:
+        except User.DoesNotExist:
             retresult['Status_Code'] = status.HTTP_404_NOT_FOUND
             retresult['User_Verified'] = False
             return retresult

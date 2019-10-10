@@ -2,6 +2,9 @@
 {% block title %}Category-Product List{% endblock %}
 {% block content %}
 <div class="container">
+    <div class="row">
+
+    </div>
     <br>
     <div class="row">
         <div class="col-6">
@@ -32,8 +35,8 @@
             <h3>{{ cate }}</h3>
             {% endfor %}
             <p>{{ product.price }}</p>
-            <form action="" method="post">
-                {{ productdetail_form.as_p }}
+            <form action="{% url "cart:cart_add" product.id %}" method="post">
+                {{ cart_product_form.as_p }}
                 {% csrf_token %}
                 <input type="submit" value="Add to cart">
             </form>

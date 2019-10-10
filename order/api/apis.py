@@ -5,7 +5,7 @@ from rest_framework import mixins
 from order.api.serializers import OrderSerializer, OrderItemSerializer, OrderByUserNameSerializer
 from order.models import Order, OrderItem
 from product.models import Product
-from user.models import Users
+from user.models import User
 
 
 class OrderCreate(mixins.CreateModelMixin,
@@ -33,7 +33,7 @@ class OrderCreate(mixins.CreateModelMixin,
         }
         owner_id = self.request.data.get('owner')
         products = self.request.data.get('products')
-        user = self.get_instance_by_model(Users, owner_id)
+        user = self.get_instance_by_model(User, owner_id)
         if user is not None:
             retresult['Order_Owner'] = user.id
         else:
@@ -74,7 +74,7 @@ class OrderListByUser(generics.RetrieveAPIView):
     """
     Listing all order details for specific user
     """
-    queryset = Users.objects.all()
+    queryset = User.objects.all()
     serializer_class = OrderByUserNameSerializer
 
     def get(self, request, *args, **kwargs):

@@ -1,18 +1,16 @@
 from django.db import models
 from product.models import Product
-from user.models import Users
+from user.models import User, UserInfoEntity
 # Create your models here.
 
 
 class Order(models.Model):
-    receiver = models.CharField(max_length=100, blank=True, verbose_name='Order Receiver')
+    # receiver records the person who will receive this order and  owner records who is currently logged in and create
+    # this order
+    receiver = models.ForeignKey(UserInfoEntity, verbose_name='Order Receiver', related_name='own_receiver',
+                                 on_delete=models.CASCADE)
     # sender = models.CharField(max_length=100, blank=True, verbose_name='order_sender')
-    order_email = models.EmailField(max_length=100, blank=True, verbose_name='Order Email')
-    order_telephone = models.CharField(max_length=100, blank=True, verbose_name='Order Telephone')
-    order_receiver_address = models.CharField(max_length=100, blank=True, verbose_name='Order Address')
-    order_receiver_address_postal = models.CharField(max_length=100, blank=True,
-                                                     verbose_name='Order Receiver Address Postal')
-    owner = models.ForeignKey(Users, related_name='own_orders', verbose_name='Order Owner',
+    owner = models.ForeignKey(User, related_name='own_orders', verbose_name='Order Owner',
                               on_delete=models.CASCADE, blank=False)
     STATUS_ORDER = (
         ('unpaid', 'Unpaid'),

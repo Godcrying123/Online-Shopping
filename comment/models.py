@@ -1,11 +1,11 @@
 from django.db import models
-from user.models import Users
+from user.models import User
 from product.models import Product
 # Create your models here.
 
 
-class Comments(models.Model):
-    owner = models.ForeignKey(Users, related_name='whoscomments',
+class Comment(models.Model):
+    owner = models.ForeignKey(User, related_name='whoscomments',
                               verbose_name='comment_owner', on_delete=models.CASCADE)
     belongproduct = models.ForeignKey(Product, related_name='forwhichproduct',
                                       verbose_name='itemscomments', on_delete=models.CASCADE)

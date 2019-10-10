@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from order.models import Order, OrderItem
-from user.models import Users
+from user.models import User
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
@@ -23,6 +23,6 @@ class OrderByUserNameSerializer(serializers.ModelSerializer):
     own_orders = OrderSerializer(many=True)
 
     class Meta:
-        model = Users
+        model = User
         fields = ['id', 'name', 'username', 'own_orders']
 

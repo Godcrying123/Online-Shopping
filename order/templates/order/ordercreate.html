@@ -8,14 +8,47 @@
         </div>
     </div>
     <div class="row" >
-        <div class="col-7" style="background:orange;">
+        <div class="col-8">
+            <p>Order List</p>
+            <table class="table">
+                <thead class="thead-light">
+                    <th colspan="6">Kai's Store</th>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                        {% with product=item.product %}
+                            <tr>
+                                <td><img src="{{ product.image.url }}" height="80" width="80"></td>
+                                <td>{{ product.name }}</td>
+                                <td>${{ product.price }} X {{ item.quantity }}</td>
+                                <td>${{ item.total_price }}</td>
+                            </tr>
+                        {% endwith %}
+                    {% endfor %}
+                            <tr>
+                                <td colspan="2"></td>
+                                <td>Total:</td>
+                                <td>${{ cart.get_total_price}}</td>
+                            </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="col-5">
-            <form>
+        <div class="col-4">
+            <div class="row">
+                <p>Receiver Choose</p>
+                <select onchange="location = this.options[this.selectedIndex].value;">
+                    {% for userinfo in owner.owneduserinfos %}
+                    <option value="/{{userinfo.name}}">{{userinfo.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <form action="" method="post">
                {{ ordercreateform.as_p }}
                 <p><input type="submit" value="Place a Order"></p>
                 {% csrf_token %}
             </form>
+            </div>
         </div>
     </div>
 </div>

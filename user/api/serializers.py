@@ -1,27 +1,27 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
-from user.models import Users, Buyer
+from user.models import User, Buyer
 
 
 class BuyerSerializer(serializers.ModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
-        model = Users
+        model = User
         fields = ['id', 'name', 'username', 'password', 'mail', 'telephone']
 
 
 class BuyerDetailSerializer(serializers.ModelSerializer):
-    RECEIVE_ADDRESS = (
-        ('Primary Receive Address', None),
-    )
-    recaddress = serializers.MultipleChoiceField(choices=RECEIVE_ADDRESS, allow_blank=True)
+    # RECEIVE_ADDRESS = (
+    #     ('Primary Receive Address', None),
+    # )
+    # recaddress = serializers.MultipleChoiceField(choices=RECEIVE_ADDRESS, allow_blank=True)
 
     class Meta:
-        model = Users
-        fields = ['id', 'name', 'username', 'mail', 'telephone', 'password', 'recaddress']
+        model = User
+        fields = ['id', 'name', 'username', 'mail', 'telephone', 'password']
 
 
 class AdminBuyerSerializer(serializers.ModelSerializer):

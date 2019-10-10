@@ -2,7 +2,7 @@
 {% block title %}Log-in{% endblock %}
 {% block h3 %}Log-in{% endblock%}
 {% block user_form %}
-<form action="/view/user/ll/" method="post">
+<form action="/view/user/login/" method="post">
     {{ form.as_p }}
     {% csrf_token %}
     <p><input type="submit" value="Log in"></p>

@@ -27,7 +27,7 @@
                                 {% for cate in category.secondlevelcategory %}
                                 {% if cate.numofproductincategory == 0 %}
                                 {% else %}
-                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="/view/item/category/products/{{ cate.slug }}/?page=1">{{ cate }}</a><span class="badge badge-primary badge-pill">{{ cate.numofproductincategory }}</span></li>
+                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="{{ cate.get_absolute_url }}?page=1">{{ cate }}</a><span class="badge badge-primary badge-pill">{{ cate.numofproductincategory }}</span></li>
                                 {% endif %}
                                 {% endfor %}
                             </ul>

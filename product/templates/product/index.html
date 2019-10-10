@@ -18,7 +18,7 @@
                         <thead>
                         <tr>
                             <th scope="col">{{ cate }}
-                                <small><a href="/view/item/category/products/{{ cate.slug }}/?page=1">View More</a></small>
+                                <small><a href="{{ cate.get_absolute_url }}">View More</a></small>
                             </th>
                         </tr>
                         </thead>

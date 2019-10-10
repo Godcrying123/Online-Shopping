@@ -2,7 +2,7 @@
 {% block title %}User Profile{% endblock %}
 {% block h3 %}Profile Management{% endblock%}
 {% block user_form %}
-<form action="/view/user/profile/3/" method="post">
+<form action="{% url "user:profile_change" user.id %}" method="post">
     {{ profile_form.as_p }}
     {% csrf_token %}
     <p><input type="submit" value="Save Profile"></p>

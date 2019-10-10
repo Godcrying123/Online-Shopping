@@ -35,6 +35,9 @@ class Category(models.Model):
     def numofproductincategory(self):
         return len(Product.objects.filter(Q(category=self)))
 
+    def get_absolute_url(self):
+        return reverse('product:category_product_list_by_category',  args=[self.slug])
+
 
 class Product(models.Model):
     # category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)

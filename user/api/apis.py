@@ -6,7 +6,7 @@ from rest_framework import mixins
 from rest_framework import status
 
 from user.api.serializers import BuyerSerializer, AdminBuyerSerializer, BuyerDetailSerializer
-from user.models import Buyer
+from user.models import Buyer, User
 
 
 # class UserList(generics.ListAPIView):
@@ -54,32 +54,35 @@ class UserRegisterCheck(mixins.RetrieveModelMixin,
     example call: /username/value/ to check the value has been registered or not
     """
     serializer_class = BuyerSerializer
+    retresult = {}
 
     def get(self, request, *args, **kwargs):
-
         return self.retrieve(request, *args, **kwargs)
 
     def get_object(self, fieldname, fieldvalue):
-        retresult = {
-            'Status_Code': None,
-            'Verified_Field': fieldname,
-            'Verified_Value': fieldvalue,
-            'HaveOrNotHave': None
-        }
+        self.retresult['Field_Name'] = fieldname
+        self.retresult['Field_Value'] = fieldvalue
+        print(self.retresult)
         try:
             if fieldname == 'username':
                 buyerinstance = Buyer.objects.get(username=fieldvalue)
+                self.retresult['Status_Code'] = status.HTTP_200_OK
+                self.retresult['HaveOrNotHave'] = True
+                return self.retresult
             elif fieldname == 'mail':
                 buyerinstance = Buyer.objects.get(mail=fieldvalue)
+                self.retresult['Status_Code'] = status.HTTP_200_OK
+                self.retresult['HaveOrNotHave'] = True
+                return self.retresult
             elif fieldname == 'telephone':
                 buyerinstance = Buyer.objects.get(telephone=fieldvalue)
-            retresult['Status_Code'] = status.HTTP_200_OK
-            retresult['HaveOrNotHave'] = True
-            return retresult
+                self.retresult['Status_Code'] = status.HTTP_200_OK
+                self.retresult['HaveOrNotHave'] = True
+                return self.retresult
         except Buyer.DoesNotExist:
-            retresult['Status_Code'] = status.HTTP_204_NO_CONTENT
-            retresult['HaveOrNotHave'] = None
-            return retresult
+            self.retresult['Status_Code'] = status.HTTP_204_NO_CONTENT
+            self.retresult['HaveOrNotHave'] = None
+            return self.retresult
 
     def retrieve(self, request, *args, **kwargs):
         fieldname = kwargs.get('fieldname')
@@ -89,11 +92,19 @@ class UserRegisterCheck(mixins.RetrieveModelMixin,
         return Response(retresult)
 
 
+class BuyerDetailByID(generics.RetrieveAPIView):
+    """
+    user profile details and update by id
+    """
+    queryset = User.objects.all()
+    serializer_class = BuyerDetailSerializer
+
+
 class BuyerDetailByName(mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
                         generics.GenericAPIView):
     """
-    user profile details and update
+    user profile details and update by username
     """
     serializer_class = BuyerDetailSerializer
 

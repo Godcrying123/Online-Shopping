@@ -1,5 +1,5 @@
 from django import forms
-from .models import Users
+from .models import User
 
 
 class LoginForm(forms.Form):
@@ -15,8 +15,8 @@ class UserRegistrationForm(forms.ModelForm):
                                 widget=forms.PasswordInput)
 
     class Meta:
-        model = Users
-        fields = ('username','mail', 'password', 'password2')
+        model = User
+        fields = ('username', 'mail', 'password', 'password2')
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -28,8 +28,8 @@ class UserRegistrationForm(forms.ModelForm):
 class UserProfileGetForm(forms.ModelForm):
 
     class Meta:
-        model = Users
-        fields = ('name', 'username', 'mail', 'telephone', 'recaddress')
+        model = User
+        fields = ('name', 'username', 'mail', 'telephone')
 
 
 class UserProfileChangeForm(forms.Form):
@@ -41,5 +41,5 @@ class UserProfileChangeForm(forms.Form):
                             max_length=100)
     telephone = forms.CharField(label='Telephone', max_length=100,
                                 required=True)
-    recaddress = forms.CharField(label='Recaddress', max_length=100,
-                                 required=True)
+    # recaddress = forms.CharField(label='Recaddress', max_length=100,
+    #                              required=True)
