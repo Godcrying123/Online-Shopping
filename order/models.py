@@ -5,13 +5,15 @@ from user.models import User, UserInfoEntity
 
 
 class Order(models.Model):
-    # receiver records the person who will receive this order and  owner records who is currently logged in and create
-    # this order
-    receiver = models.ForeignKey(UserInfoEntity, verbose_name='Order Receiver', related_name='own_receiver',
-                                 on_delete=models.CASCADE)
-    # sender = models.CharField(max_length=100, blank=True, verbose_name='order_sender')
+    order_receiver_name = models.CharField(max_length=100, blank=True, verbose_name='Order Receiver Name',)
+    order_email = models.EmailField(max_length=100, blank=True, verbose_name='Order Receiver Email')
+    order_telephone = models.CharField(max_length=100, blank=True, verbose_name='Order Receiver Telephone')
+    order_receiver_address_postal = models.CharField(max_length=100, blank=True,
+                                                     verbose_name='Order Receiver Address Postal')
+    order_receiver_address = models.CharField(max_length=100, blank=True, verbose_name='Order Receiver Address')
     owner = models.ForeignKey(User, related_name='own_orders', verbose_name='Order Owner',
-                              on_delete=models.CASCADE, blank=False)
+                              on_delete=models.CASCADE, blank=True)
+    # sender = models.CharField(max_length=100, blank=True, verbose_name='order_sender')
     STATUS_ORDER = (
         ('unpaid', 'Unpaid'),
         ('paid', 'Paid'),
@@ -38,7 +40,8 @@ class Order(models.Model):
         return "Order {}".format(self.id)
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        print(self)
+        return sum(item.get_cost() for item in self.orderitems.all())
 
 
 class OrderItem(models.Model):

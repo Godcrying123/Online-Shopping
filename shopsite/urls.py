@@ -13,15 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path, include
-from django.contrib import admin
-from rest_framework import routers
-from rest_framework.documentation import include_docs_urls
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+# from rest_framework import routers
+from rest_framework.documentation import include_docs_urls
 
 from product.views import IndexView
-
 
 # router = routers.DefaultRouter()
 # router.register(r'users', views.UserViewSet)
@@ -48,6 +47,7 @@ urlpatterns = [
         path('item/', include('product.urls', namespace='product_view')),
         path('cart/', include('cart.urls', namespace='cart_view')),
         path('order/', include('order.urls', namespace='order_view')),
+        path('payment/', include('payment.urls', namespace='payment_view')),
     ])),
     path('', include(extra_patterns)),
     # path('', include('snippets.urls')),

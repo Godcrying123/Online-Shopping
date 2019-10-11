@@ -1,7 +1,5 @@
 from django.db import models
 from django.db.models import Q
-
-# from order.models import Order
 # Create your models here.
 
 
@@ -39,7 +37,7 @@ class User(models.Model):
 
 class UserInfoEntity(models.Model):
     owner = models.ForeignKey(User, verbose_name='Who Input', max_length=100,
-                              related_name='own_user', on_delete=models.CASCADE)
+                              related_name='own_user', on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, verbose_name='name', blank=True)
     recaddress = models.CharField(max_length=100, blank=True, verbose_name='receiver address')
     recaddresspostal = models.CharField(max_length=100, blank=True, verbose_name='receiver address postal')

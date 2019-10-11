@@ -31,3 +31,17 @@ LOGGING = {
         },
     }
 }
+
+# Braintree settings
+BRAINTREE_MERCHANT_ID = '2qf4snfqxsdxqhq4'
+BRAINTREE_PUBLIC_KEY = '33bsw4wvhtxk9c8x'
+BRAINTREE_PRIVATE_KEY = 'ebd24f1370267d2f46697bf09867fa30'
+
+from braintree import Configuration, Environment
+
+Configuration.configure(
+    Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)

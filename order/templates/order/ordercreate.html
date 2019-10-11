@@ -37,13 +37,14 @@
             <div class="row">
                 <p>Receiver Choose</p>
                 <select onchange="location = this.options[this.selectedIndex].value;">
+                    <option value="{% url "order:order_preview" %}"></option>
                     {% for userinfo in owner.owneduserinfos %}
-                    <option value="/{{userinfo.name}}">{{userinfo.name}}</option>
+                    <option value="{% url "order:order_preview" userinfo.name %}">{{userinfo.name}}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="row">
-                <form action="" method="post">
+                <form action="{% url "order:order_create" %}" method="post">
                {{ ordercreateform.as_p }}
                 <p><input type="submit" value="Place a Order"></p>
                 {% csrf_token %}

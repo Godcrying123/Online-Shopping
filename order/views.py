@@ -1,49 +1,75 @@
-from django.shortcuts import render,get_object_or_404
-from .models import OrderItem
-from .forms import OrderCreateForm
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.views import View, generic
+
 from cart.cart import Cart
-from django.views.generic import FormView
-from django.views import View
-from user.models import User
+from product.models import Product
+from user.models import User, UserInfoEntity
+from .forms import OrderCreateForm
+from .models import Order, OrderItem
 # Create your views here.
+
+
+class orderpreview(View):
+    template_name = 'order/ordercreate.html'
+
+    def get(self, request, *args, **kwargs):
+        cart = Cart(request)
+        ownerinstance = get_object_or_404(User, pk=3)
+        userinfo = kwargs.get('userinfo', None)
+        if userinfo is not None:
+            userinfoinstance = get_object_or_404(UserInfoEntity, name=userinfo)
+            ordercreateform = OrderCreateForm(initial={'name': userinfoinstance.name, 'email': userinfoinstance.mail,
+                                                       'telephone': userinfoinstance.telephone,
+                                                       'postal': userinfoinstance.recaddresspostal,
+                                                       'address': userinfoinstance.recaddress})
+        else:
+            ordercreateform = OrderCreateForm()
+        # self.get_form_kwargs(ownerinstance)
+        return render(request, self.template_name, {'ordercreateform': ordercreateform,
+                                                    'cart': cart, 'owner': ownerinstance})
 
 
 class ordercreate(View):
     template_name = 'order/ordercreate.html'
-    # form_class = OrderCreateForm
-
-    def get(self, request, *args, **kwargs):
-        # ownerid = kwargs.get('pk')
-        cart = Cart(request)
-        ownerinstance = get_object_or_404(User, pk=3)
-
-        # ordercreateform = OrderCreateForm(initial={'receiver': ownerinstance.name, 'email': ownerinstance.mail,
-        #                                            'telephone': ownerinstance.telephone,
-        #                                            'address': ownerinstance.recaddress})
-        # self.get_form_kwargs(ownerinstance)
-        ordercreateform = OrderCreateForm()
-        return render(request, self.template_name, {'ordercreateform': ordercreateform,
-                                                    'cart': cart, 'owner': ownerinstance})
 
     def post(self, request, *args, **kwargs):
-        order_create_form = OrderCreateForm(request.POST)
-        if order_create_form.is_valid():
-            cd = order_create_form.cleaned_data
-            receiver = cd['receiver']
+        cart = Cart(request)
+        ownerinstance = get_object_or_404(User, pk=3)
+        ordercreateform = OrderCreateForm(request.POST)
+        if ordercreateform.is_valid():
+            cd = ordercreateform.cleaned_data
+            name = cd['name']
             email = cd['email']
             telephone = cd['telephone']
+            postal = cd['postal']
             address = cd['address']
-        return render(request, self.template_name, )
+            ordercreate = Order.objects.create(owner=ownerinstance, order_receiver_name=name, order_email=email,
+                                               order_telephone=telephone, order_receiver_address_postal=postal,
+                                               order_receiver_address=address)
+            for item in cart.cart:
+                product = get_object_or_404(Product, pk=item)
+                quantity = cart.cart.get(item)['quantity']
+                price = cart.cart.get(item)['price']
+                orderitem = OrderItem.objects.create(order=ordercreate, product=product, quantity=quantity,
+                                                     price=price)
+                request.session['order_id'] = ordercreate.id
+            print(ordercreate.get_total_cost())
+            return redirect(reverse('payment:payment_process'))
+            # return redirect('order:order_preview')
+        else:
+            return redirect('order:order_preview')
 
 
-class orderreceiver(View):
-    template_name = 'order/ordercreate.html'
+class orderreview(View):
 
-    def get(self, request):
-        return render(request, self.template_name, )
-
-    def post(self, request):
-        return render(request, self.template_name, )
+    def get(self):
+        return None
 
 
+class orderlist(generic.ListView):
+    template_name = 'order/orderlist.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
 

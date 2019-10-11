@@ -46,4 +46,21 @@
             </div>
         </li>
     </nav>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link disable">ShortCuts:</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onClick="javascript:history.back(-1);">Back</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "cart:cart_detail" %}">Cart</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "order:order_list" 1 %}">Order</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "cart:cart_detail" %}">Favorites</a>
+        </li>
+    </ul>
 </header>
