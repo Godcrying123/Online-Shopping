@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Q
+
 from product.models import Product
 from user.models import User, UserInfoEntity
 # Create your models here.
@@ -40,8 +42,10 @@ class Order(models.Model):
         return "Order {}".format(self.id)
 
     def get_total_cost(self):
-        print(self)
         return sum(item.get_cost() for item in self.orderitems.all())
+
+    def get_top2_orderitems(self):
+        return self.orderitems.all()[:2]
 
 
 class OrderItem(models.Model):
