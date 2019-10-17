@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-16 20:54+0800\n"
+"POT-Creation-Date: 2019-10-17 19:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr "中文"
 
 #: .\shopsite\templates\footer.html:6
 msgid "Online-Shopping"
-msgstr "在线购物"
+msgstr "购物商场"
 
 #: .\shopsite\templates\head.html:26
 msgid "HomePage"
@@ -51,7 +51,7 @@ msgstr "登录"
 
 #: .\shopsite\templates\head.html:52
 msgid "New User?"
-msgstr "新用户"
+msgstr "新的用户？"
 
 #: .\shopsite\templates\head.html:53
 msgid "Profile"
@@ -63,11 +63,11 @@ msgstr "登出"
 
 #: .\shopsite\templates\head.html:62
 msgid "Short Cuts:"
-msgstr "快捷键:"
+msgstr "快捷键："
 
 #: .\shopsite\templates\head.html:65
 msgid "Back"
-msgstr "返回"
+msgstr "回退"
 
 #: .\shopsite\templates\head.html:68
 msgid "cart"
@@ -79,7 +79,7 @@ msgstr "订单"
 
 #: .\shopsite\templates\head.html:74
 msgid "Favorites"
-msgstr "最爱"
+msgstr "收藏"
 
 #: .\shopsite\templates\searchbar.html:7
 msgid "Categories"
@@ -111,30 +111,354 @@ msgstr "搜索商品"
 msgid "Search Stores"
 msgstr "搜索商店"
 
-#: .\shopsite\urls.py:45
+#: .\shopsite\urls.py:44
 msgid "user/"
 msgstr ""
 
-#: .\shopsite\urls.py:46
+#: .\shopsite\urls.py:45
 msgid "item/"
 msgstr ""
 
-#: .\shopsite\urls.py:47
-#, fuzzy
-#| msgid "cart"
+#: .\shopsite\urls.py:46
 msgid "cart/"
-msgstr "购物车"
+msgstr ""
+
+#: .\shopsite\urls.py:47
+msgid "order/"
+msgstr ""
 
 #: .\shopsite\urls.py:48
-#, fuzzy
-#| msgid "Order"
-msgid "order/"
-msgstr "订单"
-
-#: .\shopsite\urls.py:49
 msgid "store/"
 msgstr ""
 
-#: .\shopsite\urls.py:50
+#: .\shopsite\urls.py:49
 msgid "payment/"
 msgstr ""
+
+#: .\buyer\models.py:10
+msgid "Not VIP"
+msgstr "不是VIP"
+
+#: .\buyer\models.py:13 .\seller\models.py:12
+msgid "Normal"
+msgstr "正常"
+
+#: .\buyer\models.py:14 .\order\templates\order\orderlist.html:47
+#: .\seller\models.py:13
+msgid "Deleted"
+msgstr "被删除"
+
+#: .\buyer\models.py:15 .\seller\models.py:14
+msgid "Banned"
+msgstr "被禁止"
+
+#: .\cart\forms.py:19
+msgid "Quantity"
+msgstr "数量"
+
+#: .\cart\forms.py:20 .\cart\templates\cart\cart_detail.html:28
+msgid "Update"
+msgstr "更新"
+
+#: .\cart\templates\cart\cart_detail.html:4
+msgid "Cart Detail Page"
+msgstr "购物车详情页"
+
+#: .\cart\templates\cart\cart_detail.html:9
+msgid "Your Shopping Cart"
+msgstr "您的购物车"
+
+#: .\cart\templates\cart\cart_detail.html:33
+msgid "Remove"
+msgstr "删除"
+
+#: .\cart\templates\cart\cart_detail.html:40
+msgid "Total"
+msgstr "合计"
+
+#: .\cart\templates\cart\cart_detail.html:72
+msgid "Continue Shopping"
+msgstr "继续购物"
+
+#: .\cart\templates\cart\cart_detail.html:73
+msgid "Checkout"
+msgstr "结算"
+
+#: .\order\models.py:22 .\order\templates\order\orderlist.html:13
+msgid "Unpaid"
+msgstr "未付款"
+
+#: .\order\models.py:23 .\order\templates\order\orderlist.html:12
+#: .\order\templates\order\orderlist.html:44
+msgid "Paid"
+msgstr "已付款"
+
+#: .\order\models.py:24 .\order\templates\order\orderlist.html:59
+msgid "Cancel"
+msgstr "被取消"
+
+#: .\order\models.py:25 .\order\templates\order\orderlist.html:53
+msgid "Delete"
+msgstr "被删除"
+
+#: .\order\models.py:55
+msgid "Un-Delivery"
+msgstr "未发货"
+
+#: .\order\models.py:56
+msgid "In-Delivery"
+msgstr "运输中"
+
+#: .\order\models.py:57
+msgid "Delivered"
+msgstr "已送达"
+
+#: .\order\templates\order\ordercreated.html:17
+msgid "Your Order Detail Table"
+msgstr "你的订单列表"
+
+#: .\order\templates\order\ordercreated.html:26
+msgid "Order ID"
+msgstr "订单编号"
+
+#: .\order\templates\order\ordercreated.html:30
+msgid "Shops"
+msgstr "商店"
+
+#: .\order\templates\order\ordercreate.html:8
+msgid "CheckOut"
+msgstr "清算"
+
+#: .\order\templates\order\ordercreate.html:13
+msgid "Order List"
+msgstr "购物清单"
+
+#: .\order\templates\order\ordercreate.html:50
+msgid "Place a Order"
+msgstr "下订单"
+
+#: .\order\templates\order\ordercreate.html:39
+msgid "Receiver Choose"
+msgstr "收件人选择"
+
+#: .\order\templates\order\ordercreated.html:34
+msgid "Receiver Name"
+msgstr "收件人姓名"
+
+#: .\order\templates\order\ordercreated.html:38
+msgid "Receiver Email"
+msgstr "收件人邮箱"
+
+#: .\order\templates\order\ordercreated.html:42
+#| msgid "telephone"
+msgid "Receiver Telephone"
+msgstr "收件人电话"
+
+#: .\order\templates\order\ordercreated.html:46
+msgid "Receiver Address Postal"
+msgstr "收件人地址邮编"
+
+#: .\order\templates\order\ordercreated.html:50
+msgid "Receiver Address"
+msgstr "收件人地址"
+
+#: .\order\templates\order\ordercreated.html:54
+#, fuzzy
+#| msgid "created_time"
+msgid "Created"
+msgstr "创建时间"
+
+#: .\order\templates\order\ordercreated.html:58
+msgid "Used Coupon"
+msgstr "使用的优惠券"
+
+#: .\order\templates\order\ordercreated.html:111
+msgid "PDF Print"
+msgstr "订单PDF打印"
+
+#: .\order\templates\order\orderlist.html:3
+#: .\order\templates\order\orderlist.html:7
+msgid "Your Order List"
+msgstr "你的订单列表"
+
+#: .\order\templates\order\orderlist.html:11
+#: .\product\templates\product\categorylist.html:14
+msgid "All"
+msgstr "全部"
+
+#: .\order\templates\order\orderlist.html:14
+#: .\order\templates\order\orderlist.html:46
+#| msgid "Cancel"
+msgid "Canceled"
+msgstr "被取消"
+
+#: .\order\templates\order\orderlist.html:15
+#| msgid "Deleted"
+msgid "Deleted "
+msgstr "被删除"
+
+#: .\order\templates\order\orderlist.html:45
+msgid "Pending Payment"
+msgstr "等待支付"
+
+#: .\order\templates\order\orderlist.html:55
+msgid "After-Sales"
+msgstr "售后服务"
+
+#: .\order\templates\order\orderlist.html:54
+#: .\order\templates\order\orderlist.html:58
+#: .\order\templates\order\orderlist.html:61
+msgid "Review"
+msgstr "查看浏览"
+
+#: .\order\templates\order\orderlist.html:57
+msgid "Pay"
+msgstr "支付"
+
+#: .\payment\templates\payment\payment_cancel.html:5
+msgid "Your Payment has not been processed"
+msgstr "您的支付未被处理"
+
+#: .\payment\templates\payment\payment_cancel.html:6
+msgid "There was a problem processing your payment."
+msgstr "您的支付处理存在问题"
+
+#: .\payment\templates\payment\payment_done.html:5
+msgid "Your Payment was successful"
+msgstr "您的支付成功"
+
+#: .\payment\templates\payment\payment_done.html:6
+msgid "Your Payment has been processed successfully."
+msgstr "您的支付已经成功"
+
+#: .\payment\templates\payment\payment_process.html:5
+msgid "Pay By Credit Card"
+msgstr "信用卡支付"
+
+#: .\payment\templates\payment\payment_process.html:7
+msgid "Card Number"
+msgstr "信用卡号"
+
+#: .\payment\templates\payment\payment_process.html:13
+msgid "Expiration Date"
+msgstr "过期日期"
+
+#: .\payment\templates\payment\payment_process.html:17
+#| msgid "Your Order List"
+msgid "Pay Your Order"
+msgstr "你的订单列表"
+
+#: .\product\models.py:15 .\product\models.py:48
+msgid "name"
+msgstr "名字"
+
+#: .\product\models.py:16
+msgid "slug"
+msgstr ""
+
+#: .\product\models.py:49
+msgid "description"
+msgstr ""
+
+#: .\product\templates\product\extraproductdetail.html:24
+msgid "Description"
+msgstr "商品描述"
+
+#: .\product\templates\product\extraproductdetail.html:27
+msgid "Comments"
+msgstr "评论"
+
+#: .\product\templates\product\extraproductdetail.html:34
+msgid "Please leave your comments here"
+msgstr "请留下你的评论"
+
+#: .\product\templates\product\extraproductdetail.html:35
+msgid "Comment"
+msgstr "评论"
+
+#: .\product\templates\product\index.html:21
+msgid "View More"
+msgstr "查看更多"
+
+#: .\product\templates\product\productdetail.html:42
+msgid "Add to cart"
+msgstr "添加到购物车"
+
+#: .\user\forms.py:10
+msgid "Username"
+msgstr "用户名"
+
+#: .\user\forms.py:12 .\user\models.py:17
+msgid "password"
+msgstr "密码"
+
+#: .\user\forms.py:16
+#| msgid "password"
+msgid "Password"
+msgstr "密码"
+
+#: .\user\forms.py:18
+msgid "Repeat password"
+msgstr "重复密码"
+
+#: .\user\forms.py:40
+msgid "Name"
+msgstr "名字"
+
+#: .\user\forms.py:42
+msgid "UserName"
+msgstr "用户名"
+
+#: .\user\forms.py:44
+#| msgid "mail"
+msgid "E-mail"
+msgstr "邮箱"
+
+#: .\user\forms.py:46
+#| msgid "telephone"
+msgid "Telephone"
+msgstr "电话"
+
+#: .\user\models.py:15
+msgid "mail"
+msgstr "邮箱"
+
+#: .\user\models.py:16
+msgid "telephone"
+msgstr "电话"
+
+#: .\user\models.py:18
+msgid "created_time"
+msgstr "创建时间"
+
+#: .\user\models.py:19
+msgid "updated_time"
+msgstr "更新时间"
+
+#: .\user\templates\user\login.html:3 .\user\templates\user\login.html:4
+msgid "Log-in"
+msgstr "登录"
+
+#: .\user\templates\user\login.html:9
+msgid "Log in"
+msgstr "登录"
+
+#: .\user\templates\user\profile.html:3
+msgid "User Profile"
+msgstr "用户信息"
+
+#: .\user\templates\user\profile.html:4
+msgid "Profile Management"
+msgstr "信息管理"
+
+#: .\user\templates\user\profile.html:9
+msgid "Save Profile"
+msgstr "保存用户信息"
+
+#: .\user\templates\user\register.html:3
+msgid "Registraion"
+msgstr "注册用户"
+
+#: .\user\templates\user\register.html:4 .\user\templates\user\register.html:9
+msgid "Create an account"
+msgstr "创建账户"

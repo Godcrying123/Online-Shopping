@@ -48,12 +48,15 @@ class CategoryProductList(generic.ListView):
             self.eachby.clear()
             self.eachby.append(itemby)
 
-    def get_context(self, categoryslug):
+    def get_context(self, request, categoryslug):
         firstCategories = Category.firstlevelcategory(Category)
         if categoryslug == 'all':
             productlist = Product.objects.all()
         else:
-            category = get_object_or_404(Category, slug=categoryslug)
+            language = request.LANGUAGE_CODE
+            category = get_object_or_404(Category,
+                                         translations__language_code=language,
+                                         translations__slug=categoryslug)
             productlist = category.categoryproductlist()
         context = {
             'firstcategorylist': firstCategories,
@@ -63,7 +66,7 @@ class CategoryProductList(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         categoryslug = kwargs.get('categoryslug', 'all')
-        context = self.get_context(categoryslug)
+        context = self.get_context(request, categoryslug)
         productlist = context['productlist']
         itemby = self.request.GET.get('eachby')
         self.eachbyrenew(itemby)

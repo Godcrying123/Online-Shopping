@@ -1,15 +1,17 @@
 from django.db import models
-from user.models import User
+from django.utils.translation import gettext_lazy as _
 from shop.models import Store
+from user.models import User
+
 
 # Create your models here.
 
 
 class Seller(User):
     STATUS_ITEMS = (
-        {'normal', 'Normal'},
-        {'delete', 'Deleted'},
-        {'banned', 'Banned'},
+        {'normal', _('Normal')},
+        {'delete', _('Deleted')},
+        {'banned', _('Banned')},
         {'vip', 'VIP'},
     )
     status = models.CharField(default='normal', max_length=100, choices=STATUS_ITEMS, verbose_name='store_status')

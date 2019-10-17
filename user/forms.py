@@ -1,6 +1,8 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+from parler.forms import TranslatableModelForm
+
 from .models import User
 
 

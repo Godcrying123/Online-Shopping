@@ -1,13 +1,14 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from product.models import Product
+from parler.forms import TranslatableModelForm
 
 
-# class ProductDetailForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = Product
-#         fields = ('name', 'description', 'price', 'salesamount')
+class ProductDetailForm(TranslatableModelForm):
+
+    class Meta:
+        model = Product
+        fields = ('name', 'description', 'price', 'salesamount')
 
 
 PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 21)]

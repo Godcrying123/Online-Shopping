@@ -1,15 +1,16 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from user.models import UserInfoEntity
 from django.db.models import Q
 from .models import Order
 
 
 class OrderCreateForm(forms.Form):
-    name = forms.CharField(label='Receiver Name', max_length=100, required=True)
-    email = forms.EmailField(label='Receiver E-mail', max_length=100, required=True)
-    telephone = forms.CharField(label='Receiver Telephone', max_length=100, required=True)
-    postal = forms.CharField(label='Receiver Address Postal', max_length=100, required=False)
-    address = forms.CharField(label='Receiver Address', max_length=100, required=True)
+    name = forms.CharField(label=_('Receiver Name'), max_length=100, required=True)
+    email = forms.EmailField(label=_('Receiver Email'), max_length=100, required=True)
+    telephone = forms.CharField(label=_('Receiver Telephone'), max_length=100, required=True)
+    postal = forms.CharField(label=_('Receiver Address Postal'), max_length=100, required=False)
+    address = forms.CharField(label=_('Receiver Address'), max_length=100, required=True)
 
     # AVAILABLE_USER_INFO_ENTITY = None
     #

@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rosetta',
-    'parler',
     'user.apps.UserConfig',
     'seller.apps.SellerConfig',
     'buyer.apps.BuyerConfig',
@@ -53,6 +51,8 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'activity.apps.ActivityConfig',
     'rest_framework',
+    'parler',
+    'rosetta',
     'snippets.apps.SnippetsConfig',
     'django.contrib.auth',
 ]

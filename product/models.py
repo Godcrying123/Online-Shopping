@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from parler.models import TranslatableModel, TranslatedFields
 
 from shop.models import Store
@@ -11,8 +12,8 @@ from shop.models import Store
 
 class Category(TranslatableModel):
     translations = TranslatedFields(
-        name=models.CharField(max_length=200, unique=True),
-        slug=models.SlugField('slug', max_length=40),
+        name=models.CharField(_('name'), max_length=200, unique=True),
+        slug=models.SlugField(_('slug'), max_length=40)
     )
     parent_category = models.ForeignKey('self', verbose_name='parent_category', related_name='children_categories', blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
@@ -39,14 +40,13 @@ class Category(TranslatableModel):
         return len(Product.objects.filter(Q(category=self)))
 
     def get_absolute_url(self):
-        print(self.translations(0))
-        return reverse('product:category_product_list_by_category',  args=[self.slug])
+        return reverse('product:category_product_list_by_category', args=[self.slug])
 
 
 class Product(TranslatableModel):
     translations = TranslatedFields(
-        description=models.TextField(blank=True),
-        name=models.CharField(max_length=200, db_index=True)
+        name=models.CharField(_('name'), max_length=200, db_index=True),
+        description=models.TextField(_('description'), blank=True)
     )
     # category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, related_name='products', verbose_name='category_product')

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}Category-Product List{% endblock %}
 {% block content %}
 <div class="container-fluid">
@@ -9,7 +10,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h2 class="mb-0">
-                            <button class="btn btn-link" type="button" onclick="location.href='/view/item/category/products/?page=1';">All</button>
+                            {% get_current_language as LANGUAGE_CODE %}
+                            <button class="btn btn-link" type="button" onclick="location.href='/{{ LANGUAGE_CODE }}/item/category/products/?page=1';">{% trans "All" %}</button>
                         </h2>
                     </div>
                 </div>
@@ -56,7 +58,7 @@
                 {% for product in productlist %}
                     <div class="col-{{ eachby }}">
                         <div class="card" style="width: 18rem;margin:auto auto;">
-                            <a href="/view/item/category/products/detail/{{ product.id }}/">
+                            <a href="{% url "product:product_detail" product.id %}">
                                 <img src="{{ product.image.url }}" class="card-img-top" alt="..." height="200" width="200" />
                             </a>
                             <div class="card-body">

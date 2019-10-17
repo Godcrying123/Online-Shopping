@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-16 20:54+0800\n"
+"POT-Creation-Date: 2019-10-17 19:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,26 +112,321 @@ msgstr ""
 msgid "Search Stores"
 msgstr ""
 
-#: .\shopsite\urls.py:45
+#: .\shopsite\urls.py:44
 msgid "user/"
 msgstr ""
 
-#: .\shopsite\urls.py:46
+#: .\shopsite\urls.py:45
 msgid "item/"
 msgstr ""
 
-#: .\shopsite\urls.py:47
+#: .\shopsite\urls.py:46
 msgid "cart/"
 msgstr ""
 
-#: .\shopsite\urls.py:48
+#: .\shopsite\urls.py:47
 msgid "order/"
 msgstr ""
 
-#: .\shopsite\urls.py:49
+#: .\shopsite\urls.py:48
 msgid "store/"
 msgstr ""
 
-#: .\shopsite\urls.py:50
+#: .\shopsite\urls.py:49
 msgid "payment/"
+msgstr ""
+
+#: .\buyer\models.py:10
+msgid "Not VIP"
+msgstr ""
+
+#: .\buyer\models.py:13 .\seller\models.py:12
+msgid "Normal"
+msgstr ""
+
+#: .\buyer\models.py:14 .\order\templates\order\orderlist.html:47
+#: .\seller\models.py:13
+msgid "Deleted"
+msgstr ""
+
+#: .\buyer\models.py:15 .\seller\models.py:14
+msgid "Banned"
+msgstr ""
+
+#: .\cart\forms.py:19
+msgid "Quantity"
+msgstr ""
+
+#: .\cart\forms.py:20 .\cart\templates\cart\cart_detail.html:28
+msgid "Update"
+msgstr ""
+
+#: .\cart\templates\cart\cart_detail.html:4
+msgid "Cart Detail Page"
+msgstr ""
+
+#: .\cart\templates\cart\cart_detail.html:9
+msgid "Your Shopping Cart"
+msgstr ""
+
+#: .\cart\templates\cart\cart_detail.html:33
+msgid "Remove"
+msgstr ""
+
+#: .\cart\templates\cart\cart_detail.html:40
+msgid "Total"
+msgstr ""
+
+#: .\cart\templates\cart\cart_detail.html:72
+msgid "Continue Shopping"
+msgstr ""
+
+#: .\cart\templates\cart\cart_detail.html:73
+msgid "Checkout"
+msgstr ""
+
+#: .\order\models.py:22 .\order\templates\order\orderlist.html:13
+msgid "Unpaid"
+msgstr ""
+
+#: .\order\models.py:23 .\order\templates\order\orderlist.html:12
+#: .\order\templates\order\orderlist.html:44
+msgid "Paid"
+msgstr ""
+
+#: .\order\models.py:24 .\order\templates\order\orderlist.html:59
+msgid "Cancel"
+msgstr ""
+
+#: .\order\models.py:25 .\order\templates\order\orderlist.html:53
+msgid "Delete"
+msgstr ""
+
+#: .\order\models.py:55
+msgid "Un-Delivery"
+msgstr ""
+
+#: .\order\models.py:56
+msgid "In-Delivery"
+msgstr ""
+
+#: .\order\models.py:57
+msgid "Delivered"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:17
+msgid "Your Order Detail Table"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:26
+msgid "Order ID"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:30
+msgid "Shops"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:34
+msgid "Receiver Name"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:38
+msgid "Receiver Email"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:42
+msgid "Receiver Telephone"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:46
+msgid "Receiver Address Postal"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:50
+msgid "Receiver Address"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:54
+msgid "Created"
+msgstr ""
+
+#: .\order\templates\order\ordercreated.html:58
+msgid "Used Coupon"
+msgstr ""
+
+#: .\order\templates\order\orderlist.html:3
+#: .\order\templates\order\orderlist.html:7
+msgid "Your Order List"
+msgstr ""
+
+#: .\order\templates\order\orderlist.html:11
+#: .\product\templates\product\categorylist.html:14
+msgid "All"
+msgstr ""
+
+#: .\order\templates\order\orderlist.html:14
+#: .\order\templates\order\orderlist.html:46
+msgid "Canceled"
+msgstr ""
+
+#: .\order\templates\order\orderlist.html:15
+msgid "Deleted "
+msgstr ""
+
+#: .\order\templates\order\orderlist.html:45
+msgid "Pending Payment"
+msgstr ""
+
+#: .\order\templates\order\orderlist.html:54
+#: .\order\templates\order\orderlist.html:58
+#: .\order\templates\order\orderlist.html:61
+msgid "Review"
+msgstr ""
+
+#: .\order\templates\order\orderlist.html:57
+msgid "Pay"
+msgstr ""
+
+#: .\payment\templates\payment\payment_cancel.html:5
+msgid "Your Payment has not been processed"
+msgstr ""
+
+#: .\payment\templates\payment\payment_cancel.html:6
+msgid "There was a problem processing your payment."
+msgstr ""
+
+#: .\payment\templates\payment\payment_done.html:5
+msgid "Your Payment was successful"
+msgstr ""
+
+#: .\payment\templates\payment\payment_done.html:6
+msgid "Your Payment has been processed successfully."
+msgstr ""
+
+#: .\payment\templates\payment\payment_process.html:5
+msgid "Pay By Credit Card"
+msgstr ""
+
+#: .\payment\templates\payment\payment_process.html:7
+msgid "Card Number"
+msgstr ""
+
+#: .\payment\templates\payment\payment_process.html:13
+msgid "Expiration Date"
+msgstr ""
+
+#: .\payment\templates\payment\payment_process.html:17
+msgid "Pay Your Order"
+msgstr ""
+
+#: .\product\models.py:15 .\product\models.py:48
+msgid "name"
+msgstr ""
+
+#: .\product\models.py:16
+msgid "slug"
+msgstr ""
+
+#: .\product\models.py:49
+msgid "description"
+msgstr ""
+
+#: .\product\templates\product\extraproductdetail.html:24
+msgid "Description"
+msgstr ""
+
+#: .\product\templates\product\extraproductdetail.html:27
+msgid "Comments"
+msgstr ""
+
+#: .\product\templates\product\extraproductdetail.html:34
+msgid "Please leave your comments here"
+msgstr ""
+
+#: .\product\templates\product\extraproductdetail.html:35
+msgid "Comment"
+msgstr ""
+
+#: .\product\templates\product\index.html:21
+msgid "View More"
+msgstr ""
+
+#: .\product\templates\product\productdetail.html:42
+msgid "Add to cart"
+msgstr ""
+
+#: .\user\forms.py:10
+msgid "Username"
+msgstr ""
+
+#: .\user\forms.py:12 .\user\models.py:17
+msgid "password"
+msgstr ""
+
+#: .\user\forms.py:16
+msgid "Password"
+msgstr ""
+
+#: .\user\forms.py:18
+msgid "Repeat password"
+msgstr ""
+
+#: .\user\forms.py:40
+msgid "Name"
+msgstr ""
+
+#: .\user\forms.py:42
+msgid "UserName"
+msgstr ""
+
+#: .\user\forms.py:44
+msgid "E-mail"
+msgstr ""
+
+#: .\user\forms.py:46
+msgid "Telephone"
+msgstr ""
+
+#: .\user\models.py:15
+msgid "mail"
+msgstr ""
+
+#: .\user\models.py:16
+msgid "telephone"
+msgstr ""
+
+#: .\user\models.py:18
+msgid "created_time"
+msgstr ""
+
+#: .\user\models.py:19
+msgid "updated_time"
+msgstr ""
+
+#: .\user\templates\user\login.html:3 .\user\templates\user\login.html:4
+msgid "Log-in"
+msgstr ""
+
+#: .\user\templates\user\login.html:9
+msgid "Log in"
+msgstr ""
+
+#: .\user\templates\user\profile.html:3
+msgid "User Profile"
+msgstr ""
+
+#: .\user\templates\user\profile.html:4
+msgid "Profile Management"
+msgstr ""
+
+#: .\user\templates\user\profile.html:9
+msgid "Save Profile"
+msgstr ""
+
+#: .\user\templates\user\register.html:3
+msgid "Registraion"
+msgstr ""
+
+#: .\user\templates\user\register.html:4 .\user\templates\user\register.html:9
+msgid "Create an account"
 msgstr ""

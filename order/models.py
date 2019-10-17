@@ -1,8 +1,10 @@
 from django.db import models
-from django.db.models import Q
 
 from product.models import Product
-from user.models import User, UserInfoEntity
+from user.models import User
+from django.utils.translation import gettext_lazy as _
+
+from parler.models import TranslatableModel, TranslatedFields
 # Create your models here.
 
 
@@ -17,10 +19,10 @@ class Order(models.Model):
                               on_delete=models.CASCADE, blank=True)
     # sender = models.CharField(max_length=100, blank=True, verbose_name='order_sender')
     STATUS_ORDER = (
-        ('unpaid', 'Unpaid'),
-        ('paid', 'Paid'),
-        ('cancel', 'Cancel'),
-        ('delete', 'Delete'),
+        ('unpaid', _('Unpaid')),
+        ('paid', _('Paid')),
+        ('cancel', _('Cancel')),
+        ('delete', _('Delete')),
     )
 
     status_order = models.CharField(default='unpaid', max_length=10,
@@ -50,9 +52,9 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     STATUS_DELIVERY = (
-        ('un-delivery', 'Un-Delivery'),
-        ('in delivery', 'In-Delivery'),
-        ('delivered', 'Delivered'),
+        ('un-delivery', _('Un-Delivery')),
+        ('in delivery', _('In-Delivery')),
+        ('delivered', _('Delivered')),
     )
     order = models.ForeignKey(Order, verbose_name='belongsorder', related_name='orderitems', on_delete=models.CASCADE, blank=False)
     status_delivery = models.CharField(default='un-delivery', max_length=50, choices=STATUS_DELIVERY,

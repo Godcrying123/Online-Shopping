@@ -28,7 +28,7 @@ from product.views import IndexView
 # router.register(r'users', views.UserViewSet)
 # router.register(r'groups', views.GroupViewSet)
 
-extra_patterns = [
+api_patterns = [
     # API URL List
     path('api/', include([
         path('person_entity/v1/', include('user.api.urls', namespace='persona_api')),
@@ -41,13 +41,14 @@ extra_patterns = [
 
 translate_urlpatterns = i18n_patterns(
     # path('view/', include([
-    path('', IndexView.as_view(), name='index_view'),
     path(_('user/'), include('user.urls', namespace='user_view')),
     path(_('item/'), include('product.urls', namespace='product_view')),
     path(_('cart/'), include('cart.urls', namespace='cart_view')),
     path(_('order/'), include('order.urls', namespace='order_view')),
     path(_('store/'), include('shop.urls', namespace='shop_view')),
     path(_('payment/'), include('payment.urls', namespace='payment_view')),
+    path('rosetta/', include('rosetta.urls')),
+    path('', IndexView.as_view(), name='index_view'),
     # ])),
 )
 
@@ -55,8 +56,7 @@ urlpatterns = translate_urlpatterns + [
     # View URL List
     # Admin page url
     path('admin/', admin.site.urls),
-    path('', include(extra_patterns)),
-    path('rosetta/', include('rosetta.urls')),
+    path('', include(api_patterns)),
     # path('', include('snippets.urls')),
 ]
 

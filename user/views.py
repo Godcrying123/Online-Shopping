@@ -95,6 +95,7 @@ class ProfileView(View):
     template_name = 'user/profile.html'
 
     def get(self, request, *args, **kwargs):
+
         username = request.get_signed_cookie('username', default=None, salt=settings.COOKIE_SALT_VALUE,
                                         max_age=settings.COOKIE_EXPIRE_TIME)
         if username is None:

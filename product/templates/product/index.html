@@ -25,7 +25,7 @@
                         <tbody>
                         <tr>
                             {% for product in cate.categoryproductlist %}
-                            <td><img src="{{ product.image.url }}" height="200" width="200"></td>
+                            <td><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" height="200" width="200"></a></td>
                             {% endfor %}
                         </tr>
                         <tr>

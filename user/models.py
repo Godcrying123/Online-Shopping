@@ -1,14 +1,17 @@
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
+from parler.models import TranslatableModel
+
+
 # Create your models here.
 
 
 class User(models.Model):
-    name = models.CharField(_('name'), max_length=200, blank=True)
+    name = models.CharField(max_length=200, blank=True, verbose_name=_('name'))
+    username = models.CharField(max_length=200, db_index=True, unique=True, verbose_name=_('username'))
     # owner = models.ForeignKey('auth.User', related_name='person_entity', on_delete=models.CASCADE, blank=True)
     # isAdmin = models.BooleanField(default=False, verbose_name='IsAdmin')
-    username = models.CharField(_('username'), max_length=200, db_index=True, unique=True)
     mail = models.EmailField(_('mail'), max_length=200, db_index=True)
     telephone = models.CharField(_('telephone'), max_length=100, blank=True)
     password = models.CharField(_('password'), max_length=200)
@@ -37,9 +40,9 @@ class User(models.Model):
 
 
 class UserInfoEntity(models.Model):
+    name = models.CharField(max_length=200, blank=True, verbose_name='name')
     owner = models.ForeignKey(User, verbose_name='Who Input', max_length=100,
                               related_name='own_user', on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=200, verbose_name='name', blank=True)
     recaddress = models.CharField(max_length=100, blank=True, verbose_name='receiver address')
     recaddresspostal = models.CharField(max_length=100, blank=True, verbose_name='receiver address postal')
     sendoutaddress = models.CharField(max_length=100, blank=True, verbose_name='deliver out address')

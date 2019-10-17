@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block title %}Make A Payment For Your Order{% endblock %}
 {% block content %}
     <div class="container">
-        <h1>Pay By Credit Card</h1>
+        <h1>{% trans "Pay By Credit Card" %}</h1>
         <form action="." id="payment" method="post">
-            <label for="card-number">Card Number</label>
+            <label for="card-number">{% trans "Card Number" %}</label>
             <div id="card-number" class="field"></div>
 
             <label for="cvv">CVV</label>
             <div id="cvv" class="field"></div>
 
-            <label for="expiration-date">Expiration Date</label>
+            <label for="expiration-date">{% trans "Expiration Date" %}</label>
             <div id="expiration-date" class="field"></div>
             <input type="hidden" id="nonce" name="payment_method_nonce" value="">
             {% csrf_token %}
-            <input type="submit" value="Pay Your Order">
+            <input type="submit" value="{% trans "Pay Your Order" %}">
         </form>
     </div>
 <!--Load the required client component-->

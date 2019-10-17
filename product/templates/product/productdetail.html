@@ -39,7 +39,7 @@
             <form action="{% url "cart:cart_add" product.id %}" method="post">
                 {{ cart_product_form.as_p }}
                 {% csrf_token %}
-                <input type="submit" value="Add to cart">
+                <input type="submit" value="{% trans "Add to cart" %}">
             </form>
             <hr>
             {{ product.description | linebreaks }}
