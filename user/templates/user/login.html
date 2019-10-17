@@ -1,11 +1,12 @@
 {% extends "user/user_base.html" %}
-{% block title %}Log-in{% endblock %}
-{% block h3 %}Log-in{% endblock%}
+{% load i18n %}
+{% block title %}{% trans "Log-in" %}{% endblock %}
+{% block h3 %}{% trans "Log-in" %}{% endblock%}
 {% block user_form %}
-<form action="/view/user/login/" method="post">
+<form action="{% url "user:login" %}" method="post">
     {{ form.as_p }}
     {% csrf_token %}
-    <p><input type="submit" value="Log in"></p>
+    <p><input type="submit" value="{% trans "Log in" %}"></p>
 </form>
 <p>{{ loginresult }}</p>
 {% endblock %}

@@ -1,18 +1,19 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from .models import User
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='Username', max_length=100)
-    email = forms.EmailField(label='E-Mail', max_length=100)
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label=_('Username'), max_length=100)
+    # email = forms.EmailField(label='E-Mail', max_length=100)
+    password = forms.CharField(label=_('password'), widget=forms.PasswordInput)
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Password',
+    password = forms.CharField(label=_('Password'),
                                widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password',
+    password2 = forms.CharField(label=_('Repeat password'),
                                 widget=forms.PasswordInput)
 
     class Meta:
@@ -34,13 +35,13 @@ class UserProfileGetForm(forms.ModelForm):
 
 
 class UserProfileChangeForm(forms.Form):
-    name = forms.CharField(label='Name', max_length=100,
+    name = forms.CharField(label=_('Name'), max_length=100,
                            required=True)
-    username = forms.CharField(label='UserName', max_length=100,
+    username = forms.CharField(label=_('UserName'), max_length=100,
                                required=True)
-    mail = forms.EmailField(label='E-mail', required=True,
+    mail = forms.EmailField(label=_('E-mail'), required=True,
                             max_length=100)
-    telephone = forms.CharField(label='Telephone', max_length=100,
+    telephone = forms.CharField(label=_('Telephone'), max_length=100,
                                 required=True)
     # recaddress = forms.CharField(label='Recaddress', max_length=100,
     #                              required=True)

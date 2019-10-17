@@ -6,7 +6,8 @@ from rest_framework import mixins
 from rest_framework import status
 
 from user.api.serializers import BuyerSerializer, AdminBuyerSerializer, BuyerDetailSerializer
-from user.models import Buyer, User
+from user.models import User
+from buyer.models import Buyer
 
 
 # class UserList(generics.ListAPIView):

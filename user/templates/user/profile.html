@@ -1,11 +1,12 @@
 {% extends "user/user_base.html" %}
-{% block title %}User Profile{% endblock %}
-{% block h3 %}Profile Management{% endblock%}
+{% load i18n %}
+{% block title %}{% trans "User Profile" %}{% endblock %}
+{% block h3 %}{% trans "Profile Management" %}{% endblock%}
 {% block user_form %}
 <form action="{% url "user:profile_change" user.id %}" method="post">
     {{ profile_form.as_p }}
     {% csrf_token %}
-    <p><input type="submit" value="Save Profile"></p>
+    <p><input type="submit" value="{% trans "Save Profile" %}"></p>
 </form>
 <p>{{ loginresult }}</p>
 {% endblock %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %}Online Shopping{% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@
                         <thead>
                         <tr>
                             <th scope="col">{{ cate }}
-                                <small><a href="{{ cate.get_absolute_url }}">View More</a></small>
+                                <small><a href="{{ cate.get_absolute_url }}">{% trans "View More" %}</a></small>
                             </th>
                         </tr>
                         </thead>
@@ -55,7 +55,7 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="/media/image/13369b33f128c4366033cceb91491207.jpg" class="d-block w-100" alt="..." height="400" width="400">
+                        <img src="/media/image/664e721184afb881fbefc8f586bb005d_OB4uyhL.jpg" class="d-block w-100" alt="..." height="400" width="400">
                     </div>
 
                     <div class="carousel-item">

@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-header">Kai's Store</div>
                 <div class="card-body">
-                    <p class="text-left">{{ order }}<small> ========== </small>{{ order.status_order }}</p>
+                    <p class="text-left">{{ order }}</p>
                     <table class="table">
                         <tbody>
                         {% for orderitem in orderitems %}
@@ -37,15 +37,25 @@
                     <p class="text-right">
                         <span>Total: ${{ order.get_total_cost }}</span>
                     </p>
+                    <span class="{% if order.status_order == 'paid' %}paid{% elif order.status_order == 'unpaid' %}
+                    pending{% elif order.status_order == 'cancel' %}cancel{% elif order.status_order == 'delete' %}
+                    delete{% endif %}">
+                        {% if order.status_order == 'paid' %}Paid
+                        {% elif order.status_order == 'unpaid' %}Pending Payment
+                        {% elif order.status_order == 'cancel' %}Canceled
+                        {% else %}Deleted
+                        {% endif %}
+                    </span>
                 </div>
                 <div class="card-body text-right">
                     {% if order.status_order == 'paid' %}
-                    <a href="#" class="btn btn-primary">Delete</a>
+                    <a href="{% url "order:order_delete" order.id%}" class="btn btn-primary">Delete</a>
                     <a href="{% url "order:order_review" order.id%}" class="btn btn-primary">Review</a>
                     <a href="#" class="btn btn-primary">After-Sales</a>
                     {% elif order.status_order == 'unpaid'  %}
-                    <a href="{% url "payment:payment_process" %}" class="btn btn-primary">Pay</a>
-                    <a href="#" class="btn btn-primary">Cancel</a>
+                    <a href="{% url "payment:payment_process" order.id %}" class="btn btn-primary">Pay</a>
+                    <a href="{% url "order:order_review" order.id%}" class="btn btn-primary">Review</a>
+                    <a href="{% url "order:order_cancel" order.id%}" class="btn btn-primary">Cancel</a>
                     {% else  %}
                     <a href="{% url "order:order_review" order.id%}" class="btn btn-primary">Review</a>
                     {% endif %}

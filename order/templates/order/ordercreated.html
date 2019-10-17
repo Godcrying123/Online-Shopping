@@ -100,8 +100,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card-body text-right">
-                <a href="{% url "payment:payment_process" %}" class="btn btn-primary">Pay</a>
-                <a href="#" class="btn btn-primary">Delete</a>
+                {% if orderdetailview.status_order == 'unpaid' %}
+                <a href="{% url "payment:payment_process" orderdetailview.id %}" class="btn btn-primary">Pay</a>
+                <a href="{% url "order:order_cancel" orderdetailview.id%}" class="btn btn-primary">Cancel</a>
+                {% elif orderdetailview.status_order == 'paid' %}
+                    <a href="{% url "order:order_delete" orderdetailview.id%}" class="btn btn-primary">Delete</a>
+                {% endif %}
 <!--                <a href="#" class="btn btn-primary">CSV Export</a>-->
                 <a href="{% url "order:print_PDF" orderdetailview.id %}" class="btn btn-primary" target='_blank'>PDF Print</a>
             </div>

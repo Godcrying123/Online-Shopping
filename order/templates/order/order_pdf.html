@@ -41,8 +41,13 @@
         </tr>
         </tbody>
     </table>
-<span class="{% if order.status_order == 'paid' %}paid{% else %}pending{% endif %}">
-    {% if order.status_order == 'paid' %}paid{% else %}Pending Payment{% endif %}
+<span class="{% if order.status_order == 'paid' %}paid{% elif order.status_order == 'pending' %}pending
+{% elif order.status_order == 'cancel' %}cancel{% else %}delete{% endif %}">
+    {% if order.status_order == 'paid' %}Paid
+    {% elif order.status_order == 'pending' %}Pending Payment
+    {% elif order.status_order == 'cancel' %}Cancel
+    {% else %}Delete
+    {% endif %}
 </span>
 
 </body>

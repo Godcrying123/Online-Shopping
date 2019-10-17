@@ -1,12 +1,13 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from product.models import Product
 
 
-class ProductDetailForm(forms.ModelForm):
-
-    class Meta:
-        model = Product
-        fields = ('name', 'description', 'price', 'salesamount')
+# class ProductDetailForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = Product
+#         fields = ('name', 'description', 'price', 'salesamount')
 
 
 PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 21)]
@@ -14,7 +15,6 @@ PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 21)]
 
 class CartAddProductForm(forms.Form):
     quantity = forms.TypedChoiceField(choices=PRODUCT_QUANTITY_CHOICES,
-                                      coerce=int)
-    update = forms.BooleanField(required=False,
-                                initial=False,
+                                      coerce=int, label=_('Quantity'))
+    update = forms.BooleanField(required=False, initial=False, label=_('Update'),
                                 widget=forms.HiddenInput)

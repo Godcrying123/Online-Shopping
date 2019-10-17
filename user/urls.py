@@ -5,9 +5,10 @@ from . import views
 app_name = 'user'
 
 urlpatterns = [
-    path('login/', views.LoginView.as_view()),
-    path('register/', views.RegistrationView.as_view()),
-    path('profile/<int:pk>/', views.ProfileView.as_view(), name='profile_view'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('register/', views.RegistrationView.as_view(), name='register'),
+    path('profile/', views.ProfileView.as_view(), name='profile_view'),
     path('profile/change/<int:pk>/', views.ProfileView.as_view(), name='profile_change'),
     # path('user/info/detail/<int:pk>/', views.Us)
 ]

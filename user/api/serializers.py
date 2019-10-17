@@ -2,7 +2,8 @@
 
 from rest_framework import serializers
 
-from user.models import User, Buyer
+from user.models import User
+from buyer.models import Buyer
 
 
 class BuyerSerializer(serializers.ModelSerializer):

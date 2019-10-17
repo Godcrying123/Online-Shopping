@@ -1,10 +1,13 @@
+from django.conf import settings
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.views import View, generic
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .models import Category, Product
-from cart.forms import CartAddProductForm
 
+from cart.forms import CartAddProductForm
 from image.models import Images
+from .models import Category, Product
+
+
 # Create your views here.
 
 
@@ -20,6 +23,8 @@ class IndexView(View):
 
     def get(self, request):
         context = self.get_context()
+        context['haslogged'] = request.get_signed_cookie('username', default=None, salt=settings.COOKIE_SALT_VALUE,
+                                                         max_age=settings.COOKIE_EXPIRE_TIME)
         return render(request, self.template_name, context)
 
 
@@ -93,6 +98,8 @@ class CategoryProductList(generic.ListView):
         if productlist.has_next():
             context['next_page_number'] = productlist.next_page_number()
         context['page_range'] = paginator.num_pages
+        context['haslogged'] = request.get_signed_cookie('username', default=None, salt=settings.COOKIE_SALT_VALUE,
+                                                         max_age=settings.COOKIE_EXPIRE_TIME)
         # context['productlist'] = productlist
         # print(context)
         return render(request, self.template_name, context)
@@ -109,6 +116,9 @@ class ProductListDetail(generic.DetailView):
         self.imagesets.clear()
         self.imagesets['product'] = productinstance
         self.imagesets['otherimages'] = images
+        self.imagesets['haslogged'] = request.get_signed_cookie('username', default=None,
+                                                                salt=settings.COOKIE_SALT_VALUE,
+                                                                max_age=settings.COOKIE_EXPIRE_TIME)
         cart_product_form = CartAddProductForm()
         # print(productinstance.categorynameforproduct())
         return render(request, self.template_name, {**{'cart_product_form': cart_product_form}, **self.imagesets})

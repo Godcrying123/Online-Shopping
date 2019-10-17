@@ -1,4 +1,5 @@
 import braintree
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 
 from order.models import Order
@@ -7,8 +8,13 @@ from order.models import Order
 # Create your views here.
 
 
-def payment_process(request):
-    order_id = request.session.get('order_id')
+def payment_process(request, *args, **kwargs):
+    # order_id = request.session.get('order_id', None)
+    order_id = kwargs.get('pk', None)
+    username = request.get_signed_cookie('username', default=None, salt=settings.COOKIE_SALT_VALUE,
+                                         max_age=settings.COOKIE_EXPIRE_TIME)
+    if order_id is None:
+        return redirect('order:order_list')
     order = get_object_or_404(Order, id=order_id)
 
     if request.method == 'POST':
@@ -34,7 +40,8 @@ def payment_process(request):
         client_token = braintree.ClientToken.generate()
         return render(request, 'payment/payment_process.html',
                       {'order': order,
-                       'client_token': client_token})
+                       'client_token': client_token,
+                       'haslogged': username})
 
 
 def payment_confirm(request):

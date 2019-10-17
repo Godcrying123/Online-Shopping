@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-16 20:54+0800\n"
+"PO-Revision-Date: 2019-10-14 17:49+0000\n"
+"Last-Translator: b'  <kzhang@test.com>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.9.3\n"
+
+#: .\cart\forms.py:18
+msgid "Quantity"
+msgstr "数量"
+
+#: .\cart\forms.py:19
+msgid "Update"
+msgstr "更新"
+
+#: .\product\templates\product\index.html:21
+msgid "View More"
+msgstr "查看更多"
+
+#: .\user\forms.py:8
+#, fuzzy
+#| msgid "username"
+msgid "Username"
+msgstr "用户名"
+
+#: .\user\forms.py:10 .\user\models.py:14
+msgid "password"
+msgstr "密码"
+
+#: .\user\forms.py:14
+#, fuzzy
+#| msgid "password"
+msgid "Password"
+msgstr "密码"
+
+#: .\user\forms.py:16
+msgid "Repeat password"
+msgstr "重复密码"
+
+#: .\user\forms.py:38
+msgid "Name"
+msgstr "名字"
+
+#: .\user\forms.py:40
+msgid "UserName"
+msgstr "用户名"
+
+#: .\user\forms.py:42
+#, fuzzy
+#| msgid "mail"
+msgid "E-mail"
+msgstr "邮箱"
+
+#: .\user\forms.py:44
+#, fuzzy
+#| msgid "telephone"
+msgid "Telephone"
+msgstr "电话"
+
+#: .\user\models.py:8
+msgid "name"
+msgstr "名字"
+
+#: .\user\models.py:11
+msgid "username"
+msgstr "用户名"
+
+#: .\user\models.py:12
+msgid "mail"
+msgstr "邮箱"
+
+#: .\user\models.py:13
+msgid "telephone"
+msgstr "电话"
+
+#: .\user\models.py:15
+msgid "created_time"
+msgstr "创建时间"
+
+#: .\user\models.py:16
+msgid "updated_time"
+msgstr "更新时间"
+
+#: .\user\templates\user\login.html:3 .\user\templates\user\login.html:4
+msgid "Log-in"
+msgstr "登录"
+
+#: .\user\templates\user\login.html:9
+msgid "Log in"
+msgstr "登录"
+
+#: .\user\templates\user\profile.html:3
+msgid "User Profile"
+msgstr "用户信息"
+
+#: .\user\templates\user\profile.html:4
+msgid "Profile Management"
+msgstr "信息管理"
+
+#: .\user\templates\user\profile.html:9
+msgid "Save Profile"
+msgstr "保存用户信息"
+
+#: .\user\templates\user\register.html:3
+msgid "Registraion"
+msgstr "注册用户"
+
+#: .\user\templates\user\register.html:4 .\user\templates\user\register.html:9
+msgid "Create an account"
+msgstr "创建账户"
+
+#~ msgid "CREATE AN ACCOUNT"
+#~ msgstr "创建账户"

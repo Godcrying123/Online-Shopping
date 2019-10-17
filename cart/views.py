@@ -1,10 +1,13 @@
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.views.decorators.http import require_POST
 
-from .cart import Cart
-from product.models import Product
 from cart.forms import CartAddProductForm
+from product.models import Product
+from .cart import Cart
+
+
 # Create your views here.
 
 
@@ -12,10 +15,12 @@ class CartDetail(generic.ListView):
     template_name = 'cart/cart_detail.html'
 
     def get(self, request):
+        username = request.get_signed_cookie('username', default=None, salt=settings.COOKIE_SALT_VALUE,
+                                             max_age=settings.COOKIE_EXPIRE_TIME)
         cart = Cart(request)
         for item in cart:
             item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'], 'update': True})
-        return render(request, self.template_name, {'cart': cart})
+        return render(request, self.template_name, {'cart': cart, 'haslogged': username})
 
 
 @require_POST

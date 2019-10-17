@@ -10,7 +10,6 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th align="center"><input type="checkbox" aria-label="Checkbox for following text input"></th>
                         <th colspan="6">Kai's Store</th>
                     </tr>
                 </thead>
@@ -18,7 +17,6 @@
                     {% for item in cart %}
                         {%  with product=item.product%}
                             <tr align="center">
-                                <td><input type="checkbox" aria-label="Checkbox for following text input"></td>
                                 <td><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" height="80" width="80"></a></td>
                                 <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
                                 <td>
@@ -36,7 +34,7 @@
                         {% endwith %}
                     {% endfor %}
                     <tr class="total" style="text-align:center;">
-                        <td colspan="5"></td>
+                        <td colspan="4"></td>
                         <td>Total</td>
                         <td class="num">${{ cart.get_total_price }}</td>
                     </tr>

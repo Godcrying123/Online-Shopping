@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-16 20:54+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\shopsite\settings\base.py:138 .\shopsite\templates\head.html:39
+msgid "English"
+msgstr "英文"
+
+#: .\shopsite\settings\base.py:139
+msgid "Chinese"
+msgstr "中文"
+
+#: .\shopsite\templates\footer.html:6
+msgid "Online-Shopping"
+msgstr "在线购物"
+
+#: .\shopsite\templates\head.html:26
+msgid "HomePage"
+msgstr "首页"
+
+#: .\shopsite\templates\head.html:33
+msgid "Languages"
+msgstr "语言"
+
+#: .\shopsite\templates\head.html:40
+msgid "Japanese"
+msgstr "日文"
+
+#: .\shopsite\templates\head.html:46
+msgid "User Operations"
+msgstr "用户选项"
+
+#: .\shopsite\templates\head.html:50
+msgid "Login"
+msgstr "登录"
+
+#: .\shopsite\templates\head.html:52
+msgid "New User?"
+msgstr "新用户"
+
+#: .\shopsite\templates\head.html:53
+msgid "Profile"
+msgstr "用户信息"
+
+#: .\shopsite\templates\head.html:55
+msgid "Log Out"
+msgstr "登出"
+
+#: .\shopsite\templates\head.html:62
+msgid "Short Cuts:"
+msgstr "快捷键:"
+
+#: .\shopsite\templates\head.html:65
+msgid "Back"
+msgstr "返回"
+
+#: .\shopsite\templates\head.html:68
+msgid "cart"
+msgstr "购物车"
+
+#: .\shopsite\templates\head.html:71
+msgid "Order"
+msgstr "订单"
+
+#: .\shopsite\templates\head.html:74
+msgid "Favorites"
+msgstr "最爱"
+
+#: .\shopsite\templates\searchbar.html:7
+msgid "Categories"
+msgstr "分类"
+
+#: .\shopsite\templates\searchbar.html:8
+msgid "Products"
+msgstr "商品"
+
+#: .\shopsite\templates\searchbar.html:9
+msgid "Stores"
+msgstr "商店"
+
+#: .\shopsite\templates\searchbar.html:16
+msgid "Search Categories"
+msgstr "搜索分类"
+
+#: .\shopsite\templates\searchbar.html:17
+#: .\shopsite\templates\searchbar.html:23
+#: .\shopsite\templates\searchbar.html:29
+msgid "Search"
+msgstr "搜索"
+
+#: .\shopsite\templates\searchbar.html:22
+msgid "Search Products"
+msgstr "搜索商品"
+
+#: .\shopsite\templates\searchbar.html:28
+msgid "Search Stores"
+msgstr "搜索商店"
+
+#: .\shopsite\urls.py:45
+msgid "user/"
+msgstr ""
+
+#: .\shopsite\urls.py:46
+msgid "item/"
+msgstr ""
+
+#: .\shopsite\urls.py:47
+#, fuzzy
+#| msgid "cart"
+msgid "cart/"
+msgstr "购物车"
+
+#: .\shopsite\urls.py:48
+#, fuzzy
+#| msgid "Order"
+msgid "order/"
+msgstr "订单"
+
+#: .\shopsite\urls.py:49
+msgid "store/"
+msgstr ""
+
+#: .\shopsite\urls.py:50
+msgid "payment/"
+msgstr ""

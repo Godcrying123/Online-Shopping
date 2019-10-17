@@ -1,18 +1,19 @@
 from django.db import models
 from django.db.models import Q
+from django.utils.translation import gettext_lazy as _
 # Create your models here.
 
 
 class User(models.Model):
-    name = models.CharField(max_length=200, verbose_name='name', blank=True)
+    name = models.CharField(_('name'), max_length=200, blank=True)
     # owner = models.ForeignKey('auth.User', related_name='person_entity', on_delete=models.CASCADE, blank=True)
     # isAdmin = models.BooleanField(default=False, verbose_name='IsAdmin')
-    username = models.CharField(max_length=200, db_index=True, unique=True, verbose_name='username')
-    mail = models.EmailField(max_length=200, db_index=True, verbose_name='E-mail')
-    telephone = models.CharField(max_length=100, verbose_name='Telephone', blank=True)
-    password = models.CharField(max_length=200, verbose_name='Password')
-    created_time = models.DateTimeField(auto_now_add=True, verbose_name='created_time')
-    updated_time = models.DateTimeField(auto_now=True, verbose_name='updated_time')
+    username = models.CharField(_('username'), max_length=200, db_index=True, unique=True)
+    mail = models.EmailField(_('mail'), max_length=200, db_index=True)
+    telephone = models.CharField(_('telephone'), max_length=100, blank=True)
+    password = models.CharField(_('password'), max_length=200)
+    created_time = models.DateTimeField(_('created_time'), auto_now_add=True)
+    updated_time = models.DateTimeField(_('updated_time'), auto_now=True)
 
     class Meta:
         ordering = ('username',)
@@ -64,27 +65,3 @@ class UserToken(models.Model):
         db_table = 'user_token'
         verbose_name = verbose_name_plural = 'user token table'
 
-
-class Buyer(User):
-    STATUS_VIP = (
-        ('vip', 'VIP'),
-        ('not-vip', 'Not VIP'),
-    )
-    STATUS_USER = (
-        ('normal', 'Normal'),
-        ('deleted', 'Deleted'),
-        ('banned', 'Banned'),
-    )
-    status_vip = models.CharField(default='not-vip', max_length=10,
-                                  choices=STATUS_VIP, verbose_name='status_vip', db_index=True, blank=True)
-    status_user = models.CharField(default='normal', max_length=10,
-                                   choices=STATUS_USER, verbose_name='status_user', db_index=True, blank=True)
-    # order = models.ForeignKey(Order, verbose_name='own_order', related_name='boughtorders',
-    #                           on_delete=models.CASCADE, blank=True, default=None)
-
-    class Meta:
-        ordering = ('username',)
-        verbose_name = 'buyer'
-
-    def __str__(self):
-        return self.username

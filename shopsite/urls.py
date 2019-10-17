@@ -14,9 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.utils.translation import gettext_lazy as _
 # from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
 
@@ -37,19 +39,24 @@ extra_patterns = [
     # path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
-urlpatterns = [
+translate_urlpatterns = i18n_patterns(
+    # path('view/', include([
+    path('', IndexView.as_view(), name='index_view'),
+    path(_('user/'), include('user.urls', namespace='user_view')),
+    path(_('item/'), include('product.urls', namespace='product_view')),
+    path(_('cart/'), include('cart.urls', namespace='cart_view')),
+    path(_('order/'), include('order.urls', namespace='order_view')),
+    path(_('store/'), include('shop.urls', namespace='shop_view')),
+    path(_('payment/'), include('payment.urls', namespace='payment_view')),
+    # ])),
+)
+
+urlpatterns = translate_urlpatterns + [
     # View URL List
     # Admin page url
     path('admin/', admin.site.urls),
-    path('view/', include([
-        path('', IndexView.as_view()),
-        path('user/', include('user.urls', namespace='user_view')),
-        path('item/', include('product.urls', namespace='product_view')),
-        path('cart/', include('cart.urls', namespace='cart_view')),
-        path('order/', include('order.urls', namespace='order_view')),
-        path('payment/', include('payment.urls', namespace='payment_view')),
-    ])),
     path('', include(extra_patterns)),
+    path('rosetta/', include('rosetta.urls')),
     # path('', include('snippets.urls')),
 ]
 

@@ -12,4 +12,6 @@ urlpatterns = [
     path('list/', views.orderlist.as_view(), name='order_list'),
     # path('export/csv', views.orderlist.as_view(), name='order_list'),
     path('print/pdf/<int:pk>/', views.print_to_pdf, name='print_PDF'),
+    path('cancel/<int:pk>/', views.order_cancel, name='order_cancel'),
+    path('delete/<int:pk>/', views.order_delete, name='order_delete'),
 ]
