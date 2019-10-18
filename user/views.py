@@ -3,9 +3,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
 
-from .forms import LoginForm, UserRegistrationForm, UserProfileGetForm, UserProfileChangeForm
-from .models import User
-
+from .forms import LoginForm, UserRegistrationForm, UserProfileGetForm, UserProfileChangeForm, UserInfoEntityForm
+from .models import User, UserInfoEntity
+from .tasks import user_registered
+import celery
 
 # from django.contrib.auth import authenticate, login
 
@@ -21,7 +22,7 @@ class LoginView(View):
 
     def post(self, request):
         form = LoginForm(request.POST)
-        response = HttpResponseRedirect(reverse('product:index_page'))
+        response = HttpResponseRedirect(reverse('index_view'))
         context = {
             'form': None,
             'loginresult': None
@@ -56,7 +57,7 @@ class RegistrationView(View):
         user_form = UserRegistrationForm()
         username = request.get_signed_cookie('username', default=None, salt=settings.COOKIE_SALT_VALUE,
                                              max_age=settings.COOKIE_EXPIRE_TIME)
-        response = render(request, self.template_name, {'user_form': user_form})
+        response = render(request, self.template_name, {'user_form': user_form, 'haslogged': username})
         if username is not None:
             response.delete_cookie('username')
         return response
@@ -66,7 +67,7 @@ class RegistrationView(View):
             'user_form': None,
             'registrationresult': None
         }
-        response = HttpResponseRedirect(reverse('product:index_page'))
+        response = HttpResponseRedirect(reverse('index_view'))
         user_form = UserRegistrationForm(request.POST)
         context['user_form'] = user_form
         if user_form.is_valid():
@@ -84,8 +85,10 @@ class RegistrationView(View):
                     context['registrationresult'] = 'the E-Mail has been used'
                     return render(request, self.template_name, context)
                 except User.DoesNotExist:
-                    new_user = User(username=username, mail=email, password=password)
-                    new_user.save()
+                    new_user = User.objects.create(username=username, mail=email, password=password)
+                    print(new_user.id)
+                    # launch asychronous task
+                    user_registered.delay(new_user.id)
                     response.set_signed_cookie('username', username, salt=settings.COOKIE_SALT_VALUE,
                                                expires=settings.COOKIE_EXPIRE_TIME)
                     return response
@@ -95,14 +98,29 @@ class ProfileView(View):
     template_name = 'user/profile.html'
 
     def get(self, request, *args, **kwargs):
-
         username = request.get_signed_cookie('username', default=None, salt=settings.COOKIE_SALT_VALUE,
                                         max_age=settings.COOKIE_EXPIRE_TIME)
         if username is None:
             return redirect(reverse('user:login'))
+        userinfoentity = self.request.GET.get('userinfoentity')
         userinstance = get_object_or_404(User, username=username)
         profile_form = UserProfileGetForm(instance=userinstance)
-        return render(request, self.template_name, {'profile_form': profile_form, 'user': userinstance})
+        if userinfoentity is None:
+            userinfo_form = UserInfoEntityForm()
+            try:
+                del request.session['userinfo_id']
+            except KeyError:
+                pass
+        else:
+            userinfoentity_instance = get_object_or_404(UserInfoEntity, id=userinfoentity)
+            userinfo_form = UserInfoEntityForm(initial={'name': userinfoentity_instance.name,
+                                                        'mail': userinfoentity_instance.mail,
+                                                        'telephone': userinfoentity_instance.telephone,
+                                                        'recaddress': userinfoentity_instance.recaddress,
+                                                        'recaddresspostal': userinfoentity_instance.recaddresspostal})
+            request.session['userinfo_id'] = userinfoentity
+        return render(request, self.template_name, {'profile_form': profile_form, 'userinfo_form': userinfo_form,
+                                                    'user': userinstance, 'haslogged': username})
 
     def post(self, request, *args, **kwargs):
         # context = {
@@ -131,6 +149,41 @@ class ProfileView(View):
 
 
 def logout(request):
-    response = redirect(reverse('product:index_page'))
+    response = redirect(reverse('index_view'))
     response.delete_cookie('username')
     return response
+
+
+class UserInfo(View):
+    template_name = 'user/profile.html'
+
+    def post(self, request):
+        username = request.get_signed_cookie('username', default=None, salt=settings.COOKIE_SALT_VALUE,
+                                        max_age=settings.COOKIE_EXPIRE_TIME)
+        if username is None:
+            return redirect(reverse('user:login'))
+        ownerinstance = get_object_or_404(User, username=username)
+        userinfo_form = UserInfoEntityForm(request.POST)
+        userinfoentity_id = request.session.get('userinfo_id', None)
+        if userinfo_form.is_valid():
+            cd = userinfo_form.cleaned_data
+            name = cd['name']
+            mail = cd['mail']
+            telephone = cd['telephone']
+            recaddress = cd['recaddress']
+            recaddresspostal = cd['recaddresspostal']
+            if userinfoentity_id is not None:
+                userinfoinstance = get_object_or_404(UserInfoEntity, id=userinfoentity_id)
+                userinfoinstance.name = name
+                userinfoinstance.mail = mail
+                userinfoinstance.telephone = telephone
+                userinfoinstance.recaddress = recaddress
+                userinfoinstance.recaddresspostal = recaddresspostal
+                userinfoinstance.save()
+            else:
+                newuserinfoinstance = UserInfoEntity.objects.create(owner=ownerinstance, name=name, mail=mail,
+                                                                    telephone=telephone, recaddress=recaddress,
+                                                                    recaddresspostal=recaddresspostal)
+        response = HttpResponseRedirect(reverse('user:profile_view'))
+        return response
+

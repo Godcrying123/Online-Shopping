@@ -3,6 +3,8 @@ from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 
 from order.models import Order
+import celery
+from .tasks import order_payment_success, order_payment_pending
 
 
 # Create your views here.
@@ -32,8 +34,11 @@ def payment_process(request, *args, **kwargs):
             # store the unique transaction id
             order.braintree_id = result.transaction.id
             order.save()
+            # create invoice e-mail
+            order_payment_success.delay(order.id)
             return redirect('payment:payment_done')
         else:
+            order_payment_pending.delay(order.id)
             return redirect('payment:payment_canceled')
     else:
         # generate token

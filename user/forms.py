@@ -1,10 +1,10 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from parler.forms import TranslatableModelForm
-
 from .models import User
 
+
+# Create your forms here.
 
 class LoginForm(forms.Form):
     username = forms.CharField(label=_('Username'), max_length=100)
@@ -45,5 +45,11 @@ class UserProfileChangeForm(forms.Form):
                             max_length=100)
     telephone = forms.CharField(label=_('Telephone'), max_length=100,
                                 required=True)
-    # recaddress = forms.CharField(label='Recaddress', max_length=100,
-    #                              required=True)
+
+
+class UserInfoEntityForm(forms.Form):
+    name = forms.CharField(label=_('Receiver Name'), max_length=100, required=True)
+    recaddress = forms.CharField(label=_('Receiver Address'), max_length=100, required=True)
+    recaddresspostal = forms.CharField(label=_('Receiver Address Postal'), max_length=100, required=True)
+    mail = forms.EmailField(label=_('Receiver Email'), max_length=100, required=True)
+    telephone = forms.CharField(label=_('Receiver Telephone'), max_length=100, required=True)

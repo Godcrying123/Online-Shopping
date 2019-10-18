@@ -491,6 +491,10 @@ msgstr "用户信息"
 msgid "Profile Management"
 msgstr "信息管理"
 
+#: .\user\templates\user\profile.html:6
+msgid "Receiver Info Management"
+msgstr "收件人信息管理"
+
 #: .\user\templates\user\profile.html:9
 msgid "Save Profile"
 msgstr "保存用户信息"
@@ -502,3 +506,7 @@ msgstr "注册用户"
 #: .\user\templates\user\register.html:4 .\user\templates\user\register.html:9
 msgid "Create an account"
 msgstr "创建账户"
+
+#: .\user\templates\user\profile.html:10
+msgid "Save Receiver Info"
+msgstr "保存收件人信息"

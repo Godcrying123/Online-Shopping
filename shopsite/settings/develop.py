@@ -45,3 +45,5 @@ Configuration.configure(
     BRAINTREE_PUBLIC_KEY,
     BRAINTREE_PRIVATE_KEY
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
