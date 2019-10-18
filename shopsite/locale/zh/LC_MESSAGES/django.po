@@ -225,6 +225,26 @@ msgstr "订单编号"
 msgid "Shops"
 msgstr "商店"
 
+#: .\order\templates\order\ordercreated.html:71
+msgid "Image"
+msgstr "图片"
+
+#: .\order\templates\order\ordercreated.html:72
+msgid "Product Name"
+msgstr "商品名称"
+
+#: .\order\templates\order\ordercreated.html:74
+msgid "Price"
+msgstr "价格"
+
+#: .\order\templates\order\ordercreated.html:75
+msgid "Total Price"
+msgstr "总计价格"
+
+#: .\order\templates\order\ordercreated.html:76
+msgid "Delivery Status"
+msgstr "运输状态"
+
 #: .\order\templates\order\ordercreate.html:8
 msgid "CheckOut"
 msgstr "清算"
@@ -379,6 +399,26 @@ msgstr "评论"
 #: .\product\templates\product\index.html:21
 msgid "View More"
 msgstr "查看更多"
+
+#: .\product\templates\product\index.html:81
+msgid "Quick Links"
+msgstr "快速链接"
+
+#: .\product\templates\product\index.html:83
+msgid "Detailed Categories"
+msgstr "详细分类页"
+
+#: .\product\templates\product\index.html:84
+msgid "Popular Posts"
+msgstr "热门文章"
+
+#: .\product\templates\product\index.html:85
+msgid "Available Coupons"
+msgstr "可使用的优惠券"
+
+#: .\product\templates\product\index.html:86
+msgid "Snap-up Products"
+msgstr "秒杀商品"
 
 #: .\product\templates\product\productdetail.html:42
 msgid "Add to cart"
