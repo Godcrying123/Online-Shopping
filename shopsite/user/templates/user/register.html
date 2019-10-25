@@ -1,0 +1,12 @@
+{% extends "user/user_base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Registraion" %}{% endblock %}
+{% block h3 %}{% trans "Create an account" %}{% endblock%}
+{% block user_form %}
+<form action="{% url "user:register" %}" method="post">
+    {{ user_form.as_p }}
+    {% csrf_token %}
+<p><input type="submit" value="{% trans "Create an account" %}"></p>
+</form>
+{% endblock %}
+

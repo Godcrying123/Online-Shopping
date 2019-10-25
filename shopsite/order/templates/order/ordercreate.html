@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Check Out{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>{% trans "CheckOut" %}</h1>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-8">
+            <p>{% trans "Order List" %}</p>
+            <table class="table">
+                <thead class="thead-light">
+                    <th colspan="6">Kai's Store</th>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                        {% with product=item.product %}
+                            <tr>
+                                <td><img src="{{ product.image.url }}" height="80" width="80"></td>
+                                <td>{{ product.name }}</td>
+                                <td>${{ product.price }} X {{ item.quantity }}</td>
+                                <td>${{ item.total_price }}</td>
+                            </tr>
+                        {% endwith %}
+                    {% endfor %}
+                            <tr>
+                                <td colspan="2"></td>
+                                <td>{% trans "Total" %}:</td>
+                                <td>${{ cart.get_total_price}}</td>
+                            </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <p>{% trans "Receiver Choose" %}</p>
+                <select onchange="location = this.options[this.selectedIndex].value;">
+                    <option value="{% url "order:order_preview" %}"></option>
+                    {% for userinfo in owner.owneduserinfos %}
+                    <option value="{% url "order:order_preview" userinfo.name %}">{{userinfo.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <form action="{% url "order:order_create" %}" method="post">
+               {{ ordercreateform.as_p }}
+                <p><input type="submit" value="{% trans "Place a Order" %}"></p>
+                {% csrf_token %}
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Your Order List" %}{% endblock %}
+{% block content %}
+<div class="container">
+    <br>
+    <h2>{% trans "Your Order List" %}</h2>
+    <div class="row">
+        <div class="col-12">
+                <div class="card-body text-left">
+                    <a href="{% url "order:order_list" %}" class="btn btn-primary">{% trans "All" %}</a>
+                    <a href="{% url "order:order_list" %}?status=paid" class="btn btn-primary">{% trans "Paid" %}</a>
+                    <a href="{% url "order:order_list" %}?status=unpaid" class="btn btn-primary">{% trans "Unpaid" %}</a>
+                    <a href="{% url "order:order_list" %}?status=cancel" class="btn btn-primary">{% trans "Canceled" %}</a>
+                    <a href="{% url "order:order_list" %}?status=delete" class="btn btn-primary">{% trans "Deleted " %}</a>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for order in orderlist %}
+        {% with orderitems=order.get_top2_orderitems %}
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">Kai's Store</div>
+                <div class="card-body">
+                    <p class="text-left">{{ order }}</p>
+                    <table class="table">
+                        <tbody>
+                        {% for orderitem in orderitems %}
+                            <tr>
+                                <td><a href="{% url "product:product_detail" orderitem.product.id %}"><img src="{{ orderitem.product.image.url }}" height="50" width="50"></a></td>
+                                <td>{{ orderitem.product }}</td>
+                                <td>${{ orderitem.price }} X {{ orderitem.quantity }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <p class="text-right">
+                        <span>{% trans "Total" %}: ${{ order.get_total_cost }}</span>
+                    </p>
+                    <span class="{% if order.status_order == 'paid' %}paid{% elif order.status_order == 'unpaid' %}
+                    pending{% elif order.status_order == 'cancel' %}cancel{% elif order.status_order == 'delete' %}
+                    delete{% endif %}">
+                        {% if order.status_order == 'paid' %}{% trans "Paid" %}
+                        {% elif order.status_order == 'unpaid' %}{% trans "Pending Payment" %}
+                        {% elif order.status_order == 'cancel' %}{% trans "Canceled" %}
+                        {% else %}{% trans "Deleted" %}
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="card-body text-right">
+                    {% if order.status_order == 'paid' %}
+                    <a href="{% url "order:order_delete" order.id%}" class="btn btn-primary">{% trans "Delete" %}</a>
+                    <a href="{% url "order:order_review" order.id%}" class="btn btn-primary">{% trans "Review" %}</a>
+                    <a href="#" class="btn btn-primary">{% trans "After-Sales" %}</a>
+                    {% elif order.status_order == 'unpaid'  %}
+                    <a href="{% url "payment:payment_process" order.id %}" class="btn btn-primary">{% trans "Pay" %}</a>
+                    <a href="{% url "order:order_review" order.id%}" class="btn btn-primary">{% trans "Review" %}</a>
+                    <a href="{% url "order:order_cancel" order.id%}" class="btn btn-primary">{% trans "Cancel" %}</a>
+                    {% else  %}
+                    <a href="{% url "order:order_review" order.id%}" class="btn btn-primary">{% trans "Review" %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+        {% endfor %}
+    </div>
+    <br>
+</div>
+{% endblock %}

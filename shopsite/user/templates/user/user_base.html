@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<hr>
+<div class="container" >
+    <div class="row justify-content-end">
+        {% block userinfoentity %}{% endblock %}
+        <div class="col-4">
+            <h3>{% block h3 %}{% endblock%}</h3>
+            {% block user_form %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

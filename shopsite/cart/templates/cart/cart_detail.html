@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans "Cart Detail Page" %}
+{% endblock %}
+{% block content %}
+<hr>
+<div class="container">
+    <h2>{% trans "Your Shopping Cart" %}</h2>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="6">Kai's Store</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                        {%  with product=item.product%}
+                            <tr align="center">
+                                <td><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" height="80" width="80"></a></td>
+                                <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                                <td>
+                                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                    {{ item.update_quantity_form.quantity }}
+                                    {{ item.update_quantity_form.update }}
+                                    <input type="submit" value="{% trans "Update" %}">
+                                    {% csrf_token %}
+                                    </form>
+                                </td>
+                                <td>{{ product.price }}</td>
+                                <td><a href="{% url "cart:cart_remove" product.id %}">{% trans "Remove" %}</a></td>
+                                <td>${{ item.total_price }}</td>
+                            </tr>
+                        {% endwith %}
+                    {% endfor %}
+                    <tr class="total" style="text-align:center;">
+                        <td colspan="4"></td>
+                        <td>{% trans "Total" %}</td>
+                        <td class="num">${{ cart.get_total_price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-info">
+                <thead>
+                    <tr class="total">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Total</th>
+                        <th class="num">29.99</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <p class="text-right">
+                <a href="{% url "product:all_category_product_list" %}" class="button">{% trans "Continue Shopping" %}</a>
+                <a href="{% url "order:order_preview" %}" class="button">{% trans "Checkout" %}</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

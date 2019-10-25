@@ -1,0 +1,13 @@
+activity
+buyer
+cart
+comment
+image
+order
+payment
+post
+product
+seller
+shop
+shopsite
+user

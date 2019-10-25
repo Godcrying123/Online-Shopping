@@ -1,0 +1,3 @@
+[console_scripts]
+shopsite_manage = manage:main
+

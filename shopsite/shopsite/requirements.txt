@@ -15,7 +15,4 @@ amqp==2.5.1
 django-redis==4.10.0
 redis==3.3.10
 hiredis==1.0.0
-mysqlclient==1.4.4
 psycopg2==2.8.4
-gunicorn==19.9.0
-supervisor==4.1.0

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Category-Product List{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    {% include "searchbar.html" %}
+    <div class="row">
+        <div class="col-3">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="mb-0">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            <button class="btn btn-link" type="button" onclick="location.href='/{{ LANGUAGE_CODE }}/item/category/products/?page=1';">{% trans "All" %}</button>
+                        </h2>
+                    </div>
+                </div>
+                {% for category in firstcategorylist %}
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne{{ category.slug }}" aria-expanded="false" aria-controls="collapseOne">{{ category }}</button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne{{ category.slug }}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                {% for cate in category.secondlevelcategory %}
+                                {% if cate.numofproductincategory == 0 %}
+                                {% else %}
+                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="{{ cate.get_absolute_url }}?page=1">{{ cate }}</a><span class="badge badge-primary badge-pill">{{ cate.numofproductincategory }}</span></li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="container-fluid">
+                <br>
+                <div class="row justify-content-end">
+                    <div class="col-3">
+                        <form class="form-inline my-2 my-lg-0" method="post" action="">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">2</button>
+                        <button type="button" class="btn btn-secondary">3</button>
+                        <button type="button" class="btn btn-secondary">4</button>
+                    </div>
+                </form>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                {% for product in productlist %}
+                    <div class="col-{{ eachby }}">
+                        <div class="card" style="width: 18rem;margin:auto auto;">
+                            <a href="{% url "product:product_detail" product.id %}">
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="..." height="200" width="200" />
+                            </a>
+                            <div class="card-body">
+                                <p class="card-text">{{ product }}</p>
+                                <p class="card-text">{{ product.price }} &ensp; {{ product.salesamount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="row justify-content-center">
+                    <div class="col-3">
+                    <nav aria-label="Page navigation example" >
+                    <ul class="pagination">
+                        {% if has_previous_page %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="?page={{ previous_page_number }}">{{ previous_page_number }}</a></li>
+                        {% else %}
+<!--                        <p>This is a test</p>-->
+                        <li class="disabled page-item">
+                            <a class="page-link" href="" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="page-item"><a class="page-link" href="?page={{ current_page_num }}">{{ current_page_num }}</a></li>
+                        {% if has_next_page %}
+                        <li class="page-item"><a class="page-link" href="?page={{ next_page_number }}">{{ next_page_number }}</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ next_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="disabled page-item">
+                            <a class="page-link" href="" aria-label="Previous">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

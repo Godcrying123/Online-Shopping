@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Your Order List{% endblock %}
+{% block content %}
+{% load i18n %}
+<div class="container">
+<!--    <div class="row">-->
+<!--        <div class="col-4">-->
+
+<!--        </div>-->
+<!--        <div class="col-8">-->
+
+<!--        </div>-->
+<!--    </div>-->
+    <div class="row">
+        <div class="col-12">
+            <br>
+            <h3>{% trans "Your Order Detail Table" %}</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-borderless text-muted">
+                <tbody>
+                    <tr>
+                        <td>{% trans 'Order ID' %}</td>
+                        <td>{{ orderdetailview }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Shops" %}</td>
+                        <td>Kai's Store</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Receiver Name" %}</td>
+                        <td>{{ orderdetailview.order_receiver_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Receiver Email" %}</td>
+                        <td>{{ orderdetailview.order_email }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Receiver Telephone" %}</td>
+                        <td>{{ orderdetailview.order_telephone }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Receiver Address Postal" %}</td>
+                        <td>{{ orderdetailview.order_receiver_address_postal }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Receiver Address" %}</td>
+                        <td>{{ orderdetailview.order_receiver_address }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Created" %}</td>
+                        <td>{{ orderdetailview.created }}</td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Used Coupon" %}</td>
+                        <td>SUMMERSALE</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-borderless text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>{% trans "Image" %}</th>
+                        <th>{% trans "Product Name" %}</th>
+                        <th>{% trans "Quantity" %}</th>
+                        <th>{% trans "Price" %}</th>
+                        <th>{% trans "Total Price" %}</th>
+                        <th>{% trans "Delivery Status" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for orderitem in orderdetailview.orderitems.all %}
+                    {% with product=orderitem.product %}
+                    <tr>
+                        <td><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" height="80" width="80"></a></td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ orderitem.quantity }}</td>
+                        <td>${{ orderitem.price }}</td>
+                        <td>${{ orderitem.get_cost }}</td>
+                        <td>{{ orderitem.status_delivery }}</td>
+                    </tr>
+                    {% endwith %}
+                    {% endfor %}
+                    <tr>
+                        <td colspan="5"></td>
+                        <td>${{ orderdetailview.get_total_cost }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <div class="card-body text-right">
+                {% if orderdetailview.status_order == 'unpaid' %}
+                <a href="{% url "payment:payment_process" orderdetailview.id %}" class="btn btn-primary">{% trans "Pay" %}</a>
+                <a href="{% url "order:order_cancel" orderdetailview.id%}" class="btn btn-primary">{% trans "Cancel" %}</a>
+                {% elif orderdetailview.status_order == 'paid' %}
+                    <a href="{% url "order:order_delete" orderdetailview.id%}" class="btn btn-primary">{% trans "Delete" %}</a>
+                {% endif %}
+<!--                <a href="#" class="btn btn-primary">CSV Export</a>-->
+                <a href="{% url "order:print_PDF" orderdetailview.id %}" class="btn btn-primary" target='_blank'>{% trans "PDF Print" %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
