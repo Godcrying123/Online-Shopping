@@ -1,0 +1,158 @@
+version: '3.7'
+services:
+  redis:
+    image: redis:latest
+    ports: 
+      - 6479:6379
+    restart: always
+    volumes:
+      - "${REDIS_DIR}/conf:/usr/local/etc/redis"
+      - "${REDIS_DIR}/data:/data"
+    env_file:
+      - .env
+    command:
+      redis-server
+
+  postgresql:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5433:5432
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - "${POSTGRES_DATA_PATH}/data/:/var/lib/postgresql/data"
+      - "${POSTGRES_DATA_PATH}/backup/:/tmp/"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - "${RABBITMQ_DIR}/data:/var/lib/rabbitmq" 
+    env_file:
+      - .env
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
+  
+  mail:
+    image: tvial/docker-mailserver:latest
+    hostname: ${SMTP_HOSTNAME}
+    domainname: ${SMTP_DOMAINNAME}
+    container_name: ${SMTP_CONTAINER_NAME}
+    ports:
+    - "25:25"
+    - "143:143"
+    - "587:587"
+    - "993:993"
+    volumes:
+    - maildata:/var/mail
+    - mailstate:/var/mail-state
+    - maillogs:/var/log/mail
+    - ./config/:/tmp/docker-mailserver/
+    env_file:
+    - .env
+    - env-mailserver
+    cap_add:
+    - NET_ADMIN
+    - SYS_PTRACE
+    restart: always
+
+  django-web:
+    image: shopsite_celery:latest
+    depends_on: 
+      - redis
+      - postgresql
+      - rabbitmq
+      - mail
+    restart: always
+    ports:
+      - 8000:8000
+      - 8001:8001
+      - 9001:9001
+      # - 5555:5555
+    env_file:
+      - .env
+    links:
+      - redis
+      - postgresql
+      - rabbitmq
+      - mail
+    command: ./run_supervisord.sh &
+    volumes:
+      - "$MEDIA_PATH:/opt/ShopSite/shopsite/shopsite/media/"
+      # - "$LOCALE_PATH:/opt/ShopSite/shopsite/shopsite/locale/"
+      # - "$SETTINGS_PATH:/opt/ShopSite/shopsite/shopsite/settings/"
+
+  celery:
+    image: shopsite_celery:latest
+    restart: always
+    # command: /usr/local/bin/celery -A shopsite flower
+    command: /usr/local/bin/celery -A shopsite worker --pool=eventlet -l info
+    depends_on:
+      - django-web
+      - redis
+      - rabbitmq
+      - mail
+      - postgresql
+    links:
+      - redis
+      - postgresql
+      - rabbitmq
+      - mail
+      - django-web
+
+  flower:
+    image: shopsite_celery:latest
+    restart: always
+    command: /usr/local/bin/celery -A shopsite flower
+    ports:
+      - 5555:5555
+    depends_on:
+      - django-web
+      - redis
+      - rabbitmq
+      - mail
+      - postgresql
+    links:
+      - redis
+      - postgresql
+      - rabbitmq
+      - mail
+      - django-web
+
+  nginx:
+    image: nginx:latest
+    # build: nginx/.
+    restart: always
+    depends_on: 
+      - django-web
+    links:
+      - django-web
+    ports:
+      - 8877:8877
+    env_file:
+      - .env
+    environment:
+      - NGINX_PORT=${NGINX_PORT}
+    volumes:
+      - "$MEDIA_PATH:/opt/shopsite/media/"
+      - "$NGINX_DIR/tmp_log:/tmp/"
+      - "$NGINX_DIR/var_log:/var/log/nginx/"
+    command: /bin/bash -c "exec nginx -g 'daemon off;'"
+
+    
+volumes:
+  maildata:
+    driver: local
+  mailstate:
+    driver: local
+  maillogs:
+    driver: local

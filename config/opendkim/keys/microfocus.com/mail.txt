@@ -1,0 +1,3 @@
+mail._domainkey	IN	TXT	( "v=DKIM1; h=sha256; k=rsa; "
+	  "p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArk/VMFvHNPKeAvY//0ujREFu/tG7gjFqAR3DdM3+Pz6tVvQ0SloNurmjfBVI4+mkzC8PdO3DDs8cMSLwFxpYUWnbywmdqtJUO52Z29+0U5GLubu4NQIxn2kFrVlQNZ4WWpDp4qZW+T0AuIBdaKrldUdW1ZR5b4RdPx6pXqwlCsrPNftlDr928FccfPab+MxyRJGKOVc6m9SGa9"
+	  "w91b9Z/R/3t4AL5g7dTGW/SUp1U9ldIjSDTLnwuVElj0rOMRQ1PhrSYkq/6STBTGdVva5slLZ4ucI0vrdKZesQpQlzhRJbzJ2sDq/7mRg/UK1fVDvjL7qeuYlodeNTwV9cyawayQIDAQAB" )  ; ----- DKIM key mail for microfocus.com
