@@ -217,6 +217,22 @@ msgstr "已送达"
 msgid "Your Order Detail Table"
 msgstr "你的订单列表"
 
+#: .\order\templates\order\order_pdf.html:16
+msgid "Postal"
+msgstr "邮编"
+
+#: .\order\templates\order\order_pdf.html:11
+msgid "Bill to"
+msgstr "账单至"
+
+#: .\order\templates\order\order_pdf.html:17
+msgid "Address"
+msgstr "地址"
+
+#: .\order\templates\order\order_pdf.html:19
+msgid "Item Bought"
+msgstr "购买的商品"
+
 #: .\order\templates\order\ordercreated.html:26
 msgid "Order ID"
 msgstr "订单编号"
@@ -366,7 +382,7 @@ msgstr "过期日期"
 #: .\payment\templates\payment\payment_process.html:17
 #| msgid "Your Order List"
 msgid "Pay Your Order"
-msgstr "你的订单列表"
+msgstr "支付你的订单"
 
 #: .\product\models.py:15 .\product\models.py:48
 msgid "name"
@@ -510,3 +526,5 @@ msgstr "创建账户"
 #: .\user\templates\user\profile.html:10
 msgid "Save Receiver Info"
 msgstr "保存收件人信息"
+
+

@@ -6,12 +6,12 @@ from .base import *
 ALLOWED_HOSTS = ['*']
 
 # Database Configurations with SQLite3
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Database Configurations with MYSQL
 
@@ -30,18 +30,18 @@ DATABASES = {
 
 # Database Configuration with PostgreSQL
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'shopsite',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'postgresql',
-#         'PORT': 5432,
-#         # 'CONN_MAX_AGE': 5 * 60,
-#         # 'OPTIONS': {'charset': 'utf8mb4'}
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'shopsite',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'postgresql',
+        'PORT': 5432,
+        # 'CONN_MAX_AGE': 5 * 60,
+        # 'OPTIONS': {'charset': 'utf8mb4'}
+    }
+}
 
 # Braintree settings
 BRAINTREE_MERCHANT_ID = '2qf4snfqxsdxqhq4'
@@ -59,7 +59,7 @@ Configuration.configure(
 # SMTP Server Parameters Configurations
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'shcitsmacorecpe21.hpeswlab.net'
+EMAIL_HOST = 'mail'
 EMAIL_HOST_USER = 'kzhang@microfocus.com'
 EMAIL_HOST_PASSWORD = '19920216@#ZKztx'
 EMAIL_PORT = 25
@@ -87,5 +87,5 @@ CUBES_REDIS_TIMEOUT = 60*60
 NEVER_REDIS_TIMEOUT = 365*24*60*60
 
 # CELERY BROKER URL
-# CELERY_RESULT_BACKEND = 'django-cache'
+# CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = 'amqp://zhkai:iso*help@rabbitmq:5672/shopsite_vhost'

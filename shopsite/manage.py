@@ -7,8 +7,8 @@ sys.path.append("../shopsite")
 
 def main():
     # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shopsite.settings')
-    # profile = os.environ.get('PROJECT_PROFILE', 'develop')
-    profile = os.environ.get('PROJECT_PROFILE', 'product')
+    profile = os.environ.get('PROJECT_PROFILE', 'develop')
+    # profile = os.environ.get('PROJECT_PROFILE', 'product')
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shopsite.settings.%s' % profile)
     try:
         from django.core.management import execute_from_command_line

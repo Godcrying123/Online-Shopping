@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'parler',
     'rosetta',
+    # 'django_celery_results',
     'django.contrib.auth',
 ]
 

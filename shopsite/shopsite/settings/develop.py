@@ -4,10 +4,23 @@ from .base import *
 
 DEBUG = True
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'shopsite',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '16.186.79.97',
+        'PORT': 5432,
+        # 'CONN_MAX_AGE': 5 * 60,
+        # 'OPTIONS': {'charset': 'utf8mb4'}
     }
 }
 
@@ -49,6 +62,25 @@ Configuration.configure(
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Redis Configurations
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://localhost:6379",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             "CONNECTION_POOL_KWARGS": {"max_connections": 100}
+#         }
+#     }
+# }
+
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 1
+
+REDIS_TIMEOUT = 7*24*60*60
+CUBES_REDIS_TIMEOUT = 60*60
+NEVER_REDIS_TIMEOUT = 365*24*60*60
+
+# CELERY BROKER URL
+# CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BROKER_URL = 'amqp://localhost'

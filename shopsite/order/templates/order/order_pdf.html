@@ -20,10 +20,10 @@
     <table class="text-left">
         <thead>
             <tr>
-                <th>{% trans "Product" %}</th>
+                <th>{% trans "Products" %}</th>
                 <th>{% trans "Price" %}</th>
                 <th>{% trans "Quantity" %}</th>
-                <th>{% trans "Total Cost" %}</th>
+                <th>{% trans "Total" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -42,7 +42,7 @@
         </tr>
         </tbody>
     </table>
-<span class="{% if order.status_order == 'paid' %}paid{% elif order.status_order == 'pending' %}pending
+<span class="{% if order.status_order == 'paid' %}paid{% elif order.status_order == 'unpaid' %}pending
 {% elif order.status_order == 'cancel' %}cancel{% else %}delete{% endif %}">
     {% if order.status_order == 'paid' %}{% trans "Paid" %}
     {% elif order.status_order == 'unpaid' %}{% trans "Pending Payment" %}
