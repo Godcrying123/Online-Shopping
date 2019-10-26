@@ -43,7 +43,8 @@ RUN pip install --upgrade pip\
 WORKDIR $workdir/shopsite/
 
 # Update the ShopSite Package
-RUN pip install --target=. shopsite==0.2.10
+RUN pip install shopsite
+RUN pip install --target=. shopsite
 
 # Data Initialized
 # RUN python bin/shopsite_manage makemigrations user shop seller product order image comment buyer
@@ -54,7 +55,13 @@ WORKDIR $workdir
 # Add the entrypoint sh and change its ownships
 ADD run_supervisord.sh ./run_supervisord.sh
 RUN chmod 766 ./run_supervisord.sh 
-RUN http_proxy="" && https_proxy=""
+
+# Unset the proxy
+ENV http_proxy=""\
+	https_proxy=""
+
+# Port Opening for the test
+EXPOSE 7777
 
 # Test Command
 # CMD [ "supervisord", "-c", "conf/supervisord.conf"]

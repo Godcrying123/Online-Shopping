@@ -1195,7 +1195,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$150000$w49BKnSiJdE4$osKoQ5sRq8+BTk1YOnqn7HzhGOk4AFcS/spLpbHAw90=	2019-10-25 09:35:48.191569+00	t	zhkai			kzhang@test.com	t	t	2019-10-25 09:35:41.744901+00
+1	pbkdf2_sha256$150000$w49BKnSiJdE4$osKoQ5sRq8+BTk1YOnqn7HzhGOk4AFcS/spLpbHAw90=	2019-10-26 09:22:43.600813+00	t	zhkai			kzhang@test.com	t	t	2019-10-25 09:35:41.744901+00
 \.
 
 
@@ -1236,6 +1236,76 @@ COPY public.comment_comment (id, content, created, belongproduct_id, owner_id, r
 --
 
 COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2019-10-26 09:23:21.043729+00	1	buyer01	1	[{"added": {}}, {"added": {"name": "user informations", "object": "test01"}}]	4	1
+2	2019-10-26 09:23:54.775108+00	1	Food	1	[{"added": {}}]	10	1
+3	2019-10-26 09:24:12.777754+00	1	食物	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+4	2019-10-26 09:24:24.11286+00	2	Clothes	1	[{"added": {}}]	10	1
+5	2019-10-26 09:24:30.26446+00	2	衣服	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+6	2019-10-26 09:24:40.85022+00	3	Digital Devices	1	[{"added": {}}]	10	1
+7	2019-10-26 09:24:52.760668+00	3	电子设备	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+8	2019-10-26 09:25:01.934569+00	4	Candy	1	[{"added": {}}]	10	1
+9	2019-10-26 09:25:11.954772+00	4	糖果	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+10	2019-10-26 09:25:17.526713+00	4	Candy	2	[{"changed": {"fields": ["parent_category"]}}]	10	1
+11	2019-10-26 09:25:24.635425+00	5	Tea	1	[{"added": {}}]	10	1
+12	2019-10-26 09:25:33.481491+00	5	茶	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+13	2019-10-26 09:25:37.552942+00	5	Tea	2	[{"changed": {"fields": ["parent_category"]}}]	10	1
+14	2019-10-26 09:25:49.904982+00	6	Laptop	1	[{"added": {}}]	10	1
+15	2019-10-26 09:26:00.663474+00	6	笔记本电脑	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+16	2019-10-26 09:26:10.261624+00	7	Mobile Phone	1	[{"added": {}}]	10	1
+17	2019-10-26 09:26:18.222149+00	7	移动电话	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+18	2019-10-26 09:26:24.303904+00	7	Mobile Phone	2	[{"changed": {"fields": ["parent_category"]}}]	10	1
+19	2019-10-26 09:26:24.310738+00	6	Laptop	2	[{"changed": {"fields": ["parent_category"]}}]	10	1
+20	2019-10-26 09:26:54.904286+00	8	Coat	1	[{"added": {}}]	10	1
+21	2019-10-26 09:27:00.277679+00	8	外套	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+22	2019-10-26 09:27:08.151897+00	9	T-Shirt	1	[{"added": {}}]	10	1
+23	2019-10-26 09:27:16.846046+00	9	T恤	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+24	2019-10-26 09:27:21.48629+00	9	T-Shirt	2	[{"changed": {"fields": ["parent_category"]}}]	10	1
+25	2019-10-26 09:27:21.493759+00	8	Coat	2	[{"changed": {"fields": ["parent_category"]}}]	10	1
+26	2019-10-26 09:31:09.428727+00	10	Furniture	1	[{"added": {}}]	10	1
+27	2019-10-26 09:31:16.688829+00	10	家具	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+28	2019-10-26 09:31:31.668968+00	11	Bed	1	[{"added": {}}]	10	1
+29	2019-10-26 09:31:39.716586+00	11	床	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+30	2019-10-26 09:31:45.124218+00	11	Bed	2	[{"changed": {"fields": ["parent_category"]}}]	10	1
+31	2019-10-26 09:32:14.703333+00	12	Wardrobe	1	[{"added": {}}]	10	1
+32	2019-10-26 09:32:26.78287+00	12	衣橱	2	[{"changed": {"fields": ["parent_category", "name", "slug"]}}]	10	1
+33	2019-10-26 09:32:54.723862+00	13	Toy	1	[{"added": {}}]	10	1
+34	2019-10-26 09:33:01.008259+00	13	玩具	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+35	2019-10-26 09:33:31.701704+00	14	Doll	1	[{"added": {}}]	10	1
+36	2019-10-26 09:33:40.634436+00	14	洋娃娃	2	[{"changed": {"fields": ["name", "slug"]}}]	10	1
+37	2019-10-26 09:33:47.210314+00	14	Doll	2	[{"changed": {"fields": ["parent_category"]}}]	10	1
+38	2019-10-26 09:34:03.741935+00	15	Transformer	1	[{"added": {}}]	10	1
+39	2019-10-26 09:34:20.543936+00	15	变形金刚	2	[{"changed": {"fields": ["parent_category", "name", "slug"]}}]	10	1
+40	2019-10-26 09:34:42.361135+00	1	Tea's Store	1	[{"added": {}}]	9	1
+41	2019-10-26 09:34:49.03864+00	2	Clothes' Store	1	[{"added": {}}]	9	1
+42	2019-10-26 09:34:53.876042+00	3	Radio-Shack	1	[{"added": {}}]	9	1
+43	2019-10-26 09:35:21.345267+00	4	Furniture's Store	1	[{"added": {}}]	9	1
+44	2019-10-26 09:35:33.058292+00	5	Toy's Store	1	[{"added": {}}]	9	1
+45	2019-10-26 09:36:02.422294+00	1	Green Tea	1	[{"added": {}}]	11	1
+46	2019-10-26 09:36:15.564936+00	1	绿茶	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+47	2019-10-26 09:36:51.400026+00	2	Black Tea	1	[{"added": {}}]	11	1
+48	2019-10-26 09:37:03.68+00	2	红茶	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+49	2019-10-26 09:37:22.742233+00	2	Black Tea	2	[{"changed": {"fields": ["image"]}}]	11	1
+50	2019-10-26 09:39:07.314314+00	1	Green Tea	2	[{"changed": {"fields": ["image"]}}]	11	1
+51	2019-10-26 09:39:29.508834+00	2	Black Tea	2	[{"changed": {"fields": ["price"]}}]	11	1
+52	2019-10-26 09:40:06.283763+00	3	Iphone	1	[{"added": {}}]	11	1
+53	2019-10-26 09:40:25.277344+00	3	Iphone	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+54	2019-10-26 09:41:10.866108+00	4	Laptop	1	[{"added": {}}]	11	1
+55	2019-10-26 09:41:24.679517+00	4	笔记本电脑	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+56	2019-10-26 09:42:28.103245+00	5	Men's Coat	1	[{"added": {}}]	11	1
+57	2019-10-26 09:42:41.953553+00	5	男士外套	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+58	2019-10-26 09:43:25.151687+00	6	T-Shirt	1	[{"added": {}}]	11	1
+59	2019-10-26 09:43:43.092575+00	6	T恤	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+60	2019-10-26 09:45:58.794991+00	7	The White Bed	1	[{"added": {}}]	11	1
+61	2019-10-26 09:46:18.789616+00	7	白色床垫	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+62	2019-10-26 09:47:15.84499+00	8	Children's Bed	1	[{"added": {}}]	11	1
+63	2019-10-26 09:47:32.378096+00	8	儿童床垫	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+64	2019-10-26 09:48:41.983384+00	9	Wardrobe	1	[{"added": {}}]	11	1
+65	2019-10-26 09:48:54.286707+00	9	衣橱	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+66	2019-10-26 09:49:32.956939+00	4	Laptop	2	[{"changed": {"fields": ["category"]}}]	11	1
+67	2019-10-26 09:50:24.76458+00	10	Doll	1	[{"added": {}}]	11	1
+68	2019-10-26 09:50:37.355683+00	10	洋娃娃	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
+69	2019-10-26 09:51:08.6989+00	11	Transformer	1	[{"added": {}}]	11	1
+70	2019-10-26 09:51:28.010026+00	11	变形金刚	2	[{"changed": {"fields": ["name", "description"]}}]	11	1
 \.
 
 
@@ -1273,31 +1343,31 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 --
 
 COPY public.django_migrations (id, app, name, applied) FROM stdin;
-1	contenttypes	0001_initial	2019-10-25 09:32:21.983834+00
-2	auth	0001_initial	2019-10-25 09:32:22.050374+00
-3	admin	0001_initial	2019-10-25 09:32:22.114466+00
-4	admin	0002_logentry_remove_auto_add	2019-10-25 09:32:22.146096+00
-5	admin	0003_logentry_add_action_flag_choices	2019-10-25 09:32:22.160271+00
-6	contenttypes	0002_remove_content_type_name	2019-10-25 09:32:22.188157+00
-7	auth	0002_alter_permission_name_max_length	2019-10-25 09:32:22.196474+00
-8	auth	0003_alter_user_email_max_length	2019-10-25 09:32:22.208882+00
-9	auth	0004_alter_user_username_opts	2019-10-25 09:32:22.221413+00
-10	auth	0005_alter_user_last_login_null	2019-10-25 09:32:22.234236+00
-11	auth	0006_require_contenttypes_0002	2019-10-25 09:32:22.236474+00
-12	auth	0007_alter_validators_add_error_messages	2019-10-25 09:32:22.250412+00
-13	auth	0008_alter_user_username_max_length	2019-10-25 09:32:22.266504+00
-14	auth	0009_alter_user_last_name_max_length	2019-10-25 09:32:22.279043+00
-15	auth	0010_alter_group_name_max_length	2019-10-25 09:32:22.291148+00
-16	auth	0011_update_proxy_permissions	2019-10-25 09:32:22.306286+00
-17	user	0001_initial	2019-10-25 09:32:22.339949+00
-18	buyer	0001_initial	2019-10-25 09:32:22.365473+00
-19	shop	0001_initial	2019-10-25 09:32:22.388131+00
-20	product	0001_initial	2019-10-25 09:32:22.447341+00
-21	comment	0001_initial	2019-10-25 09:32:22.519482+00
-22	image	0001_initial	2019-10-25 09:32:22.550673+00
-23	order	0001_initial	2019-10-25 09:32:22.622083+00
-24	seller	0001_initial	2019-10-25 09:32:22.663047+00
-25	sessions	0001_initial	2019-10-25 09:32:22.682132+00
+1	contenttypes	0001_initial	2019-10-26 09:21:43.124262+00
+2	auth	0001_initial	2019-10-26 09:21:43.22333+00
+3	admin	0001_initial	2019-10-26 09:21:43.299515+00
+4	admin	0002_logentry_remove_auto_add	2019-10-26 09:21:43.319696+00
+5	admin	0003_logentry_add_action_flag_choices	2019-10-26 09:21:43.334469+00
+6	contenttypes	0002_remove_content_type_name	2019-10-26 09:21:43.364055+00
+7	auth	0002_alter_permission_name_max_length	2019-10-26 09:21:43.372787+00
+8	auth	0003_alter_user_email_max_length	2019-10-26 09:21:43.385486+00
+9	auth	0004_alter_user_username_opts	2019-10-26 09:21:43.396917+00
+10	auth	0005_alter_user_last_login_null	2019-10-26 09:21:43.409125+00
+11	auth	0006_require_contenttypes_0002	2019-10-26 09:21:43.411972+00
+12	auth	0007_alter_validators_add_error_messages	2019-10-26 09:21:43.426069+00
+13	auth	0008_alter_user_username_max_length	2019-10-26 09:21:43.444082+00
+14	auth	0009_alter_user_last_name_max_length	2019-10-26 09:21:43.456732+00
+15	auth	0010_alter_group_name_max_length	2019-10-26 09:21:43.468322+00
+16	auth	0011_update_proxy_permissions	2019-10-26 09:21:43.480233+00
+17	user	0001_initial	2019-10-26 09:21:43.512142+00
+18	buyer	0001_initial	2019-10-26 09:21:43.540811+00
+19	shop	0001_initial	2019-10-26 09:21:43.558895+00
+20	product	0001_initial	2019-10-26 09:21:43.614575+00
+21	comment	0001_initial	2019-10-26 09:21:43.683901+00
+22	image	0001_initial	2019-10-26 09:21:43.716948+00
+23	order	0001_initial	2019-10-26 09:21:43.793936+00
+24	seller	0001_initial	2019-10-26 09:21:43.84944+00
+25	sessions	0001_initial	2019-10-26 09:21:43.881672+00
 \.
 
 
@@ -1307,6 +1377,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 v9tvoeg7ue245wwic1617u1s2foalvip	MmM2ZDBmY2NlODc3MzQ5ODY1ZGZmMDY2ODAxNWJkYzM2Yzg4MGYwYjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlMmQyY2Q1NWJjNzljYTBlZjEzNTEzY2YxY2I1YzdjNmY0ZjhkZjE0In0=	2019-11-08 09:35:48.197436+00
+iw1fszt54ku5dy4z3uqsr78xcesx98hm	ODAwYjk3NTI0ODFhMmM0YTlhZGJiYjgxZGExODdiN2VlYzI2NzA1Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlMmQyY2Q1NWJjNzljYTBlZjEzNTEzY2YxY2I1YzdjNmY0ZjhkZjE0IiwiY2FydCI6eyIzIjp7InF1YW50aXR5IjoxLCJwcmljZSI6IjU5OS45OSJ9fX0=	2019-11-09 09:40:42.304905+00
 \.
 
 
@@ -1339,6 +1410,21 @@ COPY public.order_orderitem (id, status_delivery, price, quantity, order_id, pro
 --
 
 COPY public.product_category (id, created, updated, parent_category_id) FROM stdin;
+1	2019-10-26 09:23:54.764038+00	2019-10-26 09:24:12.773584+00	\N
+2	2019-10-26 09:24:24.108942+00	2019-10-26 09:24:30.260316+00	\N
+3	2019-10-26 09:24:40.845936+00	2019-10-26 09:24:52.755386+00	\N
+4	2019-10-26 09:25:01.930719+00	2019-10-26 09:25:17.520002+00	1
+5	2019-10-26 09:25:24.630766+00	2019-10-26 09:25:37.547302+00	1
+7	2019-10-26 09:26:10.258114+00	2019-10-26 09:26:24.298604+00	3
+6	2019-10-26 09:25:49.901043+00	2019-10-26 09:26:24.307756+00	3
+9	2019-10-26 09:27:08.148297+00	2019-10-26 09:27:21.47724+00	2
+8	2019-10-26 09:26:54.899524+00	2019-10-26 09:27:21.490343+00	2
+10	2019-10-26 09:31:09.424923+00	2019-10-26 09:31:16.68447+00	\N
+11	2019-10-26 09:31:31.659666+00	2019-10-26 09:31:45.120205+00	10
+12	2019-10-26 09:32:14.699042+00	2019-10-26 09:32:26.778518+00	10
+13	2019-10-26 09:32:54.720023+00	2019-10-26 09:33:01.003541+00	\N
+14	2019-10-26 09:33:31.69891+00	2019-10-26 09:33:47.20642+00	13
+15	2019-10-26 09:34:03.738143+00	2019-10-26 09:34:20.539579+00	13
 \.
 
 
@@ -1347,6 +1433,36 @@ COPY public.product_category (id, created, updated, parent_category_id) FROM std
 --
 
 COPY public.product_category_translation (id, language_code, name, slug, master_id) FROM stdin;
+1	en	Food	food	1
+2	zh-hans	食物	food	1
+3	en	Clothes	clothes	2
+4	zh-hans	衣服	clothes	2
+5	en	Digital Devices	digital-devices	3
+6	zh-hans	电子设备	digital-devices	3
+7	en	Candy	candy	4
+8	zh-hans	糖果	candy	4
+9	en	Tea	tea	5
+10	zh-hans	茶	tea	5
+11	en	Laptop	laptop	6
+12	zh-hans	笔记本电脑	laptop	6
+13	en	Mobile Phone	mobile-phone	7
+14	zh-hans	移动电话	mobile-phone	7
+15	en	Coat	coat	8
+16	zh-hans	外套	coat	8
+17	en	T-Shirt	t-shirt	9
+18	zh-hans	T恤	t-shirt	9
+19	en	Furniture	furniture	10
+20	zh-hans	家具	furniture	10
+21	en	Bed	bed	11
+22	zh-hans	床	bed	11
+23	en	Wardrobe	wardrobe	12
+24	zh-hans	衣橱	wardrobe	12
+25	en	Toy	toy	13
+26	zh-hans	玩具	toy	13
+27	en	Doll	doll	14
+28	zh-hans	洋娃娃	doll	14
+29	en	Transformer	transformer	15
+30	zh-hans	变形金刚	transformer	15
 \.
 
 
@@ -1355,6 +1471,17 @@ COPY public.product_category_translation (id, language_code, name, slug, master_
 --
 
 COPY public.product_product (id, image, price, available, created, updated, onstock, salesamount, store_id) FROM stdin;
+1	product/2019/10/26/e954ac6d51a04a9fdbc6dfc06279ed63.jpg	19.99	t	2019-10-26 09:36:02.40576+00	2019-10-26 09:39:07.306601+00	100	0	1
+2	product/2019/10/26/ea275a01781238c7528907d03f7b507d_fNhHPXP.jpg	21.99	t	2019-10-26 09:36:51.381336+00	2019-10-26 09:39:29.504463+00	100	0	1
+3	product/2019/10/26/dde103b9afc29abfc28384fcecc8c5d8.jpg	599.99	t	2019-10-26 09:40:06.271103+00	2019-10-26 09:40:25.272511+00	100	0	3
+5	product/2019/10/26/844948ee1b8c0e560246b5908a1be949.jpg	59.99	t	2019-10-26 09:42:28.088622+00	2019-10-26 09:42:41.945793+00	100	0	2
+6	product/2019/10/26/9981d5c309b92da9e234069accdaae7a.jpg	29.99	t	2019-10-26 09:43:25.139038+00	2019-10-26 09:43:43.083578+00	100	0	2
+7	product/2019/10/26/7131edb25c576a456bfe97c02f0f39d3.jpg	399.99	t	2019-10-26 09:45:58.783174+00	2019-10-26 09:46:18.78274+00	100	0	4
+8	product/2019/10/26/8b31705b8a483a80543cbe252c7c3400.jpeg	299.99	t	2019-10-26 09:47:15.833432+00	2019-10-26 09:47:32.370973+00	100	0	4
+9	product/2019/10/26/577536cebccfd03eed2c1f89607e2b0a.jpg	499.99	t	2019-10-26 09:48:41.972029+00	2019-10-26 09:48:54.279156+00	100	0	2
+4	product/2019/10/26/099c78f6c0a278c67d98228e62f920e0.jpg	299.99	t	2019-10-26 09:41:10.853339+00	2019-10-26 09:49:32.946149+00	100	0	3
+10	product/2019/10/26/5f5971a59c1cc126691822da752dc6ca.jpeg	89.99	t	2019-10-26 09:50:24.752083+00	2019-10-26 09:50:37.34843+00	100	0	5
+11	product/2019/10/26/5dbbe0025f359b2aa47072419ea4e5ba.jpg	109.99	t	2019-10-26 09:51:08.686115+00	2019-10-26 09:51:28.002759+00	100	0	5
 \.
 
 
@@ -1363,6 +1490,17 @@ COPY public.product_product (id, image, price, available, created, updated, onst
 --
 
 COPY public.product_product_category (id, product_id, category_id) FROM stdin;
+1	1	5
+2	2	5
+3	3	7
+5	5	8
+6	6	9
+7	7	11
+8	8	11
+9	9	12
+10	4	6
+11	10	14
+12	11	15
 \.
 
 
@@ -1371,6 +1509,28 @@ COPY public.product_product_category (id, product_id, category_id) FROM stdin;
 --
 
 COPY public.product_product_translation (id, language_code, name, description, master_id) FROM stdin;
+1	en	Green Tea	The Hand Made Green Tea	1
+2	zh-hans	绿茶	手工制作的绿茶	1
+3	en	Black Tea	The Hand Made Black Tea	2
+4	zh-hans	红茶	手工制作的红茶	2
+5	en	Iphone	The Latest Apple's Iphone	3
+6	zh-hans	Iphone	苹果公司最新的Iphone手机	3
+7	en	Laptop	The Latest Laptop	4
+8	zh-hans	笔记本电脑	最新的笔记本电脑	4
+9	en	Men's Coat	The Fashionable Men's Coat	5
+10	zh-hans	男士外套	最新款的男士外套	5
+11	en	T-Shirt	The Latest Men's T-Shirt	6
+12	zh-hans	T恤	男士最新款的T恤	6
+13	en	The White Bed	The White Colored Bed	7
+14	zh-hans	白色床垫	白颜色的床垫	7
+15	en	Children's Bed	The Bed for children	8
+16	zh-hans	儿童床垫	给儿童用的床垫	8
+17	en	Wardrobe	The White Wardrobe	9
+18	zh-hans	衣橱	白颜色的大衣橱	9
+19	en	Doll	The little girl Doll	10
+20	zh-hans	洋娃娃	小女孩的洋娃娃	10
+21	en	Transformer	The Big Bee Transformer	11
+22	zh-hans	变形金刚	大黄蜂变形金刚	11
 \.
 
 
@@ -1395,6 +1555,11 @@ COPY public.seller_seller_store (id, seller_id, store_id) FROM stdin;
 --
 
 COPY public.shop_store (id, status, store_name, created_time, store_location, store_fans) FROM stdin;
+1	normal	Tea's Store	2019-10-26 09:34:42.358421+00	Shanghai	0
+2	normal	Clothes' Store	2019-10-26 09:34:49.035902+00	Shanghai	0
+3	normal	Radio-Shack	2019-10-26 09:34:53.872379+00	Shanghai	0
+4	normal	Furniture's Store	2019-10-26 09:35:21.343507+00	Shanghai	0
+5	normal	Toy's Store	2019-10-26 09:35:33.056689+00	Shanghai	0
 \.
 
 
@@ -1411,6 +1576,7 @@ COPY public.user_token (id, token, username_id) FROM stdin;
 --
 
 COPY public.user_user (id, name, username, mail, telephone, password, created_time, updated_time) FROM stdin;
+1	buyer01	buyer01	buyer01@test.com	123456789	iso*help	2019-10-26 09:23:21.035767+00	2019-10-26 09:23:21.035808+00
 \.
 
 
@@ -1419,6 +1585,7 @@ COPY public.user_user (id, name, username, mail, telephone, password, created_ti
 --
 
 COPY public.user_userinfoentity (id, name, recaddress, recaddresspostal, sendoutaddress, sendoutaddresspostal, mail, telephone, created_time, updated_time, owner_id) FROM stdin;
+1	test01	Shanghai	201620			test01@test.com	1213141241	2019-10-26 09:23:21.03881+00	2019-10-26 09:23:21.038838+00	1
 \.
 
 
@@ -1475,7 +1642,7 @@ SELECT pg_catalog.setval('public.comment_comment_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 70, true);
 
 
 --
@@ -1517,35 +1684,35 @@ SELECT pg_catalog.setval('public.order_orderitem_id_seq', 1, false);
 -- Name: product_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.product_category_id_seq', 1, false);
+SELECT pg_catalog.setval('public.product_category_id_seq', 15, true);
 
 
 --
 -- Name: product_category_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.product_category_translation_id_seq', 1, false);
+SELECT pg_catalog.setval('public.product_category_translation_id_seq', 30, true);
 
 
 --
 -- Name: product_product_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.product_product_category_id_seq', 1, false);
+SELECT pg_catalog.setval('public.product_product_category_id_seq', 12, true);
 
 
 --
 -- Name: product_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.product_product_id_seq', 1, false);
+SELECT pg_catalog.setval('public.product_product_id_seq', 11, true);
 
 
 --
 -- Name: product_product_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.product_product_translation_id_seq', 1, false);
+SELECT pg_catalog.setval('public.product_product_translation_id_seq', 22, true);
 
 
 --
@@ -1559,7 +1726,7 @@ SELECT pg_catalog.setval('public.seller_seller_store_id_seq', 1, false);
 -- Name: shop_store_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.shop_store_id_seq', 1, false);
+SELECT pg_catalog.setval('public.shop_store_id_seq', 5, true);
 
 
 --
@@ -1573,14 +1740,14 @@ SELECT pg_catalog.setval('public.user_token_id_seq', 1, false);
 -- Name: user_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.user_user_id_seq', 1, false);
+SELECT pg_catalog.setval('public.user_user_id_seq', 1, true);
 
 
 --
 -- Name: user_userinfoentity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.user_userinfoentity_id_seq', 1, false);
+SELECT pg_catalog.setval('public.user_userinfoentity_id_seq', 1, true);
 
 
 --

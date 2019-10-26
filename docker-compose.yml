@@ -66,7 +66,7 @@ services:
     restart: always
 
   django-web:
-    image: shopsite_celery:latest
+    image: kzhang12/shopsite:django_base
     depends_on: 
       - redis
       - postgresql
@@ -92,7 +92,7 @@ services:
       # - "$SETTINGS_PATH:/opt/ShopSite/shopsite/shopsite/settings/"
 
   celery:
-    image: shopsite_celery:latest
+    image: kzhang12/shopsite:django_base
     restart: always
     # command: /usr/local/bin/celery -A shopsite flower
     command: /usr/local/bin/celery -A shopsite worker --pool=eventlet -l info
@@ -110,7 +110,7 @@ services:
       - django-web
 
   flower:
-    image: shopsite_celery:latest
+    image: kzhang12/shopsite:django_base
     restart: always
     command: /usr/local/bin/celery -A shopsite flower
     ports:
@@ -129,7 +129,7 @@ services:
       - django-web
 
   nginx:
-    image: nginx:latest
+    image: kzhang12/shopsite:nginx
     # build: nginx/.
     restart: always
     depends_on: 
